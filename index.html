@@ -1,46 +1,235 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER DOCS</title>
+<title>REFIT MASTER DOCS v8.1</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#f8fdff;color:#021a24}
-.header{background:#021a24;color:#ffb703;text-align:center;padding:20px;font-size:32px;font-weight:bold}
-.container{padding:12px}
-.menu{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.menu button,.blueBtn{background:#0a3949;color:white;border:none;padding:14px;font-size:17px;border-radius:10px;width:100%}
-.card{background:white;padding:16px;border-radius:14px;margin-bottom:18px;border-left:6px solid #219ebc;box-shadow:0 3px 8px rgba(0,0,0,.12)}
-.hidden{display:none}
-input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;font-size:17px;border-radius:8px;border:1px solid #97daf0;box-sizing:border-box}
-.saveBtn{background:#219ebc;color:white;border:none;padding:14px;width:100%;font-size:20px;border-radius:10px}
-.redBtn{background:#fb8501;color:white;border:none;padding:10px;border-radius:8px;margin-top:8px}
-.title{font-size:25px;font-weight:bold;margin-bottom:12px}
-.count{font-size:42px;font-weight:bold;color:#fb8501}
-.itemBox{background:#f8fdff;padding:12px;margin-top:10px;border-radius:8px;border-left:4px solid #ffb703}
-.logoBox{text-align:center;margin-bottom:15px}
-#logoPreview{max-width:150px;max-height:150px;border-radius:10px;border:1px solid #ccc;padding:8px;background:white}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{border:1px solid #97daf0;padding:7px}
-th{background:#0a3949;color:white}
-.total{text-align:right;font-size:19px;font-weight:bold;margin-top:12px;color:#fb8501}
-#printArea{display:none;background:white;color:#021a24;padding:30px}
-.printTitle{text-align:center;font-size:30px;font-weight:bold;margin-bottom:10px}
-.printCompany{text-align:center;margin-bottom:25px;line-height:1.5}
-.printBox{margin-bottom:18px;line-height:1.6}
-.printTotal{text-align:right;font-size:22px;font-weight:bold;margin-top:20px}
-.printFooter{margin-top:35px;font-size:13px;border-top:1px solid #ccc;padding-top:10px}
+body{
+margin:0;
+font-family:Arial;
+background:#f8fdff;
+color:#021a24;
+}
+
+.header{
+background:#021a24;
+color:#ffb703;
+text-align:center;
+padding:20px;
+font-size:32px;
+font-weight:bold;
+}
+
+.container{
+padding:12px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-bottom:18px;
+}
+
+.menu button,.blueBtn{
+background:#0a3949;
+color:white;
+border:none;
+padding:14px;
+font-size:17px;
+border-radius:10px;
+width:100%;
+}
+
+.card{
+background:white;
+padding:16px;
+border-radius:14px;
+margin-bottom:18px;
+border-left:6px solid #219ebc;
+box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+.hidden{
+display:none;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin:8px 0 14px;
+font-size:17px;
+border-radius:8px;
+border:1px solid #97daf0;
+box-sizing:border-box;
+}
+
+.saveBtn{
+background:#219ebc;
+color:white;
+border:none;
+padding:14px;
+width:100%;
+font-size:20px;
+border-radius:10px;
+}
+
+.redBtn{
+background:#e63946;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+margin-top:8px;
+width:100%;
+}
+
+.orangeBtn{
+background:#fb8501;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+margin-top:8px;
+width:100%;
+}
+
+.title{
+font-size:25px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.count{
+font-size:42px;
+font-weight:bold;
+color:#fb8501;
+}
+
+.itemBox{
+background:#f8fdff;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border-left:4px solid #ffb703;
+}
+
+.logoBox{
+text-align:center;
+margin-bottom:15px;
+}
+
+#logoPreview{
+max-width:150px;
+max-height:150px;
+border-radius:10px;
+border:1px solid #ccc;
+padding:8px;
+background:white;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+th,td{
+border:1px solid #97daf0;
+padding:7px;
+}
+
+th{
+background:#0a3949;
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:19px;
+font-weight:bold;
+margin-top:12px;
+color:#fb8501;
+}
+
+.searchBox{
+margin-bottom:12px;
+}
+
+.filterRow{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+#printArea{
+display:none;
+background:white;
+color:#021a24;
+padding:30px;
+}
+
+.printTitle{
+text-align:center;
+font-size:30px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.printCompany{
+text-align:center;
+margin-bottom:25px;
+line-height:1.5;
+}
+
+.printBox{
+margin-bottom:18px;
+line-height:1.6;
+}
+
+.printTotal{
+text-align:right;
+font-size:22px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.printFooter{
+margin-top:35px;
+font-size:13px;
+border-top:1px solid #ccc;
+padding-top:10px;
+}
+
 @media print{
-body *{visibility:hidden}
-#printArea,#printArea *{visibility:visible}
-#printArea{display:block;position:absolute;left:0;top:0;width:100%;box-sizing:border-box}
+body *{
+visibility:hidden;
+}
+
+#printArea,#printArea *{
+visibility:visible;
+}
+
+#printArea{
+display:block;
+position:absolute;
+left:0;
+top:0;
+width:100%;
+box-sizing:border-box;
+}
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="header">REFIT MASTER DOCS</div>
+<div class="header">
+REFIT MASTER DOCS
+</div>
 
 <div class="container">
 
@@ -52,162 +241,419 @@ body *{visibility:hidden}
 <button onclick="showPage('quotationPage')">Quotation</button>
 <button onclick="showPage('invoicePage')">Invoice</button>
 <button onclick="showPage('receiptPage')">Receipt</button>
+<button onclick="showPage('backupPage')">Backup</button>
 </div>
 
 <div id="dashboardPage">
-<div class="card"><h2>Projects</h2><div class="count" id="projectCount">0</div></div>
-<div class="card"><h2>Price Items</h2><div class="count" id="priceCount">0</div></div>
-<div class="card"><h2>Quotations</h2><div class="count" id="quoteCount">0</div></div>
-<div class="card"><h2>Invoices</h2><div class="count" id="invoiceCount">0</div></div>
-<div class="card"><h2>Receipts</h2><div class="count" id="receiptCount">0</div></div>
+
+<div class="card">
+<h2>Projects</h2>
+<div class="count" id="projectCount">0</div>
+</div>
+
+<div class="card">
+<h2>Price Items</h2>
+<div class="count" id="priceCount">0</div>
+</div>
+
+<div class="card">
+<h2>Quotations</h2>
+<div class="count" id="quoteCount">0</div>
+</div>
+
+<div class="card">
+<h2>Invoices</h2>
+<div class="count" id="invoiceCount">0</div>
+</div>
+
+<div class="card">
+<h2>Receipts</h2>
+<div class="count" id="receiptCount">0</div>
+</div>
+
 </div>
 
 <div id="companyPage" class="hidden">
+
 <div class="card">
-<div class="title">Company Profile</div>
+
+<div class="title">
+Company Profile
+</div>
 
 <input type="file" id="companyLogo" accept="image/*">
 
 <div class="logoBox">
-<img id="logoPreview" alt="Company Logo Preview">
+<img id="logoPreview">
 </div>
 
 <input id="companyName" placeholder="Company Name">
+
 <textarea id="companyAddress" placeholder="Company Address"></textarea>
+
 <input id="companySSM" placeholder="SSM / Registration No">
+
 <input id="companyPhone" placeholder="Company Phone">
+
 <input id="companyEmail" placeholder="Company Email">
-<textarea id="companyBank" placeholder="Bank Details e.g. Bank Name / Account No / Account Name"></textarea>
+
+<textarea id="companyBank" placeholder="Bank Details"></textarea>
+
 <input id="companySign" placeholder="Authorized Person / Signature Name">
 
-<button class="saveBtn" onclick="saveCompany()">Save / Update Company Profile</button>
+<button class="saveBtn" onclick="saveCompany()">
+Save / Update Company Profile
+</button>
+
 </div>
 
 <div class="card">
-<div class="title">Current Company</div>
-<div id="companyPreview"></div>
+
+<div class="title">
+Current Company
 </div>
+
+<div id="companyPreview"></div>
+
+</div>
+
 </div>
 
 <div id="projectPage" class="hidden">
+
 <div class="card">
-<div class="title">Project Registration</div>
+
+<div class="title">
+Project Registration
+</div>
+
+<input type="text" id="searchProject" class="searchBox"
+placeholder="Search Project..."
+onkeyup="refreshAll()">
+
 <input id="clientName" placeholder="Client Name">
+
 <textarea id="projectAddress" placeholder="Project Address"></textarea>
+
 <input id="phone" placeholder="Phone">
+
 <input id="email" placeholder="Email">
+
 <input id="quoteRef" placeholder="Quote Ref No">
+
 <input type="date" id="projectDate">
+
 <select id="projectStatus">
 <option>Pending</option>
 <option>Quotation Sent</option>
 <option>Confirmed</option>
 <option>Completed</option>
 </select>
-<button class="saveBtn" onclick="saveProject()">Save Project</button>
+
+<button class="saveBtn" onclick="saveProject()">
+Save Project
+</button>
+
 </div>
-<div class="card"><div class="title">Project List</div><div id="projectList"></div></div>
+
+<div class="card">
+
+<div class="title">
+Project List
+</div>
+
+<div id="projectList"></div>
+
+</div>
+
 </div>
 
 <div id="pricePage" class="hidden">
+
 <div class="card">
-<div class="title">Price Master</div>
-<input id="priceCategory" placeholder="Category">
-<textarea id="priceDesc" placeholder="Item Description"></textarea>
-<input id="priceUnit" placeholder="Unit">
-<input type="number" id="priceRate" placeholder="Rate RM">
-<button class="saveBtn" onclick="savePriceItem()">Save Price Item</button>
+
+<div class="title">
+Price Master
 </div>
-<div class="card"><div class="title">Price Item List</div><div id="priceList"></div></div>
+
+<input type="text" id="searchPrice"
+class="searchBox"
+placeholder="Search Price Item..."
+onkeyup="refreshAll()">
+
+<input id="priceCategory" placeholder="Category">
+
+<textarea id="priceDesc" placeholder="Item Description"></textarea>
+
+<input id="priceUnit" placeholder="Unit">
+
+<input type="number" id="priceRate" placeholder="Rate RM">
+
+<button class="saveBtn" onclick="savePriceItem()">
+Save Price Item
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+Price Item List
+</div>
+
+<div id="priceList"></div>
+
+</div>
+
 </div>
 
 <div id="quotationPage" class="hidden">
+
 <div class="card">
-<div class="title">Quotation Builder</div>
+
+<div class="title">
+Quotation Builder
+</div>
+
 <select id="quoteProject"></select>
+
 <select id="quoteItem"></select>
+
 <input type="number" id="quoteQty" placeholder="Quantity">
-<button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
+
+<button class="blueBtn" onclick="addQuoteItem()">
+Add Item
+</button>
+
 </div>
 
 <div class="card">
-<div class="title">Quotation Items</div>
+
+<div class="title">
+Quotation Items
+</div>
+
 <table>
+
 <thead>
-<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
+<tr>
+<th>No</th>
+<th>Description</th>
+<th>Unit</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+</tr>
 </thead>
+
 <tbody id="quoteTable"></tbody>
+
 </table>
-<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
+
+<div class="total">
+Grand Total: RM <span id="grandTotalText">0.00</span>
+</div>
+
 <br>
-<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button>
+
+<button class="saveBtn" onclick="saveQuotation()">
+Save Quotation
+</button>
+
 <br><br>
-<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
+
+<button class="blueBtn" onclick="printCurrentQuotation()">
+Print Current Quotation
+</button>
+
 <br><br>
-<button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
-</div>
+
+<button class="redBtn" onclick="clearCurrentQuote()">
+Clear Current Quotation
+</button>
+
 </div>
 
+</div>
 <div id="invoicePage" class="hidden">
+
 <div class="card">
-<div class="title">Generate Progress Invoices</div>
+
+<div class="title">
+Generate Progress Invoices
+</div>
+
+<div class="filterRow">
+
 <select id="invoiceQuotation"></select>
-<button class="saveBtn" onclick="generateInvoices()">Generate INV 30/40/25/5</button>
+
+<select id="invoiceFilter" onchange="refreshAll()">
+<option value="ALL">All Invoice</option>
+<option value="PENDING">Outstanding</option>
+<option value="PAID">Paid</option>
+</select>
+
+</div>
+
+<button class="saveBtn" onclick="generateInvoices()">
+Generate INV 30/40/25/5
+</button>
+
 </div>
 
 <div class="card">
-<div class="title">Print Invoice</div>
-<select id="printInvoiceSelect"></select>
-<button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button>
+
+<div class="title">
+Print Invoice
 </div>
 
-<div class="card"><div class="title">Invoice List</div><div id="invoiceList"></div></div>
+<select id="printInvoiceSelect"></select>
+
+<button class="blueBtn" onclick="printSelectedInvoice()">
+Print Selected Invoice
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+Invoice List
+</div>
+
+<div id="invoiceList"></div>
+
+</div>
+
 </div>
 
 <div id="receiptPage" class="hidden">
+
 <div class="card">
-<div class="title">Record Receipt</div>
+
+<div class="title">
+Record Receipt
+</div>
+
 <select id="receiptInvoice"></select>
-<input type="number" id="receiptAmount" placeholder="Paid Amount RM">
-<input type="date" id="receiptDate">
+
+<input type="number"
+id="receiptAmount"
+placeholder="Paid Amount RM">
+
+<input type="date"
+id="receiptDate">
+
 <select id="paymentMethod">
 <option>Cash</option>
 <option>Bank Transfer</option>
 <option>Cheque</option>
 <option>Online Payment</option>
 </select>
-<button class="saveBtn" onclick="saveReceipt()">Save Receipt</button>
+
+<button class="saveBtn" onclick="saveReceipt()">
+Save Receipt
+</button>
+
 </div>
 
 <div class="card">
-<div class="title">Print Receipt</div>
-<select id="printReceiptSelect"></select>
-<button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button>
+
+<div class="title">
+Print Receipt
 </div>
 
-<div class="card"><div class="title">Receipt List</div><div id="receiptList"></div></div>
+<select id="printReceiptSelect"></select>
+
+<button class="blueBtn" onclick="printSelectedReceipt()">
+Print Selected Receipt
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+Receipt List
+</div>
+
+<div id="receiptList"></div>
+
+</div>
+
+</div>
+
+<div id="backupPage" class="hidden">
+
+<div class="card">
+
+<div class="title">
+Backup & Restore
+</div>
+
+<button class="saveBtn" onclick="exportBackup()">
+Export Backup
+</button>
+
+<br><br>
+
+<input type="file" id="importFile">
+
+<button class="blueBtn" onclick="importBackup()">
+Import Backup
+</button>
+
+<br><br>
+
+<button class="redBtn" onclick="clearAllData()">
+Clear ALL Data
+</button>
+
+</div>
+
 </div>
 
 </div>
 
 <div id="printArea">
-<div class="printTitle" id="printDocTitle"></div>
-<div class="printCompany" id="printCompany"></div>
-<div class="printBox" id="printInfo"></div>
+
+<div class="printTitle"
+id="printDocTitle"></div>
+
+<div class="printCompany"
+id="printCompany"></div>
+
+<div class="printBox"
+id="printInfo"></div>
+
 <div id="printTableArea"></div>
-<div class="printTotal" id="printTotal"></div>
+
+<div class="printTotal"
+id="printTotal"></div>
+
 <br><br>
+
 <div id="printTerms"></div>
+
 <br><br>
-<p>Authorized Signature: ___________________________</p>
+
+<p>
+Authorized Signature:
+___________________________
+</p>
+
 <p id="printSign"></p>
-<div class="printFooter" id="printFooter"></div>
+
+<div class="printFooter"
+id="printFooter"></div>
+
 </div>
 
 <script>
+
 let company=JSON.parse(localStorage.getItem("company"))||{
 name:"REFIT MASTER DOCS",
-address:"Renovation / Contractor Documentation System",
+address:"",
 ssm:"",
 phone:"",
 email:"",
@@ -221,13 +667,26 @@ let prices=JSON.parse(localStorage.getItem("prices"))||[];
 let quotations=JSON.parse(localStorage.getItem("quotations"))||[];
 let invoices=JSON.parse(localStorage.getItem("invoices"))||[];
 let receipts=JSON.parse(localStorage.getItem("receipts"))||[];
+
 let currentQuoteItems=[];
 
 function showPage(page){
-["dashboardPage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage"].forEach(id=>{
+
+[
+"dashboardPage",
+"companyPage",
+"projectPage",
+"pricePage",
+"quotationPage",
+"invoicePage",
+"receiptPage",
+"backupPage"
+].forEach(id=>{
 document.getElementById(id).classList.add("hidden");
 });
+
 document.getElementById(page).classList.remove("hidden");
+
 refreshAll();
 }
 
@@ -235,18 +694,25 @@ function money(n){
 return (Number(n)||0).toFixed(2);
 }
 
-document.getElementById("companyLogo").addEventListener("change",function(e){
+document.getElementById("companyLogo")
+.addEventListener("change",function(e){
+
 const file=e.target.files[0];
+
 if(!file)return;
 
 const reader=new FileReader();
+
 reader.onload=function(event){
 document.getElementById("logoPreview").src=event.target.result;
 };
+
 reader.readAsDataURL(file);
+
 });
 
 function saveCompany(){
+
 let logoImg=document.getElementById("logoPreview").src || "";
 
 company={
@@ -261,11 +727,14 @@ logo:logoImg
 };
 
 localStorage.setItem("company",JSON.stringify(company));
-alert("Company Profile Saved / Updated");
+
+alert("Company Profile Saved");
+
 refreshAll();
 }
 
 function loadCompanyForm(){
+
 companyName.value=company.name||"";
 companyAddress.value=company.address||"";
 companySSM.value=company.ssm||"";
@@ -275,42 +744,13 @@ companyBank.value=company.bank||"";
 companySign.value=company.sign||"";
 
 if(company.logo){
-document.getElementById("logoPreview").src=company.logo;
-}else{
-document.getElementById("logoPreview").removeAttribute("src");
-}
+logoPreview.src=company.logo;
 }
 
-function companyHeader(){
-let logoPart="";
-
-if(company.logo){
-logoPart=`
-<div style="text-align:center;margin-bottom:10px;">
-<img src="${company.logo}" style="max-width:120px;max-height:120px;">
-</div>
-`;
-}
-
-return `
-${logoPart}
-<div style="text-align:center;line-height:1.6;">
-<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>
-${company.address||""}<br>
-${company.ssm ? "SSM: "+company.ssm+"<br>" : ""}
-${company.phone ? "Tel: "+company.phone+" | " : ""}
-${company.email ? "Email: "+company.email : ""}
-</div>
-`;
-}
-
-function preparePrintBase(){
-printCompany.innerHTML=companyHeader();
-printSign.innerHTML=company.sign ? company.sign : "";
-printFooter.innerHTML=company.bank ? "<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>") : "";
 }
 
 function saveProject(){
+
 projects.push({
 client:clientName.value,
 address:projectAddress.value,
@@ -323,18 +763,24 @@ status:projectStatus.value
 
 localStorage.setItem("projects",JSON.stringify(projects));
 
-clientName.value="";
-projectAddress.value="";
-phone.value="";
-email.value="";
-quoteRef.value="";
-projectDate.value="";
-
 alert("Project Saved");
+
+refreshAll();
+}
+
+function deleteProject(i){
+
+if(!confirm("Delete this project?")) return;
+
+projects.splice(i,1);
+
+localStorage.setItem("projects",JSON.stringify(projects));
+
 refreshAll();
 }
 
 function savePriceItem(){
+
 prices.push({
 category:priceCategory.value,
 desc:priceDesc.value,
@@ -344,16 +790,24 @@ rate:parseFloat(priceRate.value)||0
 
 localStorage.setItem("prices",JSON.stringify(prices));
 
-priceCategory.value="";
-priceDesc.value="";
-priceUnit.value="";
-priceRate.value="";
-
 alert("Price Item Saved");
+
+refreshAll();
+}
+
+function deletePriceItem(i){
+
+if(!confirm("Delete this price item?")) return;
+
+prices.splice(i,1);
+
+localStorage.setItem("prices",JSON.stringify(prices));
+
 refreshAll();
 }
 
 function addQuoteItem(){
+
 let item=prices[quoteItem.value];
 
 if(!item){
@@ -371,15 +825,17 @@ rate:item.rate,
 amount:qty*item.rate
 });
 
-quoteQty.value="";
 loadQuoteTable();
 }
 
 function loadQuoteTable(){
+
 let total=0;
 
 quoteTable.innerHTML=currentQuoteItems.map((item,i)=>{
+
 total+=item.amount;
+
 return `
 <tr>
 <td>${i+1}</td>
@@ -390,12 +846,14 @@ return `
 <td>${money(item.amount)}</td>
 </tr>
 `;
+
 }).join("");
 
 grandTotalText.innerText=money(total);
 }
 
 function saveQuotation(){
+
 if(currentQuoteItems.length===0){
 alert("No quotation item");
 return;
@@ -403,12 +861,8 @@ return;
 
 let selectedProject=projects[quoteProject.value];
 
-if(!selectedProject){
-alert("Please save/select project first");
-return;
-}
-
 let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
+
 let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
 
 quotations.push({
@@ -421,14 +875,17 @@ date:new Date().toLocaleDateString()
 
 localStorage.setItem("quotations",JSON.stringify(quotations));
 
-alert("Quotation Saved: "+qNo);
+alert("Quotation Saved");
 
 currentQuoteItems=[];
+
 loadQuoteTable();
+
 refreshAll();
 }
 
 function generateInvoices(){
+
 let q=quotations[invoiceQuotation.value];
 
 if(!q){
@@ -436,8 +893,10 @@ alert("No quotation selected");
 return;
 }
 
-if(invoices.filter(inv=>inv.quoteNo===q.quoteNo).length>0){
-alert("Invoices already generated for this quotation.");
+let existing=invoices.filter(inv=>inv.quoteNo===q.quoteNo);
+
+if(existing.length>0){
+alert("Invoices already generated");
 return;
 }
 
@@ -449,13 +908,15 @@ let stages=[
 ];
 
 stages.forEach(s=>{
+
 let invoiceNo=s.stage+"-"+String(invoices.length+1).padStart(3,"0");
+
 let amount=(Number(q.total)||0)*s.percent/100;
 
 invoices.push({
 invoiceNo:invoiceNo,
 quoteNo:q.quoteNo,
-client:q.project?.client||"No Client Name",
+client:q.project?.client||"",
 projectRef:q.project?.ref||"",
 stage:s.stage,
 percent:s.percent,
@@ -465,15 +926,29 @@ balance:amount,
 status:"Pending",
 date:new Date().toLocaleDateString()
 });
+
 });
 
 localStorage.setItem("invoices",JSON.stringify(invoices));
 
-alert("Progress invoices generated");
+alert("Invoices Generated");
+
+refreshAll();
+}
+
+function deleteInvoice(i){
+
+if(!confirm("Delete invoice?")) return;
+
+invoices.splice(i,1);
+
+localStorage.setItem("invoices",JSON.stringify(invoices));
+
 refreshAll();
 }
 
 function saveReceipt(){
+
 let inv=invoices[receiptInvoice.value];
 
 if(!inv){
@@ -491,6 +966,7 @@ return;
 let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");
 
 inv.paid=(Number(inv.paid)||0)+paid;
+
 inv.balance=(Number(inv.amount)||0)-inv.paid;
 
 if(inv.balance<=0){
@@ -513,156 +989,20 @@ balance:inv.balance
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
 
-receiptAmount.value="";
-receiptDate.value="";
+alert("Receipt Saved");
 
-alert("Receipt Saved: "+receiptNo);
 refreshAll();
 }
 
-function printCurrentQuotation(){
-let p=projects[quoteProject.value];
+function deleteReceipt(i){
 
-if(!p || currentQuoteItems.length===0){
-alert("Select project and add items first");
-return;
-}
+if(!confirm("Delete receipt?")) return;
 
-let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
+receipts.splice(i,1);
 
-preparePrintBase();
+localStorage.setItem("receipts",JSON.stringify(receipts));
 
-printDocTitle.innerText="QUOTATION";
-
-printInfo.innerHTML=`
-<b>Client:</b> ${p.client}<br>
-<b>Address:</b> ${p.address}<br>
-<b>Phone:</b> ${p.phone}<br>
-<b>Email:</b> ${p.email}<br>
-<b>Ref:</b> ${p.ref}<br>
-<b>Date:</b> ${new Date().toLocaleDateString()}
-`;
-
-printTableArea.innerHTML=`
-<table>
-<thead>
-<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate RM</th><th>Amount RM</th></tr>
-</thead>
-<tbody>
-${currentQuoteItems.map((it,i)=>`
-<tr>
-<td>${i+1}</td>
-<td>${it.desc}</td>
-<td>${it.unit}</td>
-<td>${it.qty}</td>
-<td>${money(it.rate)}</td>
-<td>${money(it.amount)}</td>
-</tr>
-`).join("")}
-</tbody>
-</table>
-`;
-
-printTotal.innerHTML=`Grand Total: RM ${money(total)}`;
-
-printTerms.innerHTML=`
-<b>Terms:</b><br>
-1. Price subject to final site confirmation.<br>
-2. Payment progress claim based on agreed stage.<br>
-3. Additional work shall be treated as variation order.
-`;
-
-window.print();
-}
-
-function printSelectedInvoice(){
-let inv=invoices[printInvoiceSelect.value];
-
-if(!inv){
-alert("No invoice selected");
-return;
-}
-
-preparePrintBase();
-
-printDocTitle.innerText="PROGRESS INVOICE";
-
-printInfo.innerHTML=`
-<b>Invoice No:</b> ${inv.invoiceNo}<br>
-<b>Client:</b> ${inv.client}<br>
-<b>Quotation:</b> ${inv.quoteNo}<br>
-<b>Project Ref:</b> ${inv.projectRef}<br>
-<b>Stage:</b> ${inv.stage} (${inv.percent}%)<br>
-<b>Date:</b> ${inv.date}
-`;
-
-printTableArea.innerHTML=`
-<table>
-<thead>
-<tr><th>Description</th><th>Amount RM</th><th>Paid RM</th><th>Balance RM</th><th>Status</th></tr>
-</thead>
-<tbody>
-<tr>
-<td>${inv.stage} Progress Claim ${inv.percent}%</td>
-<td>${money(inv.amount)}</td>
-<td>${money(inv.paid)}</td>
-<td>${money(inv.balance)}</td>
-<td>${inv.status}</td>
-</tr>
-</tbody>
-</table>
-`;
-
-printTotal.innerHTML=`Amount Due: RM ${money(inv.balance)}`;
-
-printTerms.innerHTML=`
-<b>Payment Note:</b><br>
-Please arrange payment according to the above progress claim.
-`;
-
-window.print();
-}
-
-function printSelectedReceipt(){
-let r=receipts[printReceiptSelect.value];
-
-if(!r){
-alert("No receipt selected");
-return;
-}
-
-preparePrintBase();
-
-printDocTitle.innerText="OFFICIAL RECEIPT";
-
-printInfo.innerHTML=`
-<b>Receipt No:</b> ${r.receiptNo}<br>
-<b>Invoice No:</b> ${r.invoiceNo}<br>
-<b>Client:</b> ${r.client}<br>
-<b>Date:</b> ${r.date}<br>
-<b>Payment Method:</b> ${r.method}
-`;
-
-printTableArea.innerHTML=`
-<table>
-<thead>
-<tr><th>Description</th><th>Paid RM</th><th>Balance After Payment RM</th></tr>
-</thead>
-<tbody>
-<tr>
-<td>Payment Received</td>
-<td>${money(r.amount)}</td>
-<td>${money(r.balance)}</td>
-</tr>
-</tbody>
-</table>
-`;
-
-printTotal.innerHTML=`Received Amount: RM ${money(r.amount)}`;
-
-printTerms.innerHTML=`<b>Thank you for your payment.</b>`;
-
-window.print();
+refreshAll();
 }
 
 function clearCurrentQuote(){
@@ -670,13 +1010,82 @@ currentQuoteItems=[];
 loadQuoteTable();
 }
 
-function deletePriceItem(i){
-prices.splice(i,1);
+function exportBackup(){
+
+let backupData={
+company,
+projects,
+prices,
+quotations,
+invoices,
+receipts
+};
+
+let dataStr=JSON.stringify(backupData);
+
+let blob=new Blob([dataStr],{
+type:"application/json"
+});
+
+let a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="refitmaster_backup.json";
+
+a.click();
+
+alert("Backup Exported");
+}
+
+function importBackup(){
+
+let file=document.getElementById("importFile").files[0];
+
+if(!file){
+alert("Please select backup file");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+let data=JSON.parse(e.target.result);
+
+company=data.company||company;
+projects=data.projects||[];
+prices=data.prices||[];
+quotations=data.quotations||[];
+invoices=data.invoices||[];
+receipts=data.receipts||[];
+
+localStorage.setItem("company",JSON.stringify(company));
+localStorage.setItem("projects",JSON.stringify(projects));
 localStorage.setItem("prices",JSON.stringify(prices));
+localStorage.setItem("quotations",JSON.stringify(quotations));
+localStorage.setItem("invoices",JSON.stringify(invoices));
+localStorage.setItem("receipts",JSON.stringify(receipts));
+
+alert("Backup Imported");
+
 refreshAll();
+};
+
+reader.readAsText(file);
+}
+
+function clearAllData(){
+
+if(!confirm("DELETE ALL DATA?")) return;
+
+localStorage.clear();
+
+location.reload();
 }
 
 function refreshAll(){
+
 projectCount.innerText=projects.length;
 priceCount.innerText=prices.length;
 quoteCount.innerText=quotations.length;
@@ -685,86 +1094,141 @@ receiptCount.innerText=receipts.length;
 
 loadCompanyForm();
 
-companyPreview.innerHTML=`
-<div class="itemBox">
-${companyHeader()}
-<br>
-<b>Bank:</b><br>${(company.bank||"").replace(/\n/g,"<br>")}
-<br><br>
-<b>Authorized:</b> ${company.sign||""}
-</div>
-`;
+let projectSearch=(searchProject?.value||"").toLowerCase();
 
-projectList.innerHTML=projects.map(p=>`
+projectList.innerHTML=projects
+.filter(p=>(p.client||"").toLowerCase().includes(projectSearch))
+.map((p,i)=>`
 <div class="itemBox">
 <b>${p.client}</b><br>
 ${p.address}<br>
 Ref: ${p.ref}<br>
-Status: ${p.status}
+Status: ${p.status}<br><br>
+
+<button class="redBtn"
+onclick="deleteProject(${i})">
+Delete
+</button>
+
 </div>
 `).join("");
 
-priceList.innerHTML=prices.map((p,i)=>`
+let priceSearch=(searchPrice?.value||"").toLowerCase();
+
+priceList.innerHTML=prices
+.filter(p=>(p.desc||"").toLowerCase().includes(priceSearch))
+.map((p,i)=>`
 <div class="itemBox">
 <b>${p.category}</b><br>
 ${p.desc}<br>
 Unit: ${p.unit}<br>
 Rate: RM ${money(p.rate)}<br>
-<button class="redBtn" onclick="deletePriceItem(${i})">Delete</button>
+
+<button class="redBtn"
+onclick="deletePriceItem(${i})">
+Delete
+</button>
+
 </div>
 `).join("");
 
 quoteProject.innerHTML=projects.map((p,i)=>`
-<option value="${i}">${p.client||"Client"} - ${p.ref||"No Ref"}</option>
+<option value="${i}">
+${p.client} - ${p.ref}
+</option>
 `).join("");
 
 quoteItem.innerHTML=prices.map((p,i)=>`
-<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>
+<option value="${i}">
+${p.category} - ${p.desc}
+</option>
 `).join("");
 
 invoiceQuotation.innerHTML=quotations.map((q,i)=>`
-<option value="${i}">${q.quoteNo||"Q-"+(i+1)} - ${q.project?.client||"No Client"} - RM ${money(q.total||q.grandTotal)}</option>
+<option value="${i}">
+${q.quoteNo} - ${q.project?.client}
+</option>
 `).join("");
 
 receiptInvoice.innerHTML=invoices.map((inv,i)=>`
-<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>
+<option value="${i}">
+${inv.invoiceNo} - ${inv.client}
+</option>
 `).join("");
 
 printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`
-<option value="${i}">${inv.invoiceNo} - ${inv.client} - RM ${money(inv.balance)} - ${inv.status}</option>
+<option value="${i}">
+${inv.invoiceNo} - ${inv.client}
+</option>
 `).join("");
 
 printReceiptSelect.innerHTML=receipts.map((r,i)=>`
-<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>
+<option value="${i}">
+${r.receiptNo} - ${r.client}
+</option>
 `).join("");
 
-invoiceList.innerHTML=invoices.map(inv=>`
+let invoiceFilterValue=invoiceFilter?.value || "ALL";
+
+let filteredInvoices=invoices;
+
+if(invoiceFilterValue==="PENDING"){
+filteredInvoices=invoices.filter(inv=>inv.balance>0);
+}
+
+if(invoiceFilterValue==="PAID"){
+filteredInvoices=invoices.filter(inv=>inv.balance<=0);
+}
+
+invoiceList.innerHTML=filteredInvoices.map((inv,i)=>`
 <div class="itemBox">
+
 <b>${inv.invoiceNo}</b><br>
+
 Client: ${inv.client}<br>
-Quotation: ${inv.quoteNo}<br>
-Stage: ${inv.stage} (${inv.percent}%)<br>
+
+Stage: ${inv.stage}<br>
+
 Amount: RM ${money(inv.amount)}<br>
+
 Paid: RM ${money(inv.paid)}<br>
+
 Balance: RM ${money(inv.balance)}<br>
-Status: <b>${inv.status}</b>
+
+Status: ${inv.status}<br><br>
+
+<button class="redBtn"
+onclick="deleteInvoice(${i})">
+Delete
+</button>
+
 </div>
 `).join("");
 
-receiptList.innerHTML=receipts.map(r=>`
+receiptList.innerHTML=receipts.map((r,i)=>`
 <div class="itemBox">
+
 <b>${r.receiptNo}</b><br>
+
 Invoice: ${r.invoiceNo}<br>
+
 Client: ${r.client}<br>
+
 Paid: RM ${money(r.amount)}<br>
-Method: ${r.method}<br>
-Date: ${r.date}<br>
-Balance After Payment: RM ${money(r.balance)}
+
+Balance: RM ${money(r.balance)}<br><br>
+
+<button class="redBtn"
+onclick="deleteReceipt(${i})">
+Delete
+</button>
+
 </div>
 `).join("");
 }
 
 refreshAll();
+
 </script>
 
 </body>
