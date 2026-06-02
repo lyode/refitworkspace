@@ -1,38 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER v3</title>
-
+<title>REFIT MASTER v4</title>
 <style>
 body{margin:0;font-family:Arial;background:#e9edf2}
-.header{background:#0b57a4;color:white;text-align:center;padding:20px;font-size:42px;font-weight:bold}
+.header{background:#0b57a4;color:white;text-align:center;padding:20px;font-size:40px;font-weight:bold}
 .container{padding:15px}
 .menu{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.menu button{background:#0b57a4;color:white;border:none;padding:16px;font-size:21px;border-radius:10px}
-.card{background:white;padding:18px;border-radius:10px;margin-bottom:20px;box-shadow:0 2px 5px #bbb}
+.menu button,.blueBtn{background:#0b57a4;color:white;border:none;padding:15px;font-size:20px;border-radius:10px}
+.card{background:white;padding:18px;border-radius:10px;margin-bottom:20px}
 .hidden{display:none}
 input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;font-size:18px;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}
-button{cursor:pointer}
 .saveBtn{background:green;color:white;border:none;padding:14px;width:100%;font-size:21px;border-radius:10px}
 .redBtn{background:#c62828;color:white;border:none;padding:10px;border-radius:8px;margin-top:8px}
-.blueBtn{background:#0b57a4;color:white;border:none;padding:12px;border-radius:8px;width:100%;font-size:18px}
 .title{font-size:28px;font-weight:bold;margin-bottom:15px}
-.count{font-size:50px;font-weight:bold}
+.count{font-size:48px;font-weight:bold}
 .itemBox{background:#f5f5f5;padding:12px;margin-top:10px;border-radius:8px}
-table{width:100%;border-collapse:collapse;font-size:15px}
-th,td{border:1px solid #ccc;padding:8px;text-align:left}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:1px solid #ccc;padding:8px}
 th{background:#0b57a4;color:white}
-.total{text-align:right;font-size:22px;font-weight:bold;margin-top:15px}
+.total{text-align:right;font-size:20px;font-weight:bold;margin-top:12px}
+
+#printArea{display:none;background:white;padding:30px}
+.printTitle{text-align:center;font-size:28px;font-weight:bold}
+.printCompany{text-align:center;margin-bottom:25px}
+.printInfo{margin-bottom:20px}
+.printTotal{text-align:right;font-size:22px;font-weight:bold;margin-top:20px}
+
+@media print{
+body *{visibility:hidden}
+#printArea,#printArea *{visibility:visible}
+#printArea{display:block;position:absolute;left:0;top:0;width:100%}
+.noPrint{display:none}
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">REFIT MASTER</div>
+<div class="header noPrint">REFIT MASTER</div>
 
-<div class="container">
+<div class="container noPrint">
 
 <div class="menu">
 <button onclick="showPage('dashboardPage')">Dashboard</button>
@@ -41,14 +50,12 @@ th{background:#0b57a4;color:white}
 <button onclick="showPage('quotationPage')">Quotation</button>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboardPage">
 <div class="card"><h2>Total Projects</h2><div class="count" id="projectCount">0</div></div>
 <div class="card"><h2>Total Price Items</h2><div class="count" id="priceCount">0</div></div>
 <div class="card"><h2>Total Quotations</h2><div class="count" id="quoteCount">0</div></div>
 </div>
 
-<!-- PROJECT -->
 <div id="projectPage" class="hidden">
 <div class="card">
 <div class="title">Project Registration</div>
@@ -69,214 +76,197 @@ th{background:#0b57a4;color:white}
 <div class="card"><div class="title">Project List</div><div id="projectList"></div></div>
 </div>
 
-<!-- PRICE MASTER -->
 <div id="pricePage" class="hidden">
 <div class="card">
 <div class="title">Price Master</div>
-<input id="priceCategory" placeholder="Category e.g. Hacking / Ceiling / Painting">
+<input id="priceCategory" placeholder="Category">
 <textarea id="priceDesc" placeholder="Item Description"></textarea>
-<input id="priceUnit" placeholder="Unit e.g. item / sqft / nos / lsum">
+<input id="priceUnit" placeholder="Unit">
 <input type="number" id="priceRate" placeholder="Rate RM">
 <button class="saveBtn" onclick="savePriceItem()">Save Price Item</button>
 </div>
 <div class="card"><div class="title">Price Item List</div><div id="priceList"></div></div>
 </div>
 
-<!-- QUOTATION -->
 <div id="quotationPage" class="hidden">
 <div class="card">
 <div class="title">Quotation Builder</div>
-
 <select id="quoteProject"></select>
-
 <select id="quoteItem"></select>
-
 <input type="number" id="quoteQty" placeholder="Quantity">
-
-<button class="blueBtn" onclick="addQuoteItem()">Add Item To Quotation</button>
+<button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
 </div>
 
 <div class="card">
 <div class="title">Quotation Items</div>
 <table>
 <thead>
-<tr>
-<th>No</th>
-<th>Description</th>
-<th>Unit</th>
-<th>Qty</th>
-<th>Rate</th>
-<th>Amount</th>
-</tr>
+<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
 </thead>
 <tbody id="quoteTable"></tbody>
 </table>
 
-<div class="total">Subtotal: RM <span id="subtotal">0.00</span></div>
-<div class="total">SST 0%: RM <span id="sst">0.00</span></div>
-<div class="total">Grand Total: RM <span id="grandTotal">0.00</span></div>
+<div class="total">Subtotal: RM <span id="subtotalText">0.00</span></div>
+<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
 
 <br>
-<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button>
+<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button><br><br>
+<button class="blueBtn" onclick="preparePrint()">Print / Save PDF</button><br><br>
 <button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
 </div>
 </div>
 
 </div>
 
+<div id="printArea">
+<div class="printTitle">QUOTATION</div>
+<div class="printCompany">
+<b>REFIT MASTER</b><br>
+Renovation / Contractor Quotation System
+</div>
+
+<div class="printInfo" id="printProjectInfo"></div>
+
+<table>
+<thead>
+<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate RM</th><th>Amount RM</th></tr>
+</thead>
+<tbody id="printQuoteTable"></tbody>
+</table>
+
+<div class="printTotal" id="printTotal"></div>
+
+<br><br>
+<p><b>Terms:</b></p>
+<p>1. Price subject to final site confirmation.</p>
+<p>2. Payment progress claim based on agreed stage.</p>
+<p>3. Any additional work shall be treated as variation order.</p>
+
+<br><br>
+<p>Accepted by Client: ___________________________</p>
+</div>
+
 <script>
-let projects = JSON.parse(localStorage.getItem("projects")) || [];
-let prices = JSON.parse(localStorage.getItem("prices")) || [];
-let quotations = JSON.parse(localStorage.getItem("quotations")) || [];
-let currentQuoteItems = [];
+let projects=JSON.parse(localStorage.getItem("projects"))||[];
+let prices=JSON.parse(localStorage.getItem("prices"))||[];
+let quotations=JSON.parse(localStorage.getItem("quotations"))||[];
+let currentQuoteItems=[];
 
 function showPage(page){
-    ["dashboardPage","projectPage","pricePage","quotationPage"].forEach(id=>{
-        document.getElementById(id).classList.add("hidden");
-    });
-    document.getElementById(page).classList.remove("hidden");
-    refreshAll();
+["dashboardPage","projectPage","pricePage","quotationPage"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+document.getElementById(page).classList.remove("hidden");
+refreshAll();
 }
 
 function saveProject(){
-    let project={
-        client:clientName.value,
-        address:projectAddress.value,
-        phone:phone.value,
-        email:email.value,
-        ref:quoteRef.value,
-        date:projectDate.value,
-        status:projectStatus.value
-    };
-    projects.push(project);
-    localStorage.setItem("projects",JSON.stringify(projects));
-    clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";
-    alert("Project Saved");
-    refreshAll();
+projects.push({
+client:clientName.value,address:projectAddress.value,phone:phone.value,email:email.value,
+ref:quoteRef.value,date:projectDate.value,status:projectStatus.value
+});
+localStorage.setItem("projects",JSON.stringify(projects));
+clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";
+alert("Project Saved");
+refreshAll();
 }
 
 function savePriceItem(){
-    let item={
-        category:priceCategory.value,
-        desc:priceDesc.value,
-        unit:priceUnit.value,
-        rate:parseFloat(priceRate.value)||0
-    };
-    prices.push(item);
-    localStorage.setItem("prices",JSON.stringify(prices));
-    priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";
-    alert("Price Item Saved");
-    refreshAll();
+prices.push({
+category:priceCategory.value,desc:priceDesc.value,unit:priceUnit.value,rate:parseFloat(priceRate.value)||0
+});
+localStorage.setItem("prices",JSON.stringify(prices));
+priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";
+alert("Price Item Saved");
+refreshAll();
 }
 
 function addQuoteItem(){
-    let index=quoteItem.value;
-    let item=prices[index];
-    let qty=parseFloat(quoteQty.value)||0;
-    let amount=qty*item.rate;
-
-    currentQuoteItems.push({
-        desc:item.desc,
-        unit:item.unit,
-        qty:qty,
-        rate:item.rate,
-        amount:amount
-    });
-
-    quoteQty.value="";
-    loadQuoteTable();
+let item=prices[quoteItem.value];
+let qty=parseFloat(quoteQty.value)||0;
+currentQuoteItems.push({desc:item.desc,unit:item.unit,qty:qty,rate:item.rate,amount:qty*item.rate});
+quoteQty.value="";
+loadQuoteTable();
 }
 
 function loadQuoteTable(){
-    let html="";
-    let subtotal=0;
-
-    currentQuoteItems.forEach((item,i)=>{
-        subtotal += item.amount;
-        html += `
-        <tr>
-        <td>${i+1}</td>
-        <td>${item.desc}</td>
-        <td>${item.unit}</td>
-        <td>${item.qty}</td>
-        <td>${item.rate.toFixed(2)}</td>
-        <td>${item.amount.toFixed(2)}</td>
-        </tr>`;
-    });
-
-    quoteTable.innerHTML=html;
-    subtotal.innerText=subtotal.toFixed(2);
-    sst.innerText="0.00";
-    grandTotal.innerText=subtotal.toFixed(2);
+let html="",subtotal=0;
+currentQuoteItems.forEach((item,i)=>{
+subtotal+=item.amount;
+html+=`<tr><td>${i+1}</td><td>${item.desc}</td><td>${item.unit}</td><td>${item.qty}</td><td>${item.rate.toFixed(2)}</td><td>${item.amount.toFixed(2)}</td></tr>`;
+});
+quoteTable.innerHTML=html;
+subtotalText.innerText=subtotal.toFixed(2);
+grandTotalText.innerText=subtotal.toFixed(2);
 }
 
 function saveQuotation(){
-    if(currentQuoteItems.length===0){
-        alert("No quotation item added");
-        return;
-    }
+if(currentQuoteItems.length===0){alert("No quotation item");return;}
+let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
+quotations.push({
+project:projects[quoteProject.value],
+items:currentQuoteItems,
+total:total,
+date:new Date().toLocaleDateString()
+});
+localStorage.setItem("quotations",JSON.stringify(quotations));
+alert("Quotation Saved");
+refreshAll();
+}
 
-    let projectIndex=quoteProject.value;
-    let project=projects[projectIndex];
+function preparePrint(){
+if(currentQuoteItems.length===0){alert("No quotation item to print");return;}
 
-    let subtotalValue=currentQuoteItems.reduce((sum,i)=>sum+i.amount,0);
+let p=projects[quoteProject.value];
+let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
 
-    let quotation={
-        project:project,
-        items:currentQuoteItems,
-        subtotal:subtotalValue,
-        sst:0,
-        grandTotal:subtotalValue,
-        date:new Date().toLocaleDateString()
-    };
+printProjectInfo.innerHTML=`
+<b>Client:</b> ${p.client}<br>
+<b>Address:</b> ${p.address}<br>
+<b>Phone:</b> ${p.phone}<br>
+<b>Email:</b> ${p.email}<br>
+<b>Quotation Ref:</b> ${p.ref}<br>
+<b>Date:</b> ${new Date().toLocaleDateString()}
+`;
 
-    quotations.push(quotation);
-    localStorage.setItem("quotations",JSON.stringify(quotations));
+printQuoteTable.innerHTML=currentQuoteItems.map((item,i)=>`
+<tr>
+<td>${i+1}</td>
+<td>${item.desc}</td>
+<td>${item.unit}</td>
+<td>${item.qty}</td>
+<td>${item.rate.toFixed(2)}</td>
+<td>${item.amount.toFixed(2)}</td>
+</tr>`).join("");
 
-    alert("Quotation Saved");
-    currentQuoteItems=[];
-    loadQuoteTable();
-    refreshAll();
+printTotal.innerHTML=`Grand Total: RM ${total.toFixed(2)}`;
+
+window.print();
 }
 
 function clearCurrentQuote(){
-    currentQuoteItems=[];
-    loadQuoteTable();
+currentQuoteItems=[];
+loadQuoteTable();
 }
 
-function deletePriceItem(index){
-    prices.splice(index,1);
-    localStorage.setItem("prices",JSON.stringify(prices));
-    refreshAll();
+function deletePriceItem(i){
+prices.splice(i,1);
+localStorage.setItem("prices",JSON.stringify(prices));
+refreshAll();
 }
 
 function refreshAll(){
-    projectCount.innerText=projects.length;
-    priceCount.innerText=prices.length;
-    quoteCount.innerText=quotations.length;
+projectCount.innerText=projects.length;
+priceCount.innerText=prices.length;
+quoteCount.innerText=quotations.length;
 
-    projectList.innerHTML=projects.map(p=>`
-        <div class="itemBox">
-        <b>${p.client}</b><br>
-        ${p.address}<br>
-        Ref: ${p.ref}<br>
-        Status: ${p.status}
-        </div>`).join("");
+projectList.innerHTML=projects.map(p=>`
+<div class="itemBox"><b>${p.client}</b><br>${p.address}<br>Ref: ${p.ref}<br>Status: ${p.status}</div>`).join("");
 
-    priceList.innerHTML=prices.map((p,i)=>`
-        <div class="itemBox">
-        <b>${p.category}</b><br>
-        ${p.desc}<br>
-        Unit: ${p.unit}<br>
-        Rate: RM ${p.rate.toFixed(2)}<br>
-        <button class="redBtn" onclick="deletePriceItem(${i})">Delete</button>
-        </div>`).join("");
+priceList.innerHTML=prices.map((p,i)=>`
+<div class="itemBox"><b>${p.category}</b><br>${p.desc}<br>Unit: ${p.unit}<br>Rate: RM ${p.rate.toFixed(2)}<br>
+<button class="redBtn" onclick="deletePriceItem(${i})">Delete</button></div>`).join("");
 
-    quoteProject.innerHTML=projects.map((p,i)=>`
-        <option value="${i}">${p.client} - ${p.ref}</option>`).join("");
-
-    quoteItem.innerHTML=prices.map((p,i)=>`
-        <option value="${i}">${p.category} - ${p.desc} - RM ${p.rate.toFixed(2)}</option>`).join("");
+quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.client} - ${p.ref}</option>`).join("");
+quoteItem.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.category} - ${p.desc} - RM ${p.rate.toFixed(2)}</option>`).join("");
 }
 
 refreshAll();
