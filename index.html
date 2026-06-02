@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,96 +8,91 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
-background:#f5f7fa;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#e9edf2;
 }
 
 .header{
-background:#0B5394;
-color:white;
-padding:15px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
+    background:#0b57a4;
+    color:white;
+    text-align:center;
+    padding:20px;
+    font-size:50px;
+    font-weight:bold;
 }
 
-.nav{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-padding:15px;
+.container{
+    padding:15px;
 }
 
-.nav button{
-padding:15px;
-font-size:16px;
-border:none;
-border-radius:10px;
-background:#0B5394;
-color:white;
+.menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
 }
 
-.page{
-padding:15px;
-display:none;
-}
-
-.active{
-display:block;
+.menu button{
+    background:#0b57a4;
+    color:white;
+    border:none;
+    padding:18px;
+    font-size:24px;
+    border-radius:10px;
+    cursor:pointer;
 }
 
 .card{
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
 
-input,
-textarea,
-select{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:10px;
-border:1px solid #ccc;
-border-radius:8px;
+.count{
+    font-size:55px;
+    font-weight:bold;
 }
 
-.btn{
-width:100%;
-padding:12px;
-background:#0B5394;
-color:white;
-border:none;
-border-radius:8px;
+.hidden{
+    display:none;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
+input, textarea, select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    margin-bottom:15px;
+    font-size:18px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
 }
 
-table th,
-table td{
-border:1px solid #ddd;
-padding:8px;
-font-size:14px;
+.saveBtn{
+    background:green;
+    color:white;
+    border:none;
+    padding:15px;
+    width:100%;
+    font-size:22px;
+    border-radius:10px;
 }
 
-.total{
-font-size:24px;
-font-weight:bold;
-text-align:right;
-margin-top:10px;
+.projectItem{
+    background:#f5f5f5;
+    padding:15px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+.title{
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 
 </style>
@@ -109,170 +104,94 @@ margin-top:10px;
 REFIT MASTER
 </div>
 
-<div class="nav">
+<div class="container">
 
-<button onclick="showPage('dashboard')">Dashboard</button>
-
-<button onclick="showPage('project')">Project</button>
-
-<button onclick="showPage('price')">Price Master</button>
-
-<button onclick="showPage('quote')">Quotation</button>
-
+<div class="menu">
+<button onclick="showDashboard()">Dashboard</button>
+<button onclick="showProject()">Project</button>
+<button onclick="showPrice()">Price Master</button>
+<button onclick="showQuotation()">Quotation</button>
 </div>
 
 <!-- DASHBOARD -->
 
-<div id="dashboard" class="page active">
+<div id="dashboardPage">
 
 <div class="card">
-
-<h3>Total Projects</h3>
-
-<h1 id="totalProjects">0</h1>
-
+<h2>Total Projects</h2>
+<div class="count" id="projectCount">0</div>
 </div>
 
 <div class="card">
-
-<h3>Total Price Items</h3>
-
-<h1 id="totalItems">0</h1>
-
+<h2>Total Price Items</h2>
+<div class="count">0</div>
 </div>
 
 </div>
 
-<!-- PROJECT -->
+<!-- PROJECT PAGE -->
 
-<div id="project" class="page">
+<div id="projectPage" class="hidden">
 
 <div class="card">
 
-<h3>Project Master</h3>
+<div class="title">
+Project Registration
+</div>
 
-<label>Project ID</label>
-<input id="projectId">
+<input type="text" id="clientName" placeholder="Client Name">
 
-<label>Customer Name</label>
-<input id="customerName">
+<textarea id="projectAddress" placeholder="Project Address"></textarea>
 
-<label>Contact</label>
-<input id="contact">
+<input type="text" id="phone" placeholder="Phone Number">
 
-<label>Address</label>
-<textarea id="address"></textarea>
+<input type="email" id="email" placeholder="Email">
 
-<label>Project Title</label>
-<input id="projectTitle">
+<input type="text" id="quoteRef" placeholder="Quote Ref No">
 
-<button class="btn" onclick="saveProject()">
+<input type="date" id="projectDate">
+
+<select id="projectStatus">
+<option>Pending</option>
+<option>Quotation Sent</option>
+<option>Confirmed</option>
+<option>Completed</option>
+</select>
+
+<button class="saveBtn" onclick="saveProject()">
 Save Project
 </button>
 
 </div>
 
-</div>
-
-<!-- PRICE MASTER -->
-
-<div id="price" class="page">
-
 <div class="card">
 
-<h3>Price Master</h3>
+<div class="title">
+Project List
+</div>
 
-<label>Item Code</label>
-<input id="itemCode">
-
-<label>Description</label>
-<input id="itemDescription">
-
-<label>Unit</label>
-<input id="itemUnit">
-
-<label>Rate</label>
-<input id="itemRate">
-
-<button class="btn" onclick="saveItem()">
-Save Item
-</button>
+<div id="projectList"></div>
 
 </div>
+
+</div>
+
+<!-- PRICE PAGE -->
+
+<div id="pricePage" class="hidden">
 
 <div class="card">
-
-<table id="priceTable">
-
-<tr>
-<th>Code</th>
-<th>Description</th>
-<th>Rate</th>
-</tr>
-
-</table>
-
+<h2>Price Master Coming Soon</h2>
 </div>
 
 </div>
 
-<!-- QUOTATION -->
+<!-- QUOTATION PAGE -->
 
-<div id="quote" class="page">
+<div id="quotationPage" class="hidden">
 
 <div class="card">
-
-<h3>Quotation</h3>
-
-<label>Select Item</label>
-
-<select id="quoteItem"
-onchange="loadItem()">
-
-<option value="">
-Select Item
-</option>
-
-</select>
-
-<label>Description</label>
-<input id="quoteDescription" readonly>
-
-<label>Unit</label>
-<input id="quoteUnit" readonly>
-
-<label>Rate</label>
-<input id="quoteRate" readonly>
-
-<label>Qty</label>
-<input id="quoteQty"
-onkeyup="calculateAmount()">
-
-<label>Amount</label>
-<input id="quoteAmount" readonly>
-
-<button class="btn"
-onclick="addQuoteItem()">
-Add Item
-</button>
-
-</div>
-
-<div class="card">
-
-<table id="quoteTable">
-
-<tr>
-<th>Description</th>
-<th>Qty</th>
-<th>Rate</th>
-<th>Amount</th>
-</tr>
-
-</table>
-
-<div class="total">
-RM <span id="grandTotal">0.00</span>
+<h2>Quotation Module Coming Soon</h2>
 </div>
 
 </div>
@@ -281,233 +200,93 @@ RM <span id="grandTotal">0.00</span>
 
 <script>
 
-let projects =
-JSON.parse(localStorage.getItem("projects")) || [];
+let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-let items =
-JSON.parse(localStorage.getItem("items")) || [];
+function showDashboard(){
+    hideAll();
+    document.getElementById("dashboardPage").classList.remove("hidden");
+}
 
-let quoteTotal = 0;
+function showProject(){
+    hideAll();
+    document.getElementById("projectPage").classList.remove("hidden");
+}
 
-function showPage(page){
+function showPrice(){
+    hideAll();
+    document.getElementById("pricePage").classList.remove("hidden");
+}
 
-document.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+function showQuotation(){
+    hideAll();
+    document.getElementById("quotationPage").classList.remove("hidden");
+}
 
-document.getElementById(page)
-.classList.add("active");
-
+function hideAll(){
+    document.getElementById("dashboardPage").classList.add("hidden");
+    document.getElementById("projectPage").classList.add("hidden");
+    document.getElementById("pricePage").classList.add("hidden");
+    document.getElementById("quotationPage").classList.add("hidden");
 }
 
 function saveProject(){
 
-let data = {
+    let project = {
+        client: document.getElementById("clientName").value,
+        address: document.getElementById("projectAddress").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        ref: document.getElementById("quoteRef").value,
+        date: document.getElementById("projectDate").value,
+        status: document.getElementById("projectStatus").value
+    };
 
-projectId:
-document.getElementById("projectId").value,
+    projects.push(project);
 
-customer:
-document.getElementById("customerName").value,
+    localStorage.setItem("projects", JSON.stringify(projects));
 
-contact:
-document.getElementById("contact").value,
+    loadProjects();
 
-address:
-document.getElementById("address").value,
+    alert("Project Saved Successfully");
 
-title:
-document.getElementById("projectTitle").value
+    clearForm();
+}
 
-};
+function loadProjects(){
 
-projects.push(data);
+    document.getElementById("projectCount").innerText = projects.length;
 
-localStorage.setItem(
-"projects",
-JSON.stringify(projects)
-);
+    let html = "";
 
-document.getElementById(
-"totalProjects"
-).innerText=projects.length;
+    projects.forEach((p,index)=>{
 
-alert("Project Saved");
+        html += `
+        <div class="projectItem">
+            <b>${p.client}</b><br>
+            ${p.address}<br><br>
+            Ref: ${p.ref}<br>
+            Status: ${p.status}
+        </div>
+        `;
+
+    });
+
+    document.getElementById("projectList").innerHTML = html;
 
 }
 
-function saveItem(){
+function clearForm(){
 
-let item = {
-
-code:
-document.getElementById("itemCode").value,
-
-description:
-document.getElementById("itemDescription").value,
-
-unit:
-document.getElementById("itemUnit").value,
-
-rate:
-document.getElementById("itemRate").value
-
-};
-
-items.push(item);
-
-localStorage.setItem(
-"items",
-JSON.stringify(items)
-);
-
-loadPriceTable();
-loadDropdown();
-
-alert("Item Saved");
+    document.getElementById("clientName").value = "";
+    document.getElementById("projectAddress").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("quoteRef").value = "";
+    document.getElementById("projectDate").value = "";
 
 }
 
-function loadPriceTable(){
-
-let table =
-document.getElementById("priceTable");
-
-table.innerHTML = `
-<tr>
-<th>Code</th>
-<th>Description</th>
-<th>Rate</th>
-</tr>
-`;
-
-items.forEach(i=>{
-
-table.innerHTML += `
-<tr>
-<td>${i.code}</td>
-<td>${i.description}</td>
-<td>${i.rate}</td>
-</tr>
-`;
-
-});
-
-document.getElementById(
-"totalItems"
-).innerText = items.length;
-
-}
-
-function loadDropdown(){
-
-let select =
-document.getElementById("quoteItem");
-
-select.innerHTML =
-'<option value="">Select Item</option>';
-
-items.forEach((i,index)=>{
-
-select.innerHTML +=
-`<option value="${index}">
-${i.code}
-</option>`;
-
-});
-
-}
-
-function loadItem(){
-
-let index =
-document.getElementById("quoteItem").value;
-
-if(index==="") return;
-
-let item = items[index];
-
-document.getElementById(
-"quoteDescription"
-).value=item.description;
-
-document.getElementById(
-"quoteUnit"
-).value=item.unit;
-
-document.getElementById(
-"quoteRate"
-).value=item.rate;
-
-}
-
-function calculateAmount(){
-
-let qty =
-Number(document.getElementById(
-"quoteQty"
-).value);
-
-let rate =
-Number(document.getElementById(
-"quoteRate"
-).value);
-
-document.getElementById(
-"quoteAmount"
-).value =
-(qty*rate).toFixed(2);
-
-}
-
-function addQuoteItem(){
-
-let desc =
-document.getElementById(
-"quoteDescription"
-).value;
-
-let qty =
-document.getElementById(
-"quoteQty"
-).value;
-
-let rate =
-document.getElementById(
-"quoteRate"
-).value;
-
-let amount =
-document.getElementById(
-"quoteAmount"
-).value;
-
-document.getElementById(
-"quoteTable"
-).innerHTML += `
-<tr>
-<td>${desc}</td>
-<td>${qty}</td>
-<td>${rate}</td>
-<td>${amount}</td>
-</tr>
-`;
-
-quoteTotal += Number(amount);
-
-document.getElementById(
-"grandTotal"
-).innerText =
-quoteTotal.toFixed(2);
-
-}
-
-loadPriceTable();
-loadDropdown();
-
-document.getElementById(
-"totalProjects"
-).innerText =
-projects.length;
+loadProjects();
 
 </script>
 
