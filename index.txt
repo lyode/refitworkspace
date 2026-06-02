@@ -90,3 +90,106 @@ Receipt
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Project Master</title>
+
+</head>
+
+<body>
+
+<h2>Project Master</h2>
+
+<form>
+
+Project ID
+
+<input type="text">
+
+<br><br>
+
+Customer Name
+
+<input type="text">
+
+<br><br>
+
+Contact Number
+
+<input type="text">
+
+<br><br>
+
+Project Address
+
+<textarea></textarea>
+
+<br><br>
+
+Project Title
+
+<input type="text">
+
+<br><br>
+
+<button>
+
+Save Project
+
+</button>
+
+</form>
+
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Price Master</title>
+
+</head>
+
+<body>
+
+<h2>Price Master</h2>
+
+<table border="1">
+
+<tr>
+
+<th>Code</th>
+
+<th>Description</th>
+
+<th>Unit</th>
+
+<th>Rate</th>
+
+</tr>
+
+<tr>
+
+<td>CP001</td>
+
+<td>Auto Gate Point</td>
+
+<td>SET</td>
+
+<td>1600</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>
+
