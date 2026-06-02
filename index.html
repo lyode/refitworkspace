@@ -18,6 +18,8 @@ input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;font-size:17px;b
 .title{font-size:25px;font-weight:bold;margin-bottom:12px}
 .count{font-size:42px;font-weight:bold;color:#fb8501}
 .itemBox{background:#f8fdff;padding:12px;margin-top:10px;border-radius:8px;border-left:4px solid #ffb703}
+.logoBox{text-align:center;margin-bottom:15px}
+#logoPreview{max-width:150px;max-height:150px;border-radius:10px;border:1px solid #ccc;padding:8px;background:white}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{border:1px solid #97daf0;padding:7px}
 th{background:#0a3949;color:white}
@@ -63,6 +65,13 @@ body *{visibility:hidden}
 <div id="companyPage" class="hidden">
 <div class="card">
 <div class="title">Company Profile</div>
+
+<input type="file" id="companyLogo" accept="image/*">
+
+<div class="logoBox">
+<img id="logoPreview" alt="Company Logo Preview">
+</div>
+
 <input id="companyName" placeholder="Company Name">
 <textarea id="companyAddress" placeholder="Company Address"></textarea>
 <input id="companySSM" placeholder="SSM / Registration No">
@@ -70,9 +79,14 @@ body *{visibility:hidden}
 <input id="companyEmail" placeholder="Company Email">
 <textarea id="companyBank" placeholder="Bank Details e.g. Bank Name / Account No / Account Name"></textarea>
 <input id="companySign" placeholder="Authorized Person / Signature Name">
-<button class="saveBtn" onclick="saveCompany()">Save Company Profile</button>
+
+<button class="saveBtn" onclick="saveCompany()">Save / Update Company Profile</button>
 </div>
-<div class="card"><div class="title">Current Company</div><div id="companyPreview"></div></div>
+
+<div class="card">
+<div class="title">Current Company</div>
+<div id="companyPreview"></div>
+</div>
 </div>
 
 <div id="projectPage" class="hidden">
@@ -85,7 +99,10 @@ body *{visibility:hidden}
 <input id="quoteRef" placeholder="Quote Ref No">
 <input type="date" id="projectDate">
 <select id="projectStatus">
-<option>Pending</option><option>Quotation Sent</option><option>Confirmed</option><option>Completed</option>
+<option>Pending</option>
+<option>Quotation Sent</option>
+<option>Confirmed</option>
+<option>Completed</option>
 </select>
 <button class="saveBtn" onclick="saveProject()">Save Project</button>
 </div>
@@ -112,13 +129,21 @@ body *{visibility:hidden}
 <input type="number" id="quoteQty" placeholder="Quantity">
 <button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
 </div>
+
 <div class="card">
 <div class="title">Quotation Items</div>
-<table><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>
-<tbody id="quoteTable"></tbody></table>
-<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div><br>
-<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button><br><br>
-<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button><br><br>
+<table>
+<thead>
+<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
+</thead>
+<tbody id="quoteTable"></tbody>
+</table>
+<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
+<br>
+<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button>
+<br><br>
+<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
+<br><br>
 <button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
 </div>
 </div>
@@ -129,11 +154,13 @@ body *{visibility:hidden}
 <select id="invoiceQuotation"></select>
 <button class="saveBtn" onclick="generateInvoices()">Generate INV 30/40/25/5</button>
 </div>
+
 <div class="card">
 <div class="title">Print Invoice</div>
 <select id="printInvoiceSelect"></select>
 <button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button>
 </div>
+
 <div class="card"><div class="title">Invoice List</div><div id="invoiceList"></div></div>
 </div>
 
@@ -144,15 +171,20 @@ body *{visibility:hidden}
 <input type="number" id="receiptAmount" placeholder="Paid Amount RM">
 <input type="date" id="receiptDate">
 <select id="paymentMethod">
-<option>Cash</option><option>Bank Transfer</option><option>Cheque</option><option>Online Payment</option>
+<option>Cash</option>
+<option>Bank Transfer</option>
+<option>Cheque</option>
+<option>Online Payment</option>
 </select>
 <button class="saveBtn" onclick="saveReceipt()">Save Receipt</button>
 </div>
+
 <div class="card">
 <div class="title">Print Receipt</div>
 <select id="printReceiptSelect"></select>
 <button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button>
 </div>
+
 <div class="card"><div class="title">Receipt List</div><div id="receiptList"></div></div>
 </div>
 
@@ -180,7 +212,8 @@ ssm:"",
 phone:"",
 email:"",
 bank:"",
-sign:""
+sign:"",
+logo:""
 };
 
 let projects=JSON.parse(localStorage.getItem("projects"))||[];
@@ -191,14 +224,31 @@ let receipts=JSON.parse(localStorage.getItem("receipts"))||[];
 let currentQuoteItems=[];
 
 function showPage(page){
-["dashboardPage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+["dashboardPage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage"].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
 document.getElementById(page).classList.remove("hidden");
 refreshAll();
 }
 
-function money(n){return (Number(n)||0).toFixed(2);}
+function money(n){
+return (Number(n)||0).toFixed(2);
+}
+
+document.getElementById("companyLogo").addEventListener("change",function(e){
+const file=e.target.files[0];
+if(!file)return;
+
+const reader=new FileReader();
+reader.onload=function(event){
+document.getElementById("logoPreview").src=event.target.result;
+};
+reader.readAsDataURL(file);
+});
 
 function saveCompany(){
+let logoImg=document.getElementById("logoPreview").src || "";
+
 company={
 name:companyName.value,
 address:companyAddress.value,
@@ -206,10 +256,12 @@ ssm:companySSM.value,
 phone:companyPhone.value,
 email:companyEmail.value,
 bank:companyBank.value,
-sign:companySign.value
+sign:companySign.value,
+logo:logoImg
 };
+
 localStorage.setItem("company",JSON.stringify(company));
-alert("Company Profile Saved");
+alert("Company Profile Saved / Updated");
 refreshAll();
 }
 
@@ -221,14 +273,35 @@ companyPhone.value=company.phone||"";
 companyEmail.value=company.email||"";
 companyBank.value=company.bank||"";
 companySign.value=company.sign||"";
+
+if(company.logo){
+document.getElementById("logoPreview").src=company.logo;
+}else{
+document.getElementById("logoPreview").removeAttribute("src");
+}
 }
 
 function companyHeader(){
-return `<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>
+let logoPart="";
+
+if(company.logo){
+logoPart=`
+<div style="text-align:center;margin-bottom:10px;">
+<img src="${company.logo}" style="max-width:120px;max-height:120px;">
+</div>
+`;
+}
+
+return `
+${logoPart}
+<div style="text-align:center;line-height:1.6;">
+<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>
 ${company.address||""}<br>
 ${company.ssm ? "SSM: "+company.ssm+"<br>" : ""}
 ${company.phone ? "Tel: "+company.phone+" | " : ""}
-${company.email ? "Email: "+company.email : ""}`;
+${company.email ? "Email: "+company.email : ""}
+</div>
+`;
 }
 
 function preparePrintBase(){
@@ -239,145 +312,456 @@ printFooter.innerHTML=company.bank ? "<b>Bank Details:</b><br>"+company.bank.rep
 
 function saveProject(){
 projects.push({
-client:clientName.value,address:projectAddress.value,phone:phone.value,email:email.value,
-ref:quoteRef.value,date:projectDate.value,status:projectStatus.value
+client:clientName.value,
+address:projectAddress.value,
+phone:phone.value,
+email:email.value,
+ref:quoteRef.value,
+date:projectDate.value,
+status:projectStatus.value
 });
+
 localStorage.setItem("projects",JSON.stringify(projects));
-clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";
-alert("Project Saved");refreshAll();
+
+clientName.value="";
+projectAddress.value="";
+phone.value="";
+email.value="";
+quoteRef.value="";
+projectDate.value="";
+
+alert("Project Saved");
+refreshAll();
 }
 
 function savePriceItem(){
-prices.push({category:priceCategory.value,desc:priceDesc.value,unit:priceUnit.value,rate:parseFloat(priceRate.value)||0});
+prices.push({
+category:priceCategory.value,
+desc:priceDesc.value,
+unit:priceUnit.value,
+rate:parseFloat(priceRate.value)||0
+});
+
 localStorage.setItem("prices",JSON.stringify(prices));
-priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";
-alert("Price Item Saved");refreshAll();
+
+priceCategory.value="";
+priceDesc.value="";
+priceUnit.value="";
+priceRate.value="";
+
+alert("Price Item Saved");
+refreshAll();
 }
 
 function addQuoteItem(){
 let item=prices[quoteItem.value];
-if(!item){alert("Please add price item first");return;}
+
+if(!item){
+alert("Please add price item first");
+return;
+}
+
 let qty=parseFloat(quoteQty.value)||0;
-currentQuoteItems.push({desc:item.desc,unit:item.unit,qty:qty,rate:item.rate,amount:qty*item.rate});
-quoteQty.value="";loadQuoteTable();
+
+currentQuoteItems.push({
+desc:item.desc,
+unit:item.unit,
+qty:qty,
+rate:item.rate,
+amount:qty*item.rate
+});
+
+quoteQty.value="";
+loadQuoteTable();
 }
 
 function loadQuoteTable(){
 let total=0;
+
 quoteTable.innerHTML=currentQuoteItems.map((item,i)=>{
 total+=item.amount;
-return `<tr><td>${i+1}</td><td>${item.desc}</td><td>${item.unit}</td><td>${item.qty}</td><td>${money(item.rate)}</td><td>${money(item.amount)}</td></tr>`;
+return `
+<tr>
+<td>${i+1}</td>
+<td>${item.desc}</td>
+<td>${item.unit}</td>
+<td>${item.qty}</td>
+<td>${money(item.rate)}</td>
+<td>${money(item.amount)}</td>
+</tr>
+`;
 }).join("");
+
 grandTotalText.innerText=money(total);
 }
 
 function saveQuotation(){
-if(currentQuoteItems.length===0){alert("No quotation item");return;}
+if(currentQuoteItems.length===0){
+alert("No quotation item");
+return;
+}
+
 let selectedProject=projects[quoteProject.value];
-if(!selectedProject){alert("Please save/select project first");return;}
+
+if(!selectedProject){
+alert("Please save/select project first");
+return;
+}
+
 let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
 let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
-quotations.push({quoteNo:qNo,project:selectedProject,items:[...currentQuoteItems],total:total,date:new Date().toLocaleDateString()});
+
+quotations.push({
+quoteNo:qNo,
+project:selectedProject,
+items:[...currentQuoteItems],
+total:total,
+date:new Date().toLocaleDateString()
+});
+
 localStorage.setItem("quotations",JSON.stringify(quotations));
+
 alert("Quotation Saved: "+qNo);
-currentQuoteItems=[];loadQuoteTable();refreshAll();
+
+currentQuoteItems=[];
+loadQuoteTable();
+refreshAll();
 }
 
 function generateInvoices(){
 let q=quotations[invoiceQuotation.value];
-if(!q){alert("No quotation selected");return;}
-if(invoices.filter(inv=>inv.quoteNo===q.quoteNo).length>0){alert("Invoices already generated for this quotation.");return;}
-let stages=[{stage:"INV-1",percent:30},{stage:"INV-2",percent:40},{stage:"INV-3",percent:25},{stage:"INV-4",percent:5}];
+
+if(!q){
+alert("No quotation selected");
+return;
+}
+
+if(invoices.filter(inv=>inv.quoteNo===q.quoteNo).length>0){
+alert("Invoices already generated for this quotation.");
+return;
+}
+
+let stages=[
+{stage:"INV-1",percent:30},
+{stage:"INV-2",percent:40},
+{stage:"INV-3",percent:25},
+{stage:"INV-4",percent:5}
+];
+
 stages.forEach(s=>{
 let invoiceNo=s.stage+"-"+String(invoices.length+1).padStart(3,"0");
 let amount=(Number(q.total)||0)*s.percent/100;
+
 invoices.push({
-invoiceNo:invoiceNo,quoteNo:q.quoteNo,client:q.project?.client||"No Client Name",
-projectRef:q.project?.ref||"",stage:s.stage,percent:s.percent,
-amount:amount,paid:0,balance:amount,status:"Pending",date:new Date().toLocaleDateString()
+invoiceNo:invoiceNo,
+quoteNo:q.quoteNo,
+client:q.project?.client||"No Client Name",
+projectRef:q.project?.ref||"",
+stage:s.stage,
+percent:s.percent,
+amount:amount,
+paid:0,
+balance:amount,
+status:"Pending",
+date:new Date().toLocaleDateString()
 });
 });
+
 localStorage.setItem("invoices",JSON.stringify(invoices));
-alert("Progress invoices generated");refreshAll();
+
+alert("Progress invoices generated");
+refreshAll();
 }
 
 function saveReceipt(){
 let inv=invoices[receiptInvoice.value];
-if(!inv){alert("No invoice selected");return;}
+
+if(!inv){
+alert("No invoice selected");
+return;
+}
+
 let paid=parseFloat(receiptAmount.value)||0;
-if(paid<=0){alert("Please enter paid amount");return;}
+
+if(paid<=0){
+alert("Please enter paid amount");
+return;
+}
+
 let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");
+
 inv.paid=(Number(inv.paid)||0)+paid;
 inv.balance=(Number(inv.amount)||0)-inv.paid;
-if(inv.balance<=0){inv.balance=0;inv.status="Paid"}else{inv.status="Partial"}
+
+if(inv.balance<=0){
+inv.balance=0;
+inv.status="Paid";
+}else{
+inv.status="Partial";
+}
+
 receipts.push({
-receiptNo:receiptNo,invoiceNo:inv.invoiceNo,client:inv.client,amount:paid,
-date:receiptDate.value||new Date().toLocaleDateString(),method:paymentMethod.value,balance:inv.balance
+receiptNo:receiptNo,
+invoiceNo:inv.invoiceNo,
+client:inv.client,
+amount:paid,
+date:receiptDate.value||new Date().toLocaleDateString(),
+method:paymentMethod.value,
+balance:inv.balance
 });
+
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
-receiptAmount.value="";receiptDate.value="";
-alert("Receipt Saved: "+receiptNo);refreshAll();
+
+receiptAmount.value="";
+receiptDate.value="";
+
+alert("Receipt Saved: "+receiptNo);
+refreshAll();
 }
 
 function printCurrentQuotation(){
 let p=projects[quoteProject.value];
-if(!p || currentQuoteItems.length===0){alert("Select project and add items first");return;}
+
+if(!p || currentQuoteItems.length===0){
+alert("Select project and add items first");
+return;
+}
+
 let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
+
 preparePrintBase();
+
 printDocTitle.innerText="QUOTATION";
-printInfo.innerHTML=`<b>Client:</b> ${p.client}<br><b>Address:</b> ${p.address}<br><b>Phone:</b> ${p.phone}<br><b>Email:</b> ${p.email}<br><b>Ref:</b> ${p.ref}<br><b>Date:</b> ${new Date().toLocaleDateString()}`;
-printTableArea.innerHTML=`<table><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate RM</th><th>Amount RM</th></tr></thead><tbody>${currentQuoteItems.map((it,i)=>`<tr><td>${i+1}</td><td>${it.desc}</td><td>${it.unit}</td><td>${it.qty}</td><td>${money(it.rate)}</td><td>${money(it.amount)}</td></tr>`).join("")}</tbody></table>`;
+
+printInfo.innerHTML=`
+<b>Client:</b> ${p.client}<br>
+<b>Address:</b> ${p.address}<br>
+<b>Phone:</b> ${p.phone}<br>
+<b>Email:</b> ${p.email}<br>
+<b>Ref:</b> ${p.ref}<br>
+<b>Date:</b> ${new Date().toLocaleDateString()}
+`;
+
+printTableArea.innerHTML=`
+<table>
+<thead>
+<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate RM</th><th>Amount RM</th></tr>
+</thead>
+<tbody>
+${currentQuoteItems.map((it,i)=>`
+<tr>
+<td>${i+1}</td>
+<td>${it.desc}</td>
+<td>${it.unit}</td>
+<td>${it.qty}</td>
+<td>${money(it.rate)}</td>
+<td>${money(it.amount)}</td>
+</tr>
+`).join("")}
+</tbody>
+</table>
+`;
+
 printTotal.innerHTML=`Grand Total: RM ${money(total)}`;
-printTerms.innerHTML=`<b>Terms:</b><br>1. Price subject to final site confirmation.<br>2. Payment progress claim based on agreed stage.<br>3. Additional work shall be treated as variation order.`;
+
+printTerms.innerHTML=`
+<b>Terms:</b><br>
+1. Price subject to final site confirmation.<br>
+2. Payment progress claim based on agreed stage.<br>
+3. Additional work shall be treated as variation order.
+`;
+
 window.print();
 }
 
 function printSelectedInvoice(){
 let inv=invoices[printInvoiceSelect.value];
-if(!inv){alert("No invoice selected");return;}
+
+if(!inv){
+alert("No invoice selected");
+return;
+}
+
 preparePrintBase();
+
 printDocTitle.innerText="PROGRESS INVOICE";
-printInfo.innerHTML=`<b>Invoice No:</b> ${inv.invoiceNo}<br><b>Client:</b> ${inv.client}<br><b>Quotation:</b> ${inv.quoteNo}<br><b>Project Ref:</b> ${inv.projectRef}<br><b>Stage:</b> ${inv.stage} (${inv.percent}%)<br><b>Date:</b> ${inv.date}`;
-printTableArea.innerHTML=`<table><thead><tr><th>Description</th><th>Amount RM</th><th>Paid RM</th><th>Balance RM</th><th>Status</th></tr></thead><tbody><tr><td>${inv.stage} Progress Claim ${inv.percent}%</td><td>${money(inv.amount)}</td><td>${money(inv.paid)}</td><td>${money(inv.balance)}</td><td>${inv.status}</td></tr></tbody></table>`;
+
+printInfo.innerHTML=`
+<b>Invoice No:</b> ${inv.invoiceNo}<br>
+<b>Client:</b> ${inv.client}<br>
+<b>Quotation:</b> ${inv.quoteNo}<br>
+<b>Project Ref:</b> ${inv.projectRef}<br>
+<b>Stage:</b> ${inv.stage} (${inv.percent}%)<br>
+<b>Date:</b> ${inv.date}
+`;
+
+printTableArea.innerHTML=`
+<table>
+<thead>
+<tr><th>Description</th><th>Amount RM</th><th>Paid RM</th><th>Balance RM</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>${inv.stage} Progress Claim ${inv.percent}%</td>
+<td>${money(inv.amount)}</td>
+<td>${money(inv.paid)}</td>
+<td>${money(inv.balance)}</td>
+<td>${inv.status}</td>
+</tr>
+</tbody>
+</table>
+`;
+
 printTotal.innerHTML=`Amount Due: RM ${money(inv.balance)}`;
-printTerms.innerHTML=`<b>Payment Note:</b><br>Please arrange payment according to the above progress claim.`;
+
+printTerms.innerHTML=`
+<b>Payment Note:</b><br>
+Please arrange payment according to the above progress claim.
+`;
+
 window.print();
 }
 
 function printSelectedReceipt(){
 let r=receipts[printReceiptSelect.value];
-if(!r){alert("No receipt selected");return;}
+
+if(!r){
+alert("No receipt selected");
+return;
+}
+
 preparePrintBase();
+
 printDocTitle.innerText="OFFICIAL RECEIPT";
-printInfo.innerHTML=`<b>Receipt No:</b> ${r.receiptNo}<br><b>Invoice No:</b> ${r.invoiceNo}<br><b>Client:</b> ${r.client}<br><b>Date:</b> ${r.date}<br><b>Payment Method:</b> ${r.method}`;
-printTableArea.innerHTML=`<table><thead><tr><th>Description</th><th>Paid RM</th><th>Balance After Payment RM</th></tr></thead><tbody><tr><td>Payment Received</td><td>${money(r.amount)}</td><td>${money(r.balance)}</td></tr></tbody></table>`;
+
+printInfo.innerHTML=`
+<b>Receipt No:</b> ${r.receiptNo}<br>
+<b>Invoice No:</b> ${r.invoiceNo}<br>
+<b>Client:</b> ${r.client}<br>
+<b>Date:</b> ${r.date}<br>
+<b>Payment Method:</b> ${r.method}
+`;
+
+printTableArea.innerHTML=`
+<table>
+<thead>
+<tr><th>Description</th><th>Paid RM</th><th>Balance After Payment RM</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Payment Received</td>
+<td>${money(r.amount)}</td>
+<td>${money(r.balance)}</td>
+</tr>
+</tbody>
+</table>
+`;
+
 printTotal.innerHTML=`Received Amount: RM ${money(r.amount)}`;
+
 printTerms.innerHTML=`<b>Thank you for your payment.</b>`;
+
 window.print();
 }
 
-function clearCurrentQuote(){currentQuoteItems=[];loadQuoteTable();}
-function deletePriceItem(i){prices.splice(i,1);localStorage.setItem("prices",JSON.stringify(prices));refreshAll();}
+function clearCurrentQuote(){
+currentQuoteItems=[];
+loadQuoteTable();
+}
+
+function deletePriceItem(i){
+prices.splice(i,1);
+localStorage.setItem("prices",JSON.stringify(prices));
+refreshAll();
+}
 
 function refreshAll(){
-projectCount.innerText=projects.length;priceCount.innerText=prices.length;quoteCount.innerText=quotations.length;invoiceCount.innerText=invoices.length;receiptCount.innerText=receipts.length;
+projectCount.innerText=projects.length;
+priceCount.innerText=prices.length;
+quoteCount.innerText=quotations.length;
+invoiceCount.innerText=invoices.length;
+receiptCount.innerText=receipts.length;
 
-companyPreview.innerHTML=`<div class="itemBox">${companyHeader()}<br><br><b>Bank:</b><br>${(company.bank||"").replace(/\n/g,"<br>")}<br><br><b>Authorized:</b> ${company.sign||""}</div>`;
 loadCompanyForm();
 
-projectList.innerHTML=projects.map(p=>`<div class="itemBox"><b>${p.client}</b><br>${p.address}<br>Ref: ${p.ref}<br>Status: ${p.status}</div>`).join("");
-priceList.innerHTML=prices.map((p,i)=>`<div class="itemBox"><b>${p.category}</b><br>${p.desc}<br>Unit: ${p.unit}<br>Rate: RM ${money(p.rate)}<br><button class="redBtn" onclick="deletePriceItem(${i})">Delete</button></div>`).join("");
+companyPreview.innerHTML=`
+<div class="itemBox">
+${companyHeader()}
+<br>
+<b>Bank:</b><br>${(company.bank||"").replace(/\n/g,"<br>")}
+<br><br>
+<b>Authorized:</b> ${company.sign||""}
+</div>
+`;
 
-quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.client||"Client"} - ${p.ref||"No Ref"}</option>`).join("");
-quoteItem.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>`).join("");
-invoiceQuotation.innerHTML=quotations.map((q,i)=>`<option value="${i}">${q.quoteNo||"Q-"+(i+1)} - ${q.project?.client||"No Client"} - RM ${money(q.total||q.grandTotal)}</option>`).join("");
-receiptInvoice.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>`).join("");
-printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - RM ${money(inv.balance)} - ${inv.status}</option>`).join("");
-printReceiptSelect.innerHTML=receipts.map((r,i)=>`<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>`).join("");
+projectList.innerHTML=projects.map(p=>`
+<div class="itemBox">
+<b>${p.client}</b><br>
+${p.address}<br>
+Ref: ${p.ref}<br>
+Status: ${p.status}
+</div>
+`).join("");
 
-invoiceList.innerHTML=invoices.map(inv=>`<div class="itemBox"><b>${inv.invoiceNo}</b><br>Client: ${inv.client}<br>Quotation: ${inv.quoteNo}<br>Stage: ${inv.stage} (${inv.percent}%)<br>Amount: RM ${money(inv.amount)}<br>Paid: RM ${money(inv.paid)}<br>Balance: RM ${money(inv.balance)}<br>Status: <b>${inv.status}</b></div>`).join("");
-receiptList.innerHTML=receipts.map(r=>`<div class="itemBox"><b>${r.receiptNo}</b><br>Invoice: ${r.invoiceNo}<br>Client: ${r.client}<br>Paid: RM ${money(r.amount)}<br>Method: ${r.method}<br>Date: ${r.date}<br>Balance After Payment: RM ${money(r.balance)}</div>`).join("");
+priceList.innerHTML=prices.map((p,i)=>`
+<div class="itemBox">
+<b>${p.category}</b><br>
+${p.desc}<br>
+Unit: ${p.unit}<br>
+Rate: RM ${money(p.rate)}<br>
+<button class="redBtn" onclick="deletePriceItem(${i})">Delete</button>
+</div>
+`).join("");
+
+quoteProject.innerHTML=projects.map((p,i)=>`
+<option value="${i}">${p.client||"Client"} - ${p.ref||"No Ref"}</option>
+`).join("");
+
+quoteItem.innerHTML=prices.map((p,i)=>`
+<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>
+`).join("");
+
+invoiceQuotation.innerHTML=quotations.map((q,i)=>`
+<option value="${i}">${q.quoteNo||"Q-"+(i+1)} - ${q.project?.client||"No Client"} - RM ${money(q.total||q.grandTotal)}</option>
+`).join("");
+
+receiptInvoice.innerHTML=invoices.map((inv,i)=>`
+<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>
+`).join("");
+
+printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`
+<option value="${i}">${inv.invoiceNo} - ${inv.client} - RM ${money(inv.balance)} - ${inv.status}</option>
+`).join("");
+
+printReceiptSelect.innerHTML=receipts.map((r,i)=>`
+<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>
+`).join("");
+
+invoiceList.innerHTML=invoices.map(inv=>`
+<div class="itemBox">
+<b>${inv.invoiceNo}</b><br>
+Client: ${inv.client}<br>
+Quotation: ${inv.quoteNo}<br>
+Stage: ${inv.stage} (${inv.percent}%)<br>
+Amount: RM ${money(inv.amount)}<br>
+Paid: RM ${money(inv.paid)}<br>
+Balance: RM ${money(inv.balance)}<br>
+Status: <b>${inv.status}</b>
+</div>
+`).join("");
+
+receiptList.innerHTML=receipts.map(r=>`
+<div class="itemBox">
+<b>${r.receiptNo}</b><br>
+Invoice: ${r.invoiceNo}<br>
+Client: ${r.client}<br>
+Paid: RM ${money(r.amount)}<br>
+Method: ${r.method}<br>
+Date: ${r.date}<br>
+Balance After Payment: RM ${money(r.balance)}
+</div>
+`).join("");
 }
 
 refreshAll();
