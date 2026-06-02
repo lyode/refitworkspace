@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>REFIT MASTER</title>
 
@@ -16,37 +16,54 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#f4f6f8;
+background:#f5f7fa;
 }
 
 .header{
-background:#0d47a1;
+background:#0B5394;
 color:white;
 padding:15px;
-font-size:24px;
-font-weight:bold;
 text-align:center;
+font-size:28px;
+font-weight:bold;
 }
 
-.container{
+.nav{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
 padding:15px;
+}
+
+.nav button{
+padding:15px;
+font-size:16px;
+border:none;
+border-radius:10px;
+background:#0B5394;
+color:white;
+}
+
+.page{
+padding:15px;
+display:none;
+}
+
+.active{
+display:block;
 }
 
 .card{
 background:white;
-border-radius:12px;
 padding:15px;
 margin-bottom:15px;
-box-shadow:0 2px 6px rgba(0,0,0,.15);
-}
-
-.card h3{
-margin-bottom:10px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.15);
 }
 
 input,
-select,
-textarea{
+textarea,
+select{
 width:100%;
 padding:10px;
 margin-top:5px;
@@ -55,34 +72,13 @@ border:1px solid #ccc;
 border-radius:8px;
 }
 
-button{
+.btn{
 width:100%;
 padding:12px;
-border:none;
-background:#1565c0;
+background:#0B5394;
 color:white;
-font-size:16px;
+border:none;
 border-radius:8px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0d47a1;
-}
-
-.menu{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-bottom:20px;
-}
-
-.menu button{
-height:60px;
-}
-
-.hidden{
-display:none;
 }
 
 table{
@@ -98,7 +94,7 @@ font-size:14px;
 }
 
 .total{
-font-size:22px;
+font-size:24px;
 font-weight:bold;
 text-align:right;
 margin-top:10px;
@@ -113,47 +109,43 @@ margin-top:10px;
 REFIT MASTER
 </div>
 
-<div class="container">
+<div class="nav">
 
-<div class="menu">
+<button onclick="showPage('dashboard')">Dashboard</button>
 
-<button onclick="showPage('dashboard')">
-Dashboard
-</button>
+<button onclick="showPage('project')">Project</button>
 
-<button onclick="showPage('project')">
-Project
-</button>
+<button onclick="showPage('price')">Price Master</button>
 
-<button onclick="showPage('price')">
-Price Master
-</button>
-
-<button onclick="showPage('quote')">
-Quotation
-</button>
+<button onclick="showPage('quote')">Quotation</button>
 
 </div>
 
 <!-- DASHBOARD -->
 
-<div id="dashboard">
+<div id="dashboard" class="page active">
 
 <div class="card">
+
 <h3>Total Projects</h3>
+
 <h1 id="totalProjects">0</h1>
+
 </div>
 
 <div class="card">
+
 <h3>Total Price Items</h3>
+
 <h1 id="totalItems">0</h1>
-</div>
 
 </div>
 
-<!-- PROJECT MASTER -->
+</div>
 
-<div id="project" class="hidden">
+<!-- PROJECT -->
+
+<div id="project" class="page">
 
 <div class="card">
 
@@ -174,7 +166,7 @@ Quotation
 <label>Project Title</label>
 <input id="projectTitle">
 
-<button onclick="saveProject()">
+<button class="btn" onclick="saveProject()">
 Save Project
 </button>
 
@@ -184,7 +176,7 @@ Save Project
 
 <!-- PRICE MASTER -->
 
-<div id="price" class="hidden">
+<div id="price" class="page">
 
 <div class="card">
 
@@ -202,7 +194,7 @@ Save Project
 <label>Rate</label>
 <input id="itemRate">
 
-<button onclick="saveItem()">
+<button class="btn" onclick="saveItem()">
 Save Item
 </button>
 
@@ -226,7 +218,7 @@ Save Item
 
 <!-- QUOTATION -->
 
-<div id="quote" class="hidden">
+<div id="quote" class="page">
 
 <div class="card">
 
@@ -259,7 +251,8 @@ onkeyup="calculateAmount()">
 <label>Amount</label>
 <input id="quoteAmount" readonly>
 
-<button onclick="addQuoteItem()">
+<button class="btn"
+onclick="addQuoteItem()">
 Add Item
 </button>
 
@@ -286,8 +279,6 @@ RM <span id="grandTotal">0.00</span>
 
 </div>
 
-</div>
-
 <script>
 
 let projects =
@@ -300,19 +291,18 @@ let quoteTotal = 0;
 
 function showPage(page){
 
-document
-.querySelectorAll("#dashboard,#project,#price,#quote")
-.forEach(x=>x.classList.add("hidden"));
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
 
-document
-.getElementById(page)
-.classList.remove("hidden");
+document.getElementById(page)
+.classList.add("active");
 
 }
 
 function saveProject(){
 
-let data={
+let data = {
+
 projectId:
 document.getElementById("projectId").value,
 
@@ -327,6 +317,7 @@ document.getElementById("address").value,
 
 title:
 document.getElementById("projectTitle").value
+
 };
 
 projects.push(data);
@@ -346,7 +337,7 @@ alert("Project Saved");
 
 function saveItem(){
 
-let item={
+let item = {
 
 code:
 document.getElementById("itemCode").value,
@@ -370,7 +361,6 @@ JSON.stringify(items)
 );
 
 loadPriceTable();
-
 loadDropdown();
 
 alert("Item Saved");
@@ -382,51 +372,43 @@ function loadPriceTable(){
 let table =
 document.getElementById("priceTable");
 
-table.innerHTML=`
-
+table.innerHTML = `
 <tr>
 <th>Code</th>
 <th>Description</th>
 <th>Rate</th>
 </tr>
-
 `;
 
 items.forEach(i=>{
 
-table.innerHTML+=`
-
+table.innerHTML += `
 <tr>
-
 <td>${i.code}</td>
-
 <td>${i.description}</td>
-
 <td>${i.rate}</td>
-
 </tr>
-
 `;
 
 });
 
 document.getElementById(
 "totalItems"
-).innerText=items.length;
+).innerText = items.length;
 
 }
 
 function loadDropdown(){
 
-let select=
+let select =
 document.getElementById("quoteItem");
 
-select.innerHTML=
+select.innerHTML =
 '<option value="">Select Item</option>';
 
 items.forEach((i,index)=>{
 
-select.innerHTML+=
+select.innerHTML +=
 `<option value="${index}">
 ${i.code}
 </option>`;
@@ -437,12 +419,12 @@ ${i.code}
 
 function loadItem(){
 
-let index=
+let index =
 document.getElementById("quoteItem").value;
 
 if(index==="") return;
 
-let item=items[index];
+let item = items[index];
 
 document.getElementById(
 "quoteDescription"
@@ -460,70 +442,61 @@ document.getElementById(
 
 function calculateAmount(){
 
-let qty=
+let qty =
 Number(document.getElementById(
 "quoteQty"
 ).value);
 
-let rate=
+let rate =
 Number(document.getElementById(
 "quoteRate"
 ).value);
 
 document.getElementById(
 "quoteAmount"
-).value=(qty*rate).toFixed(2);
+).value =
+(qty*rate).toFixed(2);
 
 }
 
 function addQuoteItem(){
 
-let desc=
+let desc =
 document.getElementById(
 "quoteDescription"
 ).value;
 
-let qty=
+let qty =
 document.getElementById(
 "quoteQty"
 ).value;
 
-let rate=
+let rate =
 document.getElementById(
 "quoteRate"
 ).value;
 
-let amount=
+let amount =
 document.getElementById(
 "quoteAmount"
 ).value;
 
-let table=
 document.getElementById(
 "quoteTable"
-);
-
-table.innerHTML+=`
-
+).innerHTML += `
 <tr>
-
 <td>${desc}</td>
-
 <td>${qty}</td>
-
 <td>${rate}</td>
-
 <td>${amount}</td>
-
 </tr>
-
 `;
 
 quoteTotal += Number(amount);
 
 document.getElementById(
 "grandTotal"
-).innerText=
+).innerText =
 quoteTotal.toFixed(2);
 
 }
@@ -533,7 +506,7 @@ loadDropdown();
 
 document.getElementById(
 "totalProjects"
-).innerText=
+).innerText =
 projects.length;
 
 </script>
