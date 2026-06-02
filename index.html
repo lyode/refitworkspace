@@ -2,31 +2,134 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER v5</title>
+<title>REFIT MASTER DOCS</title>
+
 <style>
-body{margin:0;font-family:Arial;background:#e9edf2}
-.header{background:#0b57a4;color:white;text-align:center;padding:18px;font-size:36px;font-weight:bold}
+body{
+margin:0;
+font-family:Arial;
+background:#f8fdff;
+color:#021a24;
+}
+
+.header{
+background:#021a24;
+color:#ffb703;
+text-align:center;
+padding:20px;
+font-size:34px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
 .container{padding:12px}
-.menu{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.menu button,.blueBtn{background:#0b57a4;color:white;border:none;padding:14px;font-size:18px;border-radius:10px}
-.card{background:white;padding:16px;border-radius:10px;margin-bottom:18px}
+
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-bottom:18px;
+}
+
+.menu button,.blueBtn{
+background:#0a3949;
+color:white;
+border:none;
+padding:14px;
+font-size:18px;
+border-radius:10px;
+}
+
+.card{
+background:white;
+padding:16px;
+border-radius:14px;
+margin-bottom:18px;
+border-left:6px solid #219ebc;
+box-shadow:0 3px 8px rgba(0,0,0,0.12);
+}
+
 .hidden{display:none}
-input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;font-size:17px;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}
-.saveBtn{background:green;color:white;border:none;padding:14px;width:100%;font-size:20px;border-radius:10px}
-.redBtn{background:#c62828;color:white;border:none;padding:10px;border-radius:8px;margin-top:8px}
-.title{font-size:26px;font-weight:bold;margin-bottom:12px}
-.count{font-size:42px;font-weight:bold}
-.itemBox{background:#f5f5f5;padding:12px;margin-top:10px;border-radius:8px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{border:1px solid #ccc;padding:7px}
-th{background:#0b57a4;color:white}
-.total{text-align:right;font-size:19px;font-weight:bold;margin-top:12px}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin:8px 0 14px;
+font-size:17px;
+border-radius:8px;
+border:1px solid #97daf0;
+box-sizing:border-box;
+}
+
+.saveBtn{
+background:#219ebc;
+color:white;
+border:none;
+padding:14px;
+width:100%;
+font-size:20px;
+border-radius:10px;
+}
+
+.redBtn{
+background:#fb8501;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+margin-top:8px;
+}
+
+.title{
+color:#021a24;
+font-size:26px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.count{
+font-size:42px;
+font-weight:bold;
+color:#fb8501;
+}
+
+.itemBox{
+background:#f8fdff;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border-left:4px solid #ffb703;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+th,td{
+border:1px solid #97daf0;
+padding:7px;
+}
+
+th{
+background:#0a3949;
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:19px;
+font-weight:bold;
+margin-top:12px;
+color:#fb8501;
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">REFIT MASTER</div>
+<div class="header">REFIT MASTER DOCS</div>
 
 <div class="container">
 
@@ -91,7 +194,9 @@ th{background:#0b57a4;color:white}
 <div class="card">
 <div class="title">Quotation Items</div>
 <table>
-<thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>
+<thead>
+<tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
+</thead>
 <tbody id="quoteTable"></tbody>
 </table>
 <div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
@@ -139,12 +244,16 @@ let receipts=JSON.parse(localStorage.getItem("receipts"))||[];
 let currentQuoteItems=[];
 
 function showPage(page){
-["dashboardPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+["dashboardPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage"].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
 document.getElementById(page).classList.remove("hidden");
 refreshAll();
 }
 
-function money(n){return (Number(n)||0).toFixed(2);}
+function money(n){
+return (Number(n)||0).toFixed(2);
+}
 
 function saveProject(){
 projects.push({
@@ -157,7 +266,12 @@ date:projectDate.value,
 status:projectStatus.value
 });
 localStorage.setItem("projects",JSON.stringify(projects));
-clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";
+clientName.value="";
+projectAddress.value="";
+phone.value="";
+email.value="";
+quoteRef.value="";
+projectDate.value="";
 alert("Project Saved");
 refreshAll();
 }
@@ -170,14 +284,20 @@ unit:priceUnit.value,
 rate:parseFloat(priceRate.value)||0
 });
 localStorage.setItem("prices",JSON.stringify(prices));
-priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";
+priceCategory.value="";
+priceDesc.value="";
+priceUnit.value="";
+priceRate.value="";
 alert("Price Item Saved");
 refreshAll();
 }
 
 function addQuoteItem(){
 let item=prices[quoteItem.value];
-if(!item){alert("Please add price item first");return;}
+if(!item){
+alert("Please add price item first");
+return;
+}
 let qty=parseFloat(quoteQty.value)||0;
 currentQuoteItems.push({
 desc:item.desc,
@@ -207,18 +327,33 @@ grandTotalText.innerText=money(total);
 }
 
 function saveQuotation(){
-if(currentQuoteItems.length===0){alert("No quotation item");return;}
+if(currentQuoteItems.length===0){
+alert("No quotation item");
+return;
+}
+
+let selectedProject=projects[quoteProject.value];
+
+if(!selectedProject){
+alert("Please save/select project first");
+return;
+}
+
 let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
 let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
+
 quotations.push({
 quoteNo:qNo,
-project:projects[quoteProject.value],
+project:selectedProject,
 items:[...currentQuoteItems],
 total:total,
 date:new Date().toLocaleDateString()
 });
+
 localStorage.setItem("quotations",JSON.stringify(quotations));
+
 alert("Quotation Saved: "+qNo);
+
 currentQuoteItems=[];
 loadQuoteTable();
 refreshAll();
@@ -226,7 +361,20 @@ refreshAll();
 
 function generateInvoices(){
 let q=quotations[invoiceQuotation.value];
-if(!q){alert("Please save quotation first");return;}
+
+if(!q){
+alert("No quotation selected. Please save quotation first.");
+return;
+}
+
+let existing=invoices.filter(inv=>inv.quoteNo===q.quoteNo);
+
+if(existing.length>0){
+alert("Invoices already generated for this quotation.");
+return;
+}
+
+let total=Number(q.total || q.grandTotal || 0);
 
 let stages=[
 {stage:"INV-1",percent:30},
@@ -237,12 +385,13 @@ let stages=[
 
 stages.forEach(s=>{
 let invoiceNo=s.stage+"-"+String(invoices.length+1).padStart(3,"0");
-let amount=q.total*s.percent/100;
+let amount=total*s.percent/100;
+
 invoices.push({
 invoiceNo:invoiceNo,
 quoteNo:q.quoteNo,
-client:q.project.client,
-projectRef:q.project.ref,
+client:q.project?.client || "No Client Name",
+projectRef:q.project?.ref || "",
 stage:s.stage,
 percent:s.percent,
 amount:amount,
@@ -254,19 +403,30 @@ date:new Date().toLocaleDateString()
 });
 
 localStorage.setItem("invoices",JSON.stringify(invoices));
+
 alert("Progress invoices generated");
 refreshAll();
 }
 
 function saveReceipt(){
 let inv=invoices[receiptInvoice.value];
-if(!inv){alert("No invoice selected");return;}
+
+if(!inv){
+alert("No invoice selected");
+return;
+}
 
 let paid=parseFloat(receiptAmount.value)||0;
+
+if(paid<=0){
+alert("Please enter paid amount");
+return;
+}
+
 let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");
 
-inv.paid += paid;
-inv.balance = inv.amount - inv.paid;
+inv.paid=(Number(inv.paid)||0)+paid;
+inv.balance=(Number(inv.amount)||0)-inv.paid;
 
 if(inv.balance<=0){
 inv.balance=0;
@@ -290,6 +450,7 @@ localStorage.setItem("receipts",JSON.stringify(receipts));
 
 receiptAmount.value="";
 receiptDate.value="";
+
 alert("Receipt Saved: "+receiptNo);
 refreshAll();
 }
@@ -314,25 +475,41 @@ receiptCount.innerText=receipts.length;
 
 projectList.innerHTML=projects.map(p=>`
 <div class="itemBox">
-<b>${p.client}</b><br>${p.address}<br>
-Ref: ${p.ref}<br>Status: ${p.status}
+<b>${p.client}</b><br>
+${p.address}<br>
+Ref: ${p.ref}<br>
+Status: ${p.status}
 </div>`).join("");
 
 priceList.innerHTML=prices.map((p,i)=>`
 <div class="itemBox">
-<b>${p.category}</b><br>${p.desc}<br>
-Unit: ${p.unit}<br>Rate: RM ${money(p.rate)}<br>
+<b>${p.category}</b><br>
+${p.desc}<br>
+Unit: ${p.unit}<br>
+Rate: RM ${money(p.rate)}<br>
 <button class="redBtn" onclick="deletePriceItem(${i})">Delete</button>
 </div>`).join("");
 
-quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.client} - ${p.ref}</option>`).join("");
-quoteItem.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>`).join("");
+quoteProject.innerHTML=projects.map((p,i)=>`
+<option value="${i}">${p.client || "Client"} - ${p.ref || "No Ref"}</option>
+`).join("");
 
-invoiceQuotation.innerHTML=quotations.map((q,i)=>`
-<option value="${i}">${q.quoteNo} - ${q.project.client} - RM ${money(q.total)}</option>`).join("");
+quoteItem.innerHTML=prices.map((p,i)=>`
+<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>
+`).join("");
+
+invoiceQuotation.innerHTML=quotations.map((q,i)=>{
+let clientName=q.project?.client || "No Client Name";
+let quoteNo=q.quoteNo || "Q-"+String(i+1).padStart(3,"0");
+let total=q.total || q.grandTotal || 0;
+return `<option value="${i}">${quoteNo} - ${clientName} - RM ${money(total)}</option>`;
+}).join("");
 
 receiptInvoice.innerHTML=invoices.map((inv,i)=>`
-<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>`).join("");
+<option value="${i}">
+${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}
+</option>
+`).join("");
 
 invoiceList.innerHTML=invoices.map(inv=>`
 <div class="itemBox">
