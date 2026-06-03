@@ -14,6 +14,16 @@ button{padding:12px;border:none;border-radius:12px;background:#8fb7b6;color:#fff
 .hidden{display:none}
 input,textarea,select{width:100%;padding:10px;margin:6px 0 12px;border-radius:10px;border:1px solid #ddd;box-sizing:border-box;font-size:16px}
 .item{background:#fff1ed;padding:10px;border-radius:10px;margin-top:8px;line-height:1.5}
+.kpiGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.kpiCard{background:#fff1ed;border-radius:14px;padding:12px;border-left:5px solid #c98b8b}
+.kpiLabel{font-size:13px;color:#666}
+.kpiValue{font-size:24px;font-weight:bold;color:#31424a;margin-top:4px}
+.statusPaid{color:#4c8a6a;font-weight:bold}
+.statusPending{color:#c47a7a;font-weight:bold}
+.statusPartial{color:#b88a3d;font-weight:bold}
+.smallTable{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
+.smallTable th,.smallTable td{border:1px solid #ead7d3;padding:6px;text-align:left}
+.smallTable th{background:#8fb7b6;color:white}
 .danger{background:#d98c8c}
 .total{text-align:right;font-size:20px;font-weight:bold}
 #printArea{display:none;background:white;color:#222;padding:28px;font-size:13px}
@@ -49,8 +59,29 @@ body *{visibility:hidden}
 </div>
 
 <div id="dashboard" class="card">
-<h2>Dashboard</h2>
-<div id="stats"></div>
+<h2>Operations Dashboard</h2>
+<div id="stats" style="display:none"></div>
+
+<div class="kpiGrid">
+<div class="kpiCard"><div class="kpiLabel">Total Quotation Value</div><div class="kpiValue">RM <span id="dashQuoteValue">0.00</span></div></div>
+<div class="kpiCard"><div class="kpiLabel">Total Invoiced</div><div class="kpiValue">RM <span id="dashInvoiced">0.00</span></div></div>
+<div class="kpiCard"><div class="kpiLabel">Total Collected</div><div class="kpiValue">RM <span id="dashCollected">0.00</span></div></div>
+<div class="kpiCard"><div class="kpiLabel">Outstanding Balance</div><div class="kpiValue">RM <span id="dashOutstanding">0.00</span></div></div>
+<div class="kpiCard"><div class="kpiLabel">Projects</div><div class="kpiValue"><span id="dashProjects">0</span></div></div>
+<div class="kpiCard"><div class="kpiLabel">Saved Quotations</div><div class="kpiValue"><span id="dashQuotations">0</span></div></div>
+</div>
+
+<h3>Invoice Status</h3>
+<div id="dashInvoiceStatus" class="item"></div>
+
+<h3>Outstanding Invoices</h3>
+<div id="dashOutstandingList"></div>
+
+<h3>Recent Quotations</h3>
+<div id="dashRecentQuotes"></div>
+
+<h3>Recent Receipts</h3>
+<div id="dashRecentReceipts"></div>
 </div>
 
 <div id="company" class="card hidden">
@@ -642,8 +673,69 @@ printReceipt(r);
 }
 
 
+
+function updateDashboard(){
+var quoteValue=0;
+for(var i=0;i<quotations.length;i++){quoteValue+=getQuoteTotal(quotations[i]);}
+
+var invoiced=0,collected=0,outstanding=0,paidCount=0,partialCount=0,pendingCount=0;
+for(var j=0;j<invoices.length;j++){
+var inv=invoices[j]||{};
+var amount=Number(inv.amount||0);
+var paid=Number(inv.paid||0);
+var balance=Number(inv.balance||0);
+invoiced+=amount;
+collected+=paid;
+outstanding+=balance;
+if(balance<=0){paidCount++;}else if(paid>0){partialCount++;}else{pendingCount++;}
+}
+
+if(document.getElementById("dashQuoteValue"))dashQuoteValue.innerText=money(quoteValue);
+if(document.getElementById("dashInvoiced"))dashInvoiced.innerText=money(invoiced);
+if(document.getElementById("dashCollected"))dashCollected.innerText=money(collected);
+if(document.getElementById("dashOutstanding"))dashOutstanding.innerText=money(outstanding);
+if(document.getElementById("dashProjects"))dashProjects.innerText=projects.length;
+if(document.getElementById("dashQuotations"))dashQuotations.innerText=quotations.length;
+
+if(document.getElementById("dashInvoiceStatus")){
+dashInvoiceStatus.innerHTML="Paid: <span class='statusPaid'>"+paidCount+"</span><br>Partial: <span class='statusPartial'>"+partialCount+"</span><br>Pending: <span class='statusPending'>"+pendingCount+"</span>";
+}
+
+if(document.getElementById("dashOutstandingList")){
+var rows="";
+for(var k=0;k<invoices.length;k++){
+var o=invoices[k]||{};
+if(Number(o.balance||0)>0){
+rows+="<tr><td>"+(o.invoiceNo||"")+"</td><td>"+(o.client||"")+"</td><td>RM "+money(o.balance)+"</td><td>"+(o.status||"")+"</td></tr>";
+}
+}
+dashOutstandingList.innerHTML=rows?"<table class='smallTable'><thead><tr><th>Invoice</th><th>Client</th><th>Balance</th><th>Status</th></tr></thead><tbody>"+rows+"</tbody></table>":"<div class='item'>No outstanding invoice.</div>";
+}
+
+if(document.getElementById("dashRecentQuotes")){
+var qhtml="";
+var start=Math.max(0,quotations.length-5);
+for(var q=quotations.length-1;q>=start;q--){
+var qq=quotations[q]||{};
+qhtml+="<div class='item'><b>"+(qq.quoteNo||("Q-"+(q+1)))+"</b><br>Client: "+getQuoteClient(qq)+"<br>Total: RM "+money(getQuoteTotal(qq))+"</div>";
+}
+dashRecentQuotes.innerHTML=qhtml||"<div class='item'>No quotation yet.</div>";
+}
+
+if(document.getElementById("dashRecentReceipts")){
+var rhtml="";
+var rstart=Math.max(0,receipts.length-5);
+for(var r=receipts.length-1;r>=rstart;r--){
+var rr=receipts[r]||{};
+rhtml+="<div class='item'><b>"+(rr.receiptNo||"")+"</b><br>Client: "+(rr.client||"")+"<br>Paid: RM "+money(rr.amount)+"<br>Date: "+(rr.date||"")+"</div>";
+}
+dashRecentReceipts.innerHTML=rhtml||"<div class='item'>No receipt yet.</div>";
+}
+}
+
 function refresh(){
-stats.innerHTML=`Projects: ${projects.length}<br>Price Items: ${prices.length}<br>Quotations: ${quotations.length}<br>Invoices: ${invoices.length}<br>Receipts: ${receipts.length}`;
+if(document.getElementById("stats")){stats.innerHTML=`Projects: ${projects.length}<br>Price Items: ${prices.length}<br>Quotations: ${quotations.length}<br>Invoices: ${invoices.length}<br>Receipts: ${receipts.length}`;}
+updateDashboard();
 
 loadCompany();
 
