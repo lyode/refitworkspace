@@ -1,3 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REFIT MASTER DOCS v10.1 Pastel</title>
+
+<style>
+:root{
+--bg:#fff7f5;
+--text:#31424a;
+--header:#8f6f6f;
+--accent:#ffb3a7;
+--primary:#8fb7b6;
+--secondary:#a7c9c7;
+--danger:#d98c8c;
+--card:#ffffff;
+--line:#ead7d3;
+--soft:#fff1ed;
+}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+.header{
+background:var(--header);
+color:white;
+text-align:center;
+padding:20px;
+font-size:30px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.container{
+padding:12px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:18px;
+}
+
+.menu button,.blueBtn{
+background:var(--primary);
+color:white;
+border:none;
+padding:14px;
+font-size:17px;
+border-radius:14px;
+width:100%;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.card{
+background:var(--card);
+padding:16px;
+border-radius:18px;
+margin-bottom:18px;
+border-left:6px solid var(--secondary);
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.hidden{
+display:none;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin:8px 0 14px;
+font-size:17px;
+border-radius:12px;
+border:1px solid var(--line);
+box-sizing:border-box;
+background:white;
+color:var(--text);
+}
+
+textarea{
+min-height:70px;
+}
+
+.saveBtn{
+background:var(--secondary);
+color:white;
+border:none;
+padding:14px;
+width:100%;
+font-size:20px;
+border-radius:14px;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.redBtn{
+background:var(--danger);
+color:white;
+border:none;
+padding:10px;
+border-radius:12px;
+margin-top:8px;
+width:100%;
+}
+
+.orangeBtn{
+background:var(--accent);
+color:white;
+border:none;
+padding:10px;
+border-radius:12px;
+margin-top:8px;
+width:100%;
+font-weight:bold;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+margin-bottom:12px;
+color:var(--header);
+}
+
+.count{
+font-size:42px;
+font-weight:bold;
+color:var(--primary);
+}
+
+.itemBox{
+background:var(--soft);
+padding:12px;
+margin-top:10px;
+border-radius:14px;
+border-left:4px solid var(--accent);
+line-height:1.5;
+}
+
+.logoBox{
+text-align:center;
+margin-bottom:15px;
+}
+
+#logoPreview{
+max-width:150px;
+max-height:150px;
+border-radius:14px;
+border:1px solid var(--line);
+padding:8px;
+background:white;
+}
+
+.themeGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.themeBtn{
+border:none;
+padding:16px;
+border-radius:14px;
+font-size:15px;
+font-weight:bold;
+color:white;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+background:white;
+}
+
+th,td{
+border:1px solid var(--line);
+padding:7px;
+vertical-align:top;
+}
+
+th{
+background:var(--primary);
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:19px;
+font-weight:bold;
+margin-top:12px;
+color:var(--header);
+}
+
+#printArea{
+display:none;
+background:white;
+color:#222;
+padding:30px;
+font-family:Arial, sans-serif;
+}
+
+.printTitle{
+text-align:center;
+font-size:28px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:6px;
+text-transform:lowercase;
+}
+
+.printCompany{
+text-align:center;
+margin-bottom:25px;
+line-height:1.5;
+}
+
+.printBox{
+margin-bottom:18px;
+line-height:1.6;
+}
+
+.printTotal{
+text-align:right;
+font-size:20px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.printFooter{
+margin-top:35px;
+font-size:13px;
+border-top:1px solid #ccc;
+padding-top:10px;
+}
+
+@media print{
+body *{visibility:hidden}
+#printArea,#printArea *{visibility:visible}
+#printArea{
+display:block;
+position:absolute;
+left:0;
+top:0;
+width:100%;
+box-sizing:border-box;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">REFIT MASTER DOCS</div>
+
+<div class="container">
+
+<div class="menu">
+<button onclick="showPage('dashboardPage')">Dashboard</button>
+<button onclick="showPage('themePage')">Appearance</button>
+<button onclick="showPage('companyPage')">Company</button>
+<button onclick="showPage('projectPage')">Project</button>
+<button onclick="showPage('pricePage')">Price Master</button>
+<button onclick="showPage('quotationPage')">Quotation</button>
+<button onclick="showPage('invoicePage')">Invoice</button>
+<button onclick="showPage('receiptPage')">Receipt</button>
+<button onclick="showPage('backupPage')">Backup</button>
+</div>
+
+<div id="dashboardPage">
+<div class="card"><h2>Projects</h2><div class="count" id="projectCount">0</div></div>
+<div class="card"><h2>Price Items</h2><div class="count" id="priceCount">0</div></div>
+<div class="card"><h2>Quotations</h2><div class="count" id="quoteCount">0</div></div>
+<div class="card"><h2>Invoices</h2><div class="count" id="invoiceCount">0</div></div>
+<div class="card"><h2>Receipts</h2><div class="count" id="receiptCount">0</div></div>
+</div>
+
+<div id="themePage" class="hidden">
+<div class="card">
+<div class="title">Pastel Appearance Theme</div>
+<div class="themeGrid">
+<button class="themeBtn" style="background:#ff6f6f" onclick="setTheme('coral')">Pastel Coral</button>
+<button class="themeBtn" style="background:#e89a9a" onclick="setTheme('rose')">Dusty Rose</button>
+<button class="themeBtn" style="background:#8fb7b6" onclick="setTheme('aqua')">Soft Aqua</button>
+<button class="themeBtn" style="background:#94a391" onclick="setTheme('sage')">Sage Green</button>
+<button class="themeBtn" style="background:#e6cf98" onclick="setTheme('sand')">Warm Sand</button>
+<button class="themeBtn" style="background:#a6c1e1" onclick="setTheme('powder')">Powder Blue</button>
+<button class="themeBtn" style="background:#d6a5b8" onclick="setTheme('mauve')">Soft Mauve</button>
+<button class="themeBtn" style="background:#efc6a3" onclick="setTheme('peach')">Peach Cream</button>
+<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint Blue</button>
+<button class="themeBtn" style="background:#c9b6b6" onclick="setTheme('clay')">Clay Blush</button>
+<button class="themeBtn" style="background:#b7c9a8" onclick="setTheme('olive')">Pastel Olive</button>
+<button class="themeBtn" style="background:#d7c6e6" onclick="setTheme('lavender')">Lavender</button>
+<button class="themeBtn" style="background:#f0b7a4" onclick="setTheme('salmon')">Soft Salmon</button>
+<button class="themeBtn" style="background:#b7d8c8" onclick="setTheme('seafoam')">Seafoam</button>
+<button class="themeBtn" style="background:#d9c4a9" onclick="setTheme('latte')">Latte</button>
+<button class="themeBtn" style="background:#b6c5d8" onclick="setTheme('mist')">Blue Mist</button>
+<button class="themeBtn" style="background:#d8b6c9" onclick="setTheme('pink')">Pastel Pink</button>
+<button class="themeBtn" style="background:#a7c4bc" onclick="setTheme('eucalyptus')">Eucalyptus</button>
+</div>
+</div>
+</div>
+
+<div id="companyPage" class="hidden">
+<div class="card">
+<div class="title">Company Profile</div>
+<input type="file" id="companyLogo" accept="image/*">
+<div class="logoBox"><img id="logoPreview"></div>
+<input id="companyName" placeholder="Company Name">
+<textarea id="companyAddress" placeholder="Company Address"></textarea>
+<input id="companySSM" placeholder="SSM / Registration No">
+<input id="companyPhone" placeholder="Company Phone">
+<input id="companyEmail" placeholder="Company Email">
+<textarea id="companyBank" placeholder="Bank Details"></textarea>
+<input id="companySign" placeholder="Authorized Person / Signature Name">
+<button class="saveBtn" onclick="saveCompany()">Save / Update Company Profile</button>
+</div>
+<div class="card"><div class="title">Current Company</div><div id="companyPreview"></div></div>
+</div>
+
+<div id="projectPage" class="hidden">
+<div class="card">
+<div class="title">Create / Edit Project</div>
+<input type="hidden" id="editProjectIndex">
+<input id="clientName" placeholder="Client Name">
+<textarea id="projectAddress" placeholder="Project Address"></textarea>
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input id="quoteRef" placeholder="Quote Ref No / Job Title">
+<input type="date" id="projectDate">
+<select id="projectStatus">
+<option>Pending</option>
+<option>Quotation Sent</option>
+<option>Confirmed</option>
+<option>Completed</option>
+</select>
+<button class="saveBtn" onclick="saveProject()">Save / Update Project</button>
+<button class="orangeBtn" onclick="clearProjectForm()">New Project / Clear Form</button>
+</div>
+<div class="card"><div class="title">Project List</div><div id="projectList"></div></div>
+</div>
+
+<div id="pricePage" class="hidden">
+<div class="card">
+<div class="title">Create / Edit Price Item</div>
+<input type="hidden" id="editPriceIndex">
+<input id="priceCategory" placeholder="Category">
+<textarea id="priceDesc" placeholder="Item Description"></textarea>
+<input id="priceUnit" placeholder="Unit">
+<input type="number" id="priceRate" placeholder="Rate RM">
+<button class="saveBtn" onclick="savePriceItem()">Save / Update Price Item</button>
+<button class="orangeBtn" onclick="clearPriceForm()">New Price Item / Clear Form</button>
+</div>
+<div class="card"><div class="title">Price Item List</div><div id="priceList"></div></div>
+</div>
+
+<div id="quotationPage" class="hidden">
+<div class="card">
+<div class="title">Create New Quotation</div>
+<select id="quoteProject"></select>
+<select id="quoteItem"></select>
+<input type="number" id="quoteQty" placeholder="Quantity">
+<button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
+</div>
+
+<div class="card">
+<div class="title">New Quotation Items</div>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Description</th>
+<th>Unit</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody id="quoteTable"></tbody>
+</table>
+<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
+<br>
+<button class="saveBtn" onclick="saveQuotation()">Save New Quotation</button>
+<br><br>
+<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
+<br><br>
+<button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
+</div>
+
+<div class="card">
+<div class="title">Saved Quotation Preview / Edit</div>
+<select id="savedQuoteSelect"></select>
+<button class="blueBtn" onclick="loadSavedQuotation()">Load Selected Quotation</button>
+</div>
+
+<div class="card">
+<div class="title">Quotation Preview / Edit</div>
+<div id="editQuoteInfo" class="itemBox">Select and load a quotation.</div>
+<select id="editAddItem"></select>
+<input type="number" id="editAddQty" placeholder="Quantity to add">
+<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into This Quote</button>
+<br><br>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Description</th>
+<th>Unit</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="editQuoteTable"></tbody>
+</table>
+<div class="total">Updated Total: RM <span id="editQuoteTotal">0.00</span></div>
+<br>
+<button class="saveBtn" onclick="updateSavedQuotation()">Update Saved Quotation</button>
+<br><br>
+<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button>
+<br><br>
+<button class="redBtn" onclick="deleteLoadedQuotation()">Delete This Quotation</button>
+</div>
+</div>
+
 <div id="invoicePage" class="hidden">
 <div class="card">
 <div class="title">Generate Progress Invoices</div>
@@ -185,7 +615,8 @@ printCompany.innerHTML=companyHeader();
 printSign.innerHTML=company.sign||"";
 printFooter.innerHTML=company.bank?"<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>"):"";
 }
-function saveProject(){
+
+  function saveProject(){
 let i=editProjectIndex.value;
 let obj={client:clientName.value,address:projectAddress.value,phone:phone.value,email:email.value,ref:quoteRef.value,date:projectDate.value,status:projectStatus.value};
 i===""?projects.push(obj):projects[i]=obj;
