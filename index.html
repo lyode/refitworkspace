@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER DOCS v10.3A</title>
+<title>REFIT MASTER DOCS v10.5 Full Edit</title>
 <style>
 body{font-family:Arial;margin:0;background:#fff7f5;color:#31424a}
 .header{background:#c98b8b;color:#fff;padding:18px;text-align:center;font-size:28px;font-weight:bold}
@@ -35,6 +35,17 @@ input,textarea,select{width:100%;padding:10px;margin:6px 0 12px;border-radius:10
 #printArea th,#printArea td{border:1px solid #999;padding:6px;vertical-align:top}
 #printTotal{text-align:right;font-size:18px;font-weight:bold;margin-top:16px}
 #printTerms{line-height:1.6;margin-top:24px}
+:root{--bg:#fff7f5;--header:#c98b8b;--primary:#8fb7b6;--danger:#d98c8c;--soft:#fff1ed;--line:#ead7d3;--text:#31424a;--card:#ffffff}
+body{background:var(--bg)!important;color:var(--text)!important}
+.header{background:var(--header)!important}
+button{background:var(--primary)!important}
+button.danger,.danger{background:var(--danger)!important}
+.card{background:var(--card)!important}
+.item,.kpiCard{background:var(--soft)!important}
+.smallTable th{background:var(--primary)!important}
+.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.themeBtn{font-weight:bold;color:white}
+.logoPreview{max-width:140px;max-height:100px;background:white;border:1px solid var(--line);border-radius:10px;padding:6px;margin:8px 0}
 @media print{
 body *{visibility:hidden}
 #printArea,#printArea *{visibility:visible}
@@ -50,6 +61,7 @@ body *{visibility:hidden}
 
 <div class="menu">
 <button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('theme')">Theme</button>
 <button onclick="showPage('company')">Company</button>
 <button onclick="showPage('projects')">Projects</button>
 <button onclick="showPage('prices')">Price Master</button>
@@ -84,8 +96,24 @@ body *{visibility:hidden}
 <div id="dashRecentReceipts"></div>
 </div>
 
+<div id="theme" class="card hidden">
+<h2>Pastel Theme</h2>
+<div class="themeGrid">
+<button class="themeBtn" style="background:#c98b8b" onclick="setTheme('coral')">Coral</button>
+<button class="themeBtn" style="background:#8fb7b6" onclick="setTheme('aqua')">Aqua</button>
+<button class="themeBtn" style="background:#94a391" onclick="setTheme('sage')">Sage</button>
+<button class="themeBtn" style="background:#d1bb8c" onclick="setTheme('sand')">Sand</button>
+<button class="themeBtn" style="background:#a6c1e1" onclick="setTheme('powder')">Powder</button>
+<button class="themeBtn" style="background:#c6a0b6" onclick="setTheme('mauve')">Mauve</button>
+<button class="themeBtn" style="background:#efc6a3" onclick="setTheme('peach')">Peach</button>
+<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint</button>
+</div>
+</div>
+
 <div id="company" class="card hidden">
 <h2>Company Profile</h2>
+<input type="file" id="logoInput" accept="image/*">
+<img id="logoPreview" class="logoPreview">
 <input id="companyName" placeholder="Company Name">
 <textarea id="companyAddress" placeholder="Company Address"></textarea>
 <input id="companySSM" placeholder="SSM / Registration No">
@@ -99,21 +127,25 @@ body *{visibility:hidden}
 
 <div id="projects" class="card hidden">
 <h2>Projects</h2>
+<input type="hidden" id="editProjectIndex">
 <input id="projectName" placeholder="Client Name">
 <textarea id="projectAddress" placeholder="Address"></textarea>
 <input id="projectRef" placeholder="Job Title / Ref">
 <input id="projectPhone" placeholder="Phone">
 <input id="projectEmail" placeholder="Email">
-<button onclick="saveProject()">Save Project</button>
+<button onclick="saveProject()">Save / Update Project</button>
+<button onclick="clearProjectForm()">Clear Form</button>
 <div id="projectList"></div>
 </div>
 
 <div id="prices" class="card hidden">
 <h2>Price Master</h2>
+<input type="hidden" id="editPriceIndex">
 <input id="priceDesc" placeholder="Description">
 <input id="priceUnit" placeholder="Unit e.g. lot, nos, sf">
 <input id="priceRate" type="number" placeholder="Rate">
-<button onclick="savePrice()">Save Price</button>
+<button onclick="savePrice()">Save / Update Price</button>
+<button onclick="clearPriceForm()">Clear Form</button>
 <div id="priceList"></div>
 </div>
 
@@ -191,7 +223,7 @@ body *{visibility:hidden}
 </div>
 
 <script>
-let company=JSON.parse(localStorage.getItem("company")||'{"name":"REFIT MAINTENANCE SERVICES","address":"C-08-34 centum @ oasis corporate park, oasis damansara, No.2, jalan pju 1a/2, ara damansara, 47301 petaling jaya.","ssm":"201803348973","phone":"","email":"","bank":"RHB BANK A/C: 2126 1100 0235 58","sign":"Lyode ng"}');
+let company=JSON.parse(localStorage.getItem("company")||'{"name":"REFIT MAINTENANCE SERVICES","address":"C-08-34 centum @ oasis corporate park, oasis damansara, No.2, jalan pju 1a/2, ara damansara, 47301 petaling jaya.","ssm":"201803348973","phone":"","email":"","bank":"RHB BANK A/C: 2126 1100 0235 58","sign":"Lyode ng","logo":""}');
 let projects=JSON.parse(localStorage.getItem("projects")||"[]");
 let prices=JSON.parse(localStorage.getItem("prices")||"[]");
 let quotations=JSON.parse(localStorage.getItem("quotations")||"[]");
@@ -201,6 +233,19 @@ let currentQuote=[];
 let viewedQuoteIndex=null;
 
 function money(n){return (Number(n)||0).toFixed(2);}
+var themes={
+coral:{bg:'#fff7f5',header:'#c98b8b',primary:'#8fb7b6',danger:'#d98c8c',soft:'#fff1ed',line:'#ead7d3',text:'#31424a',card:'#ffffff'},
+aqua:{bg:'#f6fbfb',header:'#8fb7b6',primary:'#8fb7b6',danger:'#d98c8c',soft:'#eefafa',line:'#d8eceb',text:'#324b4d',card:'#ffffff'},
+sage:{bg:'#f8faf7',header:'#94a391',primary:'#a7b7a2',danger:'#d98c8c',soft:'#f1f5ef',line:'#dfe7dc',text:'#465046',card:'#ffffff'},
+sand:{bg:'#fffdf7',header:'#d1bb8c',primary:'#d8c4a1',danger:'#d98c8c',soft:'#fff8ea',line:'#efe7d3',text:'#5a5142',card:'#ffffff'},
+powder:{bg:'#f8fbff',header:'#a6c1e1',primary:'#b7cde8',danger:'#d98c8c',soft:'#f2f7fd',line:'#dce7f5',text:'#3d4b5f',card:'#ffffff'},
+mauve:{bg:'#fcf8fb',header:'#c6a0b6',primary:'#c9afbc',danger:'#d98c8c',soft:'#faf3f7',line:'#ebdde3',text:'#564958',card:'#ffffff'},
+peach:{bg:'#fff9f6',header:'#efc6a3',primary:'#f0c8a9',danger:'#d98c8c',soft:'#fff3ec',line:'#f0e1d7',text:'#5a4840',card:'#ffffff'},
+mint:{bg:'#f6fcfc',header:'#91d8d8',primary:'#9fdede',danger:'#d98c8c',soft:'#eefbfb',line:'#d8eeee',text:'#3f5555',card:'#ffffff'}
+};
+function setTheme(n){var t=themes[n];if(!t)return;Object.keys(t).forEach(function(k){document.documentElement.style.setProperty('--'+k,t[k]);});localStorage.setItem('theme',n);}
+function loadTheme(){setTheme(localStorage.getItem('theme')||'coral');}
+document.addEventListener('change',function(e){if(e.target&&e.target.id==='logoInput'){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){logoPreview.src=ev.target.result;company.logo=ev.target.result;};r.readAsDataURL(f);}});
 
 function getQuoteClient(q){
 if(!q)return "No Client";
@@ -235,7 +280,7 @@ return Number(q.total || q.grandTotal || 0);
 
 
 function showPage(id){
-["dashboard","company","projects","prices","quotes","invoices","receipts"].forEach(p=>document.getElementById(p).classList.add("hidden"));
+["dashboard","theme","company","projects","prices","quotes","invoices","receipts"].forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
 refresh();
 }
@@ -248,7 +293,8 @@ ssm:companySSM.value,
 phone:companyPhone.value,
 email:companyEmail.value,
 bank:companyBank.value,
-sign:companySign.value
+sign:companySign.value,
+logo:logoPreview.src||company.logo||""
 };
 localStorage.setItem("company",JSON.stringify(company));
 refresh();
@@ -263,24 +309,19 @@ companyPhone.value=company.phone||"";
 companyEmail.value=company.email||"";
 companyBank.value=company.bank||"";
 companySign.value=company.sign||"";
+if(company.logo){logoPreview.src=company.logo;}
 }
 
 function saveProject(){
-projects.push({
-name:projectName.value,
-address:projectAddress.value,
-ref:projectRef.value,
-phone:projectPhone.value,
-email:projectEmail.value
-});
+var obj={name:projectName.value,address:projectAddress.value,ref:projectRef.value,phone:projectPhone.value,email:projectEmail.value};
+var i=editProjectIndex.value;
+if(i===""){projects.push(obj);}else{projects[i]=obj;}
 localStorage.setItem("projects",JSON.stringify(projects));
-projectName.value="";
-projectAddress.value="";
-projectRef.value="";
-projectPhone.value="";
-projectEmail.value="";
+clearProjectForm();
 refresh();
 }
+function editProject(i){var p=projects[i];editProjectIndex.value=i;projectName.value=p.name||"";projectAddress.value=p.address||"";projectRef.value=p.ref||"";projectPhone.value=p.phone||"";projectEmail.value=p.email||"";showPage("projects");}
+function clearProjectForm(){editProjectIndex.value="";projectName.value="";projectAddress.value="";projectRef.value="";projectPhone.value="";projectEmail.value="";}
 
 function deleteProject(i){
 if(confirm("Delete project?")){
@@ -291,17 +332,15 @@ refresh();
 }
 
 function savePrice(){
-prices.push({
-desc:priceDesc.value,
-unit:priceUnit.value||"lot",
-rate:parseFloat(priceRate.value)||0
-});
+var obj={desc:priceDesc.value,unit:priceUnit.value||"lot",rate:parseFloat(priceRate.value)||0};
+var i=editPriceIndex.value;
+if(i===""){prices.push(obj);}else{prices[i]=obj;}
 localStorage.setItem("prices",JSON.stringify(prices));
-priceDesc.value="";
-priceUnit.value="";
-priceRate.value="";
+clearPriceForm();
 refresh();
 }
+function editPrice(i){var p=prices[i];editPriceIndex.value=i;priceDesc.value=p.desc||"";priceUnit.value=p.unit||"";priceRate.value=p.rate||0;showPage("prices");}
+function clearPriceForm(){editPriceIndex.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";}
 
 function deletePrice(i){
 if(confirm("Delete price item?")){
@@ -326,6 +365,7 @@ quoteQty.value="";
 renderQuote();
 }
 
+function editCurrentQuote(i,f,v){v=parseFloat(v)||0;currentQuote[i][f]=v;currentQuote[i].amount=(Number(currentQuote[i].qty)||0)*(Number(currentQuote[i].rate)||0);renderQuote();}
 function removeCurrentQuoteItem(i){
 currentQuote.splice(i,1);
 renderQuote();
@@ -338,8 +378,8 @@ total+=i.amount;
 return `<div class="item">
 <b>${index+1}. ${i.desc}</b><br>
 Unit: ${i.unit}<br>
-Qty: ${i.qty}<br>
-Rate: RM ${money(i.rate)}<br>
+Qty: <input type="number" value="${i.qty}" onchange="editCurrentQuote(${index},'qty',this.value)">
+Rate: <input type="number" value="${i.rate}" onchange="editCurrentQuote(${index},'rate',this.value)">
 Amount: RM ${money(i.amount)}<br>
 <button class="danger" onclick="removeCurrentQuoteItem(${index})">Remove</button>
 </div>`;
@@ -376,7 +416,8 @@ refresh();
 }
 
 function companyHeader(){
-return `<b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>
+var logo=company.logo?`<div><img src="${company.logo}" style="max-width:110px;max-height:80px"></div>`:"";
+return `${logo}<b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>
 ${company.ssm||""}<br>
 ${company.address||""}<br>
 ${company.phone?company.phone+" ":""}${company.email||""}`;
@@ -465,37 +506,18 @@ if(isNaN(idx)){alert("No quotation selected");return;}
 viewedQuoteIndex=idx;
 var q=quotations[idx];
 if(!q){alert("No quotation found");return;}
-
 var items=getQuoteItems(q);
 var rows="";
 for(var i=0;i<items.length;i++){
 var it=items[i]||{};
-var qty=Number(it.qty||0);
-var rate=Number(it.rate||0);
-var amount=Number(it.amount||qty*rate);
-rows += "<tr>"+
-"<td>"+(i+1)+"</td>"+
-"<td>"+(it.desc||"")+"</td>"+
-"<td>"+(it.unit||"")+"</td>"+
-"<td>"+qty+"</td>"+
-"<td>RM "+money(rate)+"</td>"+
-"<td>RM "+money(amount)+"</td>"+
-"</tr>";
+var qty=Number(it.qty||0);var rate=Number(it.rate||0);var amount=Number(it.amount||qty*rate);
+rows += "<tr><td>"+(i+1)+"</td><td><textarea onchange=\"editSavedQuoteItem("+i+",'desc',this.value)\">"+(it.desc||"")+"</textarea></td><td><input value=\""+(it.unit||"")+"\" onchange=\"editSavedQuoteItem("+i+",'unit',this.value)\"></td><td><input type='number' value='"+qty+"' onchange=\"editSavedQuoteItem("+i+",'qty',this.value)\"></td><td><input type='number' value='"+rate+"' onchange=\"editSavedQuoteItem("+i+",'rate',this.value)\"></td><td>RM "+money(amount)+"</td><td><button class='danger' onclick='removeSavedQuoteItem("+i+")'>Omit</button></td></tr>";
 }
-
-document.getElementById("viewQuoteBox").innerHTML =
-"<div class='item'>"+
-"<b>"+(q.quoteNo||("Q-"+(idx+1)))+"</b><br>"+
-"Client: "+getQuoteClient(q)+"<br>"+
-"Address: "+getQuoteAddress(q)+"<br>"+
-"Job Title: "+getQuoteRef(q)+"<br>"+
-"Date: "+(q.date||"")+"<br>"+
-"Total: <b>RM "+money(getQuoteTotal(q))+"</b>"+
-"</div>"+
-"<table style='width:100%;border-collapse:collapse;margin-top:10px'>"+
-"<thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>"+
-"<tbody>"+rows+"</tbody></table>";
+document.getElementById("viewQuoteBox").innerHTML = "<div class='item'><b>"+(q.quoteNo||("Q-"+(idx+1)))+"</b><br>Client: "+getQuoteClient(q)+"<br>Address: "+getQuoteAddress(q)+"<br>Job Title: "+getQuoteRef(q)+"<br>Date: "+(q.date||"")+"<br>Total: <b>RM "+money(getQuoteTotal(q))+"</b></div><table class='smallTable'><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th><th>Action</th></tr></thead><tbody>"+rows+"</tbody></table><button onclick='updateViewedQuotation()'>Update Saved Quotation</button>";
 }
+function editSavedQuoteItem(i,f,v){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;if(f==='qty'||f==='rate')v=parseFloat(v)||0;q.items[i][f]=v;q.items[i].amount=(Number(q.items[i].qty)||0)*(Number(q.items[i].rate)||0);}
+function removeSavedQuoteItem(i){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;q.items.splice(i,1);updateViewedQuotation();}
+function updateViewedQuotation(){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;q.total=q.items.reduce(function(s,it){return s+(Number(it.qty)||0)*(Number(it.rate)||0);},0);q.updatedDate=new Date().toLocaleDateString();localStorage.setItem("quotations",JSON.stringify(quotations));refresh();viewSavedQuotation();alert('Quotation updated');}
 
 function printViewedQuotation(){
 if(viewedQuoteIndex===null){alert("View quotation first");return;}
@@ -745,6 +767,7 @@ projectList.innerHTML=projects.map((p,i)=>`<div class="item">
 <b>${p.name}</b><br>
 ${p.address}<br>
 Ref: ${p.ref||""}<br>
+<button onclick="editProject(${i})">Edit</button>
 <button class="danger" onclick="deleteProject(${i})">Delete</button>
 </div>`).join("");
 
@@ -752,6 +775,7 @@ priceList.innerHTML=prices.map((p,i)=>`<div class="item">
 ${p.desc}<br>
 Unit: ${p.unit}<br>
 RM ${money(p.rate)}<br>
+<button onclick="editPrice(${i})">Edit</button>
 <button class="danger" onclick="deletePrice(${i})">Delete</button>
 </div>`).join("");
 
@@ -803,6 +827,7 @@ Balance After Payment: RM ${money(r.balance)}<br>
 printReceiptSelect.innerHTML=receipts.map((r,i)=>`<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>`).join("");
 }
 
+loadTheme();
 refresh();
 </script>
 
