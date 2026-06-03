@@ -1,222 +1,37 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER DOCS v10.2</title>
-
+<title>REFIT MASTER DOCS v10.3A</title>
 <style>
-:root{
---bg:#fff7f5;
---text:#31424a;
---header:#8f6f6f;
---accent:#ffb3a7;
---primary:#8fb7b6;
---secondary:#a7c9c7;
---danger:#d98c8c;
---card:#ffffff;
---line:#ead7d3;
---soft:#fff1ed;
-}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
-}
-
-.header{
-background:var(--header);
-color:white;
-text-align:center;
-padding:20px;
-font-size:30px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
-.container{
-padding:12px;
-}
-
-.menu{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-bottom:18px;
-}
-
-.menu button,.blueBtn{
-background:var(--primary);
-color:white;
-border:none;
-padding:14px;
-font-size:17px;
-border-radius:14px;
-width:100%;
-box-shadow:0 2px 5px rgba(0,0,0,.12);
-}
-
-.card{
-background:var(--card);
-padding:16px;
-border-radius:18px;
-margin-bottom:18px;
-border-left:6px solid var(--secondary);
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-
-.hidden{
-display:none;
-}
-
-input,textarea,select{
-width:100%;
-padding:12px;
-margin:8px 0 14px;
-font-size:17px;
-border-radius:12px;
-border:1px solid var(--line);
-box-sizing:border-box;
-background:white;
-color:var(--text);
-}
-
-textarea{
-min-height:70px;
-}
-
-.saveBtn{
-background:var(--secondary);
-color:white;
-border:none;
-padding:14px;
-width:100%;
-font-size:20px;
-border-radius:14px;
-}
-
-.redBtn{
-background:var(--danger);
-color:white;
-border:none;
-padding:10px;
-border-radius:12px;
-margin-top:8px;
-width:100%;
-}
-
-.orangeBtn{
-background:var(--accent);
-color:white;
-border:none;
-padding:10px;
-border-radius:12px;
-margin-top:8px;
-width:100%;
-font-weight:bold;
-}
-
-.title{
-font-size:24px;
-font-weight:bold;
-margin-bottom:12px;
-color:var(--header);
-}
-
-.count{
-font-size:42px;
-font-weight:bold;
-color:var(--primary);
-}
-
-.itemBox{
-background:var(--soft);
-padding:12px;
-margin-top:10px;
-border-radius:14px;
-border-left:4px solid var(--accent);
-line-height:1.5;
-}
-
-.logoBox{
-text-align:center;
-margin-bottom:15px;
-}
-
-#logoPreview{
-max-width:150px;
-max-height:150px;
-border-radius:14px;
-border:1px solid var(--line);
-padding:8px;
-background:white;
-}
-
-.themeGrid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.themeBtn{
-border:none;
-padding:16px;
-border-radius:14px;
-font-size:15px;
-font-weight:bold;
-color:white;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-font-size:13px;
-background:white;
-}
-
-th,td{
-border:1px solid var(--line);
-padding:7px;
-vertical-align:top;
-}
-
-th{
-background:var(--primary);
-color:white;
-}
-
-.total{
-text-align:right;
-font-size:19px;
-font-weight:bold;
-margin-top:12px;
-color:var(--header);
-}
-
-#printArea{
-display:none;
-background:white;
-color:#222;
-padding:30px;
-}
-
+body{font-family:Arial;margin:0;background:#fff7f5;color:#31424a}
+.header{background:#c98b8b;color:#fff;padding:18px;text-align:center;font-size:28px;font-weight:bold}
+.container{padding:12px}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{padding:12px;border:none;border-radius:12px;background:#8fb7b6;color:#fff;font-size:16px;margin-top:6px}
+.card{background:#fff;padding:16px;border-radius:16px;margin-top:14px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.hidden{display:none}
+input,textarea,select{width:100%;padding:10px;margin:6px 0 12px;border-radius:10px;border:1px solid #ddd;box-sizing:border-box;font-size:16px}
+.item{background:#fff1ed;padding:10px;border-radius:10px;margin-top:8px;line-height:1.5}
+.danger{background:#d98c8c}
+.total{text-align:right;font-size:20px;font-weight:bold}
+#printArea{display:none;background:white;color:#222;padding:28px;font-size:13px}
+#printTitle{text-align:center;font-size:26px;font-weight:bold;letter-spacing:8px;text-transform:lowercase;margin-bottom:12px}
+#printCompany{text-align:center;line-height:1.5;margin-bottom:18px}
+#printMeta{text-align:right;font-size:12px;margin-bottom:16px}
+#printInfo{line-height:1.6;margin-bottom:16px}
+#printArea table{width:100%;border-collapse:collapse;font-size:12px}
+#printArea th,#printArea td{border:1px solid #999;padding:6px;vertical-align:top}
+#printTotal{text-align:right;font-size:18px;font-weight:bold;margin-top:16px}
+#printTerms{line-height:1.6;margin-top:24px}
 @media print{
 body *{visibility:hidden}
 #printArea,#printArea *{visibility:visible}
-#printArea{
-display:block;
-position:absolute;
-left:0;
-top:0;
-width:100%;
-box-sizing:border-box;
-}
+#printArea{display:block;position:absolute;left:0;top:0;width:100%;box-sizing:border-box}
 }
 </style>
 </head>
-
 <body>
 
 <div class="header">REFIT MASTER DOCS</div>
@@ -224,445 +39,176 @@ box-sizing:border-box;
 <div class="container">
 
 <div class="menu">
-<button onclick="showPage('dashboardPage')">Dashboard</button>
-<button onclick="showPage('themePage')">Appearance</button>
-<button onclick="showPage('companyPage')">Company</button>
-<button onclick="showPage('projectPage')">Project</button>
-<button onclick="showPage('pricePage')">Price Master</button>
-<button onclick="showPage('quotationPage')">Quotation</button>
-<button onclick="showPage('invoicePage')">Invoice</button>
-<button onclick="showPage('receiptPage')">Receipt</button>
-<button onclick="showPage('backupPage')">Backup</button>
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('company')">Company</button>
+<button onclick="showPage('projects')">Projects</button>
+<button onclick="showPage('prices')">Price Master</button>
+<button onclick="showPage('quotes')">Quotations</button>
+<button onclick="showPage('invoices')">Invoices</button>
+<button onclick="showPage('receipts')">Receipts</button>
 </div>
 
-<div id="dashboardPage">
-<div class="card"><h2>Projects</h2><div class="count" id="projectCount">0</div></div>
-<div class="card"><h2>Price Items</h2><div class="count" id="priceCount">0</div></div>
-<div class="card"><h2>Quotations</h2><div class="count" id="quoteCount">0</div></div>
-<div class="card"><h2>Invoices</h2><div class="count" id="invoiceCount">0</div></div>
-<div class="card"><h2>Receipts</h2><div class="count" id="receiptCount">0</div></div>
+<div id="dashboard" class="card">
+<h2>Dashboard</h2>
+<div id="stats"></div>
 </div>
 
-<div id="themePage" class="hidden">
-<div class="card">
-<div class="title">Pastel Themes</div>
-
-<div class="themeGrid">
-<button class="themeBtn" style="background:#ffb3a7" onclick="setTheme('coral')">Pastel Coral</button>
-<button class="themeBtn" style="background:#d6a5b8" onclick="setTheme('mauve')">Soft Mauve</button>
-<button class="themeBtn" style="background:#8fb7b6" onclick="setTheme('aqua')">Soft Aqua</button>
-<button class="themeBtn" style="background:#94a391" onclick="setTheme('sage')">Sage Green</button>
-<button class="themeBtn" style="background:#e6cf98" onclick="setTheme('sand')">Warm Sand</button>
-<button class="themeBtn" style="background:#a6c1e1" onclick="setTheme('powder')">Powder Blue</button>
-<button class="themeBtn" style="background:#efc6a3" onclick="setTheme('peach')">Peach Cream</button>
-<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint</button>
-<button class="themeBtn" style="background:#d7c6e6" onclick="setTheme('lavender')">Lavender</button>
-<button class="themeBtn" style="background:#c9b6b6" onclick="setTheme('clay')">Clay</button>
-</div>
-
-</div>
-</div>
-
-<div id="companyPage" class="hidden">
-<div class="card">
-<div class="title">Company Profile</div>
-
-<input type="file" id="companyLogo" accept="image/*">
-
-<div class="logoBox">
-<img id="logoPreview">
-</div>
-
+<div id="company" class="card hidden">
+<h2>Company Profile</h2>
 <input id="companyName" placeholder="Company Name">
 <textarea id="companyAddress" placeholder="Company Address"></textarea>
 <input id="companySSM" placeholder="SSM / Registration No">
-<input id="companyPhone" placeholder="Company Phone">
-<input id="companyEmail" placeholder="Company Email">
+<input id="companyPhone" placeholder="Phone">
+<input id="companyEmail" placeholder="Email">
 <textarea id="companyBank" placeholder="Bank Details"></textarea>
-<input id="companySign" placeholder="Authorized Person / Signature Name">
-
-<button class="saveBtn" onclick="saveCompany()">Save Company</button>
-</div>
-
-<div class="card">
-<div class="title">Company Preview</div>
+<input id="companySign" placeholder="Authorized Person">
+<button onclick="saveCompany()">Save Company</button>
 <div id="companyPreview"></div>
 </div>
-</div>
 
-<div id="projectPage" class="hidden">
-
-<div class="card">
-<div class="title">Project</div>
-
-<input type="hidden" id="editProjectIndex">
-
-<input id="clientName" placeholder="Client Name">
-<textarea id="projectAddress" placeholder="Project Address"></textarea>
-<input id="phone" placeholder="Phone">
-<input id="email" placeholder="Email">
-<input id="quoteRef" placeholder="Job Title / Ref">
-<input type="date" id="projectDate">
-
-<select id="projectStatus">
-<option>Pending</option>
-<option>Quotation Sent</option>
-<option>Confirmed</option>
-<option>Completed</option>
-</select>
-
-<button class="saveBtn" onclick="saveProject()">Save Project</button>
-<button class="orangeBtn" onclick="clearProjectForm()">Clear Form</button>
-
-</div>
-
-<div class="card">
-<div class="title">Project List</div>
+<div id="projects" class="card hidden">
+<h2>Projects</h2>
+<input id="projectName" placeholder="Client Name">
+<textarea id="projectAddress" placeholder="Address"></textarea>
+<input id="projectRef" placeholder="Job Title / Ref">
+<input id="projectPhone" placeholder="Phone">
+<input id="projectEmail" placeholder="Email">
+<button onclick="saveProject()">Save Project</button>
 <div id="projectList"></div>
 </div>
 
-</div>
-```
-```html
-<div id="pricePage" class="hidden">
-
-<div class="card">
-<div class="title">Price Master</div>
-
-<input type="hidden" id="editPriceIndex">
-
-<input id="priceCategory" placeholder="Category">
-<textarea id="priceDesc" placeholder="Item Description"></textarea>
-<input id="priceUnit" placeholder="Unit">
-<input type="number" id="priceRate" placeholder="Rate RM">
-
-<button class="saveBtn" onclick="savePriceItem()">Save Price Item</button>
-<button class="orangeBtn" onclick="clearPriceForm()">Clear Form</button>
-
-</div>
-
-<div class="card">
-<div class="title">Price Item List</div>
+<div id="prices" class="card hidden">
+<h2>Price Master</h2>
+<input id="priceDesc" placeholder="Description">
+<input id="priceUnit" placeholder="Unit e.g. lot, nos, sf">
+<input id="priceRate" type="number" placeholder="Rate">
+<button onclick="savePrice()">Save Price</button>
 <div id="priceList"></div>
 </div>
 
-</div>
-
-<div id="quotationPage" class="hidden">
-
-<div class="card">
-<div class="title">Create Quotation</div>
+<div id="quotes" class="card hidden">
+<h2>Quotation</h2>
 
 <select id="quoteProject"></select>
-<select id="quoteItem"></select>
+<select id="quotePrice"></select>
+<input id="quoteQty" type="number" placeholder="Qty">
 
-<input type="number" id="quoteQty" placeholder="Quantity">
+<button onclick="addQuoteItem()">Add Item</button>
 
-<button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
+<div id="quoteItems"></div>
 
+<h3 class="total">Total RM <span id="quoteTotal">0.00</span></h3>
+
+<button onclick="saveQuotation()">Save Quotation</button>
+<button onclick="printCurrentQuotation()">Print Current Quotation</button>
+
+<h3>Saved Quotations</h3>
+<div id="quotationList"></div>
+
+<h3>View Saved Quotation</h3>
+<select id="viewQuoteSelect"></select>
+<button onclick="viewSavedQuotation()">View Selected Quotation</button>
+<button onclick="printViewedQuotation()">Print Viewed Quotation</button>
+<div id="viewQuoteBox" class="item">Select a saved quotation and tap View Selected Quotation.</div>
 </div>
 
-<div class="card">
 
-<div class="title">Quotation Items</div>
-
-<table>
-<thead>
-<tr>
-<th>No</th>
-<th>Description</th>
-<th>Unit</th>
-<th>Qty</th>
-<th>Rate</th>
-<th>Amount</th>
-</tr>
-</thead>
-
-<tbody id="quoteTable"></tbody>
-</table>
-
-<div class="total">
-Grand Total : RM <span id="grandTotalText">0.00</span>
-</div>
-
-<br>
-
-<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button>
-
-<br><br>
-
-<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
-
-<br><br>
-
-<button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
-
-</div>
-
-<div class="card">
-
-<div class="title">Saved Quotations</div>
-
-<select id="savedQuoteSelect"></select>
-
-<button class="blueBtn" onclick="loadSavedQuotation()">Load Selected Quotation</button>
-
-</div>
-
-<div class="card">
-
-<div class="title">Quotation Edit Preview</div>
-
-<div id="editQuoteInfo" class="itemBox">
-Select and load quotation.
-</div>
-
-<select id="editAddItem"></select>
-
-<input type="number" id="editAddQty" placeholder="Quantity to add">
-
-<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into Quotation</button>
-
-<br><br>
-
-<table>
-
-<thead>
-<tr>
-<th>No</th>
-<th>Description</th>
-<th>Unit</th>
-<th>Qty</th>
-<th>Rate</th>
-<th>Amount</th>
-<th>Action</th>
-</tr>
-</thead>
-
-<tbody id="editQuoteTable"></tbody>
-
-</table>
-
-<div class="total">
-Updated Total : RM <span id="editQuoteTotal">0.00</span>
-</div>
-
-<br>
-
-<button class="saveBtn" onclick="updateSavedQuotation()">Update Quotation</button>
-
-<br><br>
-
-<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button>
-
-<br><br>
-
-<button class="redBtn" onclick="deleteLoadedQuotation()">Delete Quotation</button>
-
-</div>
-
-</div>
-
-<div id="invoicePage" class="hidden">
-
-<div class="card">
-
-<div class="title">Generate Invoices</div>
-
+<div id="invoices" class="card hidden">
+<h2>Invoices</h2>
 <select id="invoiceQuotation"></select>
+<button onclick="generateInvoices()">Generate Progress Invoices 30/40/25/5</button>
 
-<button class="saveBtn" onclick="generateInvoices()">Generate INV-1 / INV-2 / INV-3 / INV-4</button>
-
-</div>
-
-<div class="card">
-
-<div class="title">Invoice List</div>
-
+<h3>Invoice List</h3>
 <div id="invoiceList"></div>
 
-</div>
-
-<div class="card">
-
-<div class="title">Print Invoice</div>
-
+<h3>Print Invoice</h3>
 <select id="printInvoiceSelect"></select>
-
-<button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button>
-
+<button onclick="printSelectedInvoice()">Print Selected Invoice</button>
 </div>
 
-</div>
-
-<div id="receiptPage" class="hidden">
-
-<div class="card">
-
-<div class="title">Record Receipt</div>
-
+<div id="receipts" class="card hidden">
+<h2>Receipts</h2>
 <select id="receiptInvoice"></select>
-
-<input type="number" id="receiptAmount" placeholder="Paid Amount RM">
-
-<input type="date" id="receiptDate">
-
+<input id="receiptAmount" type="number" placeholder="Paid Amount RM">
+<input id="receiptDate" type="date">
 <select id="paymentMethod">
 <option>Cash</option>
 <option>Bank Transfer</option>
 <option>Cheque</option>
 <option>Online Payment</option>
 </select>
+<button onclick="saveReceipt()">Save Receipt</button>
 
-<button class="saveBtn" onclick="saveReceipt()">Save Receipt</button>
-
-</div>
-
-<div class="card">
-
-<div class="title">Receipt List</div>
-
+<h3>Receipt List</h3>
 <div id="receiptList"></div>
 
-</div>
-
-<div class="card">
-
-<div class="title">Print Receipt</div>
-
+<h3>Print Receipt</h3>
 <select id="printReceiptSelect"></select>
-
-<button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button>
-
-</div>
-
-</div>
-
-<div id="backupPage" class="hidden">
-
-<div class="card">
-
-<div class="title">Backup & Restore</div>
-
-<button class="saveBtn" onclick="exportBackup()">Export Backup</button>
-
-<br><br>
-
-<input type="file" id="importFile">
-
-<button class="blueBtn" onclick="importBackup()">Import Backup</button>
-
-<br><br>
-
-<button class="redBtn" onclick="clearAllData()">Clear ALL Data</button>
-
-</div>
-
+<button onclick="printSelectedReceipt()">Print Selected Receipt</button>
 </div>
 
 </div>
 
 <div id="printArea">
-
-<div id="printDocTitle"></div>
-
+<div id="printTitle">q u o t a t i o n</div>
 <div id="printCompany"></div>
-
+<div id="printMeta"></div>
 <div id="printInfo"></div>
-
-<div id="printTableArea"></div>
-
+<div id="printTable"></div>
 <div id="printTotal"></div>
-
-<br><br>
-
 <div id="printTerms"></div>
-
-<br><br>
-
-<p>Authorized Signature : _________________________</p>
-
-<p id="printSign"></p>
-
-<div id="printFooter"></div>
-
 </div>
 
 <script>
+let company=JSON.parse(localStorage.getItem("company")||'{"name":"REFIT MAINTENANCE SERVICES","address":"C-08-34 centum @ oasis corporate park, oasis damansara, No.2, jalan pju 1a/2, ara damansara, 47301 petaling jaya.","ssm":"201803348973","phone":"","email":"","bank":"RHB BANK A/C: 2126 1100 0235 58","sign":"Lyode ng"}');
+let projects=JSON.parse(localStorage.getItem("projects")||"[]");
+let prices=JSON.parse(localStorage.getItem("prices")||"[]");
+let quotations=JSON.parse(localStorage.getItem("quotations")||"[]");
+let invoices=JSON.parse(localStorage.getItem("invoices")||"[]");
+let receipts=JSON.parse(localStorage.getItem("receipts")||"[]");
+let currentQuote=[];
+let viewedQuoteIndex=null;
 
-const themes={
+function money(n){return (Number(n)||0).toFixed(2);}
 
-coral:{bg:"#fff7f5",text:"#31424a",header:"#c98b8b",accent:"#ffb3a7",primary:"#e0a39d",secondary:"#f0c2bb",danger:"#d98c8c",card:"#ffffff",line:"#ead7d3",soft:"#fff1ed"},
-
-mauve:{bg:"#fcf8fb",text:"#564958",header:"#c6a0b6",accent:"#d6a5b8",primary:"#c9afbc",secondary:"#ead5df",danger:"#d98c8c",card:"#ffffff",line:"#ebdde3",soft:"#faf3f7"},
-
-aqua:{bg:"#f6fbfb",text:"#324b4d",header:"#8fb7b6",accent:"#a7d8d8",primary:"#8fb7b6",secondary:"#c2e4e3",danger:"#d98c8c",card:"#ffffff",line:"#d8eceb",soft:"#eefafa"},
-
-sage:{bg:"#f8faf7",text:"#465046",header:"#94a391",accent:"#bfd1b9",primary:"#a7b7a2",secondary:"#d4dfd0",danger:"#d98c8c",card:"#ffffff",line:"#dfe7dc",soft:"#f1f5ef"},
-
-sand:{bg:"#fffdf7",text:"#5a5142",header:"#d1bb8c",accent:"#e6cf98",primary:"#d8c4a1",secondary:"#efe4c6",danger:"#d98c8c",card:"#ffffff",line:"#efe7d3",soft:"#fff8ea"},
-
-powder:{bg:"#f8fbff",text:"#3d4b5f",header:"#a6c1e1",accent:"#c9ddf2",primary:"#b7cde8",secondary:"#dde9f7",danger:"#d98c8c",card:"#ffffff",line:"#dce7f5",soft:"#f2f7fd"},
-
-peach:{bg:"#fff9f6",text:"#5a4840",header:"#efc6a3",accent:"#ffd8be",primary:"#f0c8a9",secondary:"#fae2d2",danger:"#d98c8c",card:"#ffffff",line:"#f0e1d7",soft:"#fff3ec"},
-
-mint:{bg:"#f6fcfc",text:"#3f5555",header:"#91d8d8",accent:"#b9eded",primary:"#9fdede",secondary:"#d9f5f5",danger:"#d98c8c",card:"#ffffff",line:"#d8eeee",soft:"#eefbfb"},
-
-lavender:{bg:"#fbf9ff",text:"#514a61",header:"#c4b0dd",accent:"#d7c6e6",primary:"#cdbde2",secondary:"#ede4f7",danger:"#d98c8c",card:"#ffffff",line:"#e5ddf0",soft:"#f7f3fb"},
-
-clay:{bg:"#fbf8f7",text:"#554a48",header:"#c9b6b6",accent:"#dfcccc",primary:"#d0c0c0",secondary:"#eee3e3",danger:"#d98c8c",card:"#ffffff",line:"#e8dede",soft:"#f7f2f2"}
-
-};
-
-let company=JSON.parse(localStorage.getItem("company"))||{};
-let projects=JSON.parse(localStorage.getItem("projects"))||[];
-let prices=JSON.parse(localStorage.getItem("prices"))||[];
-let quotations=JSON.parse(localStorage.getItem("quotations"))||[];
-let invoices=JSON.parse(localStorage.getItem("invoices"))||[];
-let receipts=JSON.parse(localStorage.getItem("receipts"))||[];
-
-let currentQuoteItems=[];
-let loadedQuoteIndex=null;
-let loadedQuoteItems=[];
-
-function setTheme(name){
-let t=themes[name];
-Object.keys(t).forEach(k=>{
-document.documentElement.style.setProperty("--"+k,t[k]);
-});
-localStorage.setItem("refit_theme",name);
+function getQuoteClient(q){
+if(!q)return "No Client";
+if(q.project && q.project.name)return q.project.name;
+if(q.project && q.project.client)return q.project.client;
+if(q.client)return q.client;
+return "No Client";
 }
 
-function loadSavedTheme(){
-setTheme(localStorage.getItem("refit_theme")||"coral");
+function getQuoteAddress(q){
+if(q && q.project && q.project.address)return q.project.address;
+if(q && q.address)return q.address;
+return "";
 }
 
-function showPage(page){
-
-[
-"dashboardPage",
-"themePage",
-"companyPage",
-"projectPage",
-"pricePage",
-"quotationPage",
-"invoicePage",
-"receiptPage",
-"backupPage"
-
-].forEach(id=>{
-document.getElementById(id).classList.add("hidden");
-});
-
-document.getElementById(page).classList.remove("hidden");
-
-refreshAll();
+function getQuoteRef(q){
+if(q && q.project && q.project.ref)return q.project.ref;
+if(q && q.ref)return q.ref;
+return "";
 }
 
-function money(n){
-return (Number(n)||0).toFixed(2);
+function getQuoteItems(q){
+if(q && Array.isArray(q.items))return q.items;
+return [];
 }
-```
+
+function getQuoteTotal(q){
+if(!q)return 0;
+return Number(q.total || q.grandTotal || 0);
+}
+
+
+
+function showPage(id){
+["dashboard","company","projects","prices","quotes","invoices","receipts"].forEach(p=>document.getElementById(p).classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+refresh();
+}
+
 function saveCompany(){
 company={
 name:companyName.value,
@@ -671,25 +217,14 @@ ssm:companySSM.value,
 phone:companyPhone.value,
 email:companyEmail.value,
 bank:companyBank.value,
-sign:companySign.value,
-logo:logoPreview.src||""
+sign:companySign.value
 };
 localStorage.setItem("company",JSON.stringify(company));
-alert("Company Saved");
-refreshAll();
+refresh();
+alert("Company saved");
 }
 
-document.getElementById("companyLogo").addEventListener("change",function(e){
-let file=e.target.files[0];
-if(!file)return;
-let reader=new FileReader();
-reader.onload=function(event){
-logoPreview.src=event.target.result;
-};
-reader.readAsDataURL(file);
-});
-
-function loadCompanyForm(){
+function loadCompany(){
 companyName.value=company.name||"";
 companyAddress.value=company.address||"";
 companySSM.value=company.ssm||"";
@@ -697,258 +232,257 @@ companyPhone.value=company.phone||"";
 companyEmail.value=company.email||"";
 companyBank.value=company.bank||"";
 companySign.value=company.sign||"";
-if(company.logo){logoPreview.src=company.logo;}
-}
-
-function companyHeader(){
-let logo=company.logo?`<div style="text-align:center;margin-bottom:10px;"><img src="${company.logo}" style="max-width:120px;max-height:100px;"></div>`:"";
-return `${logo}<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>${company.address||""}<br>${company.ssm?"SSM: "+company.ssm+"<br>":""}${company.phone?"Tel: "+company.phone+" | ":""}${company.email?"Email: "+company.email:""}`;
-}
-
-function preparePrintBase(){
-printCompany.innerHTML=companyHeader();
-printSign.innerHTML=company.sign||"";
-printFooter.innerHTML=company.bank?"<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>"):"";
 }
 
 function saveProject(){
-let i=editProjectIndex.value;
-let obj={
-client:clientName.value,
+projects.push({
+name:projectName.value,
 address:projectAddress.value,
-phone:phone.value,
-email:email.value,
-ref:quoteRef.value,
-date:projectDate.value,
-status:projectStatus.value
-};
-if(i===""){projects.push(obj);}else{projects[i]=obj;}
+ref:projectRef.value,
+phone:projectPhone.value,
+email:projectEmail.value
+});
 localStorage.setItem("projects",JSON.stringify(projects));
-clearProjectForm();
-refreshAll();
-}
-
-function editProject(i){
-let p=projects[i];
-editProjectIndex.value=i;
-clientName.value=p.client||"";
-projectAddress.value=p.address||"";
-phone.value=p.phone||"";
-email.value=p.email||"";
-quoteRef.value=p.ref||"";
-projectDate.value=p.date||"";
-projectStatus.value=p.status||"Pending";
-showPage("projectPage");
-}
-
-function clearProjectForm(){
-editProjectIndex.value="";
-clientName.value="";
+projectName.value="";
 projectAddress.value="";
-phone.value="";
-email.value="";
-quoteRef.value="";
-projectDate.value="";
-projectStatus.value="Pending";
+projectRef.value="";
+projectPhone.value="";
+projectEmail.value="";
+refresh();
 }
 
 function deleteProject(i){
-if(confirm("Delete this project?")){
+if(confirm("Delete project?")){
 projects.splice(i,1);
 localStorage.setItem("projects",JSON.stringify(projects));
-refreshAll();
+refresh();
 }
 }
 
-function savePriceItem(){
-let i=editPriceIndex.value;
-let obj={
-category:priceCategory.value,
+function savePrice(){
+prices.push({
 desc:priceDesc.value,
-unit:priceUnit.value,
+unit:priceUnit.value||"lot",
 rate:parseFloat(priceRate.value)||0
-};
-if(i===""){prices.push(obj);}else{prices[i]=obj;}
+});
 localStorage.setItem("prices",JSON.stringify(prices));
-clearPriceForm();
-refreshAll();
-}
-
-function editPriceItem(i){
-let p=prices[i];
-editPriceIndex.value=i;
-priceCategory.value=p.category||"";
-priceDesc.value=p.desc||"";
-priceUnit.value=p.unit||"";
-priceRate.value=p.rate||0;
-showPage("pricePage");
-}
-
-function clearPriceForm(){
-editPriceIndex.value="";
-priceCategory.value="";
 priceDesc.value="";
 priceUnit.value="";
 priceRate.value="";
+refresh();
 }
 
-function deletePriceItem(i){
-if(confirm("Delete this price item?")){
+function deletePrice(i){
+if(confirm("Delete price item?")){
 prices.splice(i,1);
 localStorage.setItem("prices",JSON.stringify(prices));
-refreshAll();
+refresh();
 }
 }
 
 function addQuoteItem(){
-let item=prices[quoteItem.value];
-if(!item){alert("Please add price item first");return;}
+let p=prices[quotePrice.value];
 let qty=parseFloat(quoteQty.value)||0;
-currentQuoteItems.push({
-desc:item.desc,
-unit:item.unit,
+if(!p){alert("Add price item first");return;}
+currentQuote.push({
+desc:p.desc,
+unit:p.unit,
+rate:p.rate,
 qty:qty,
-rate:item.rate,
-amount:qty*item.rate
+amount:p.rate*qty
 });
 quoteQty.value="";
-loadQuoteTable();
+renderQuote();
 }
 
-function loadQuoteTable(){
+function removeCurrentQuoteItem(i){
+currentQuote.splice(i,1);
+renderQuote();
+}
+
+function renderQuote(){
 let total=0;
-quoteTable.innerHTML=currentQuoteItems.map((it,i)=>{
-total+=it.amount;
-return `<tr>
+quoteItems.innerHTML=currentQuote.map((i,index)=>{
+total+=i.amount;
+return `<div class="item">
+<b>${index+1}. ${i.desc}</b><br>
+Unit: ${i.unit}<br>
+Qty: ${i.qty}<br>
+Rate: RM ${money(i.rate)}<br>
+Amount: RM ${money(i.amount)}<br>
+<button class="danger" onclick="removeCurrentQuoteItem(${index})">Remove</button>
+</div>`;
+}).join("");
+quoteTotal.innerText=money(total);
+}
+
+function saveQuotation(){
+let project=projects[quoteProject.value];
+if(!project){alert("Select project");return;}
+if(currentQuote.length===0){alert("Add quotation item");return;}
+let total=currentQuote.reduce((s,i)=>s+i.amount,0);
+let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
+quotations.push({
+quoteNo:qNo,
+project:project,
+items:[...currentQuote],
+total:total,
+date:new Date().toLocaleDateString()
+});
+localStorage.setItem("quotations",JSON.stringify(quotations));
+currentQuote=[];
+renderQuote();
+refresh();
+alert("Quotation saved");
+}
+
+function deleteQuotation(i){
+if(confirm("Delete quotation?")){
+quotations.splice(i,1);
+localStorage.setItem("quotations",JSON.stringify(quotations));
+refresh();
+}
+}
+
+function companyHeader(){
+return `<b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>
+${company.ssm||""}<br>
+${company.address||""}<br>
+${company.phone?company.phone+" ":""}${company.email||""}`;
+}
+
+function printQuotation(q){
+printTitle.innerHTML="q u o t a t i o n";
+printCompany.innerHTML=companyHeader();
+printMeta.innerHTML=`quotation no : ${q.quoteNo||"DRAFT"}<br>date : ${q.date||new Date().toLocaleDateString()}`;
+printInfo.innerHTML=`<b>attention to</b><br>
+${q.project.name||""}<br>
+${q.project.address||""}<br><br>
+<b>Job Title</b><br>
+${q.project.ref||""}`;
+
+printTable.innerHTML=`<table>
+<thead><tr><th>no</th><th>description</th><th>unit</th><th>qty</th><th>rate</th><th>amount(RM)</th></tr></thead>
+<tbody>
+${q.items.map((it,i)=>`<tr>
 <td>${i+1}</td>
 <td>${it.desc}</td>
 <td>${it.unit}</td>
 <td>${it.qty}</td>
 <td>${money(it.rate)}</td>
 <td>${money(it.amount)}</td>
-</tr>`;
-}).join("");
-grandTotalText.innerText=money(total);
+</tr>`).join("")}
+</tbody>
+</table>`;
+
+printTotal.innerHTML=`TOTAL RENOVATION WORKS : RM${money(getQuoteTotal(q))}`;
+
+printTerms.innerHTML=`<b>terms and condition:</b><br>
+~ payment 30% upon confirmation. Progress claim 65% and balance 5% after completion.<br>
+~ prices valid for 30 working days from date of quotation<br>
+~ warranty / defects liability period 12 mths upon site handover<br>
+~ goods sold are not returnable or exchangeable<br><br>
+All cheques / or bank transfer should be payable to :-<br>
+<b>${company.bank||""}</b><br><br>
+I/we hereby confirm & accept the above quotation in full<br><br>
+customer name : ___________________________<br>
+customer i/c or company chop n sign : ___________________________<br><br>
+Yours sincerely,<br>
+FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
+
+window.print();
 }
 
-function saveQuotation(){
-if(currentQuoteItems.length===0){alert("No quotation item");return;}
-let p=projects[quoteProject.value];
-if(!p){alert("Please select project");return;}
-let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
-let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
-quotations.push({
-quoteNo:qNo,
-project:p,
-items:[...currentQuoteItems],
-total:total,
-date:new Date().toLocaleDateString(),
-revision:0
-});
-localStorage.setItem("quotations",JSON.stringify(quotations));
-currentQuoteItems=[];
-loadQuoteTable();
-refreshAll();
-alert("Quotation Saved");
+function printCurrentQuotation(){
+let project=projects[quoteProject.value];
+if(!project || currentQuote.length===0){alert("Select project and add item");return;}
+let total=currentQuote.reduce((s,i)=>s+i.amount,0);
+printQuotation({quoteNo:"DRAFT",project:project,items:currentQuote,total:total,date:new Date().toLocaleDateString()});
 }
 
-function clearCurrentQuote(){
-currentQuoteItems=[];
-loadQuoteTable();
-}
-
-function loadSavedQuotation(){
-loadedQuoteIndex=parseInt(savedQuoteSelect.value);
-let q=quotations[loadedQuoteIndex];
-if(!q){alert("No quotation selected");return;}
-loadedQuoteItems=JSON.parse(JSON.stringify(q.items||[]));
-renderLoadedQuotation();
-}
-
-function renderLoadedQuotation(){
-let q=quotations[loadedQuoteIndex];
+function printSavedQuotation(i){
+var q=quotations[i];
 if(!q)return;
-let total=0;
-editQuoteInfo.innerHTML=`<b>${q.quoteNo}</b><br>Client: ${q.project?.client||""}<br>Ref: ${q.project?.ref||""}<br>Revision: ${q.revision||0}`;
-editQuoteTable.innerHTML=loadedQuoteItems.map((it,i)=>{
-let amt=(Number(it.qty)||0)*(Number(it.rate)||0);
-total+=amt;
-return `<tr>
-<td>${i+1}</td>
-<td><textarea onchange="editLine(${i},'desc',this.value)">${it.desc||""}</textarea></td>
-<td><input value="${it.unit||""}" onchange="editLine(${i},'unit',this.value)"></td>
-<td><input type="number" value="${it.qty||0}" onchange="editLine(${i},'qty',this.value)"></td>
-<td><input type="number" value="${it.rate||0}" onchange="editLine(${i},'rate',this.value)"></td>
-<td>${money(amt)}</td>
-<td><button class="redBtn" onclick="removeQuoteLine(${i})">Omit</button></td>
-</tr>`;
-}).join("");
-editQuoteTotal.innerText=money(total);
-}
-
-function editLine(i,field,value){
-if(field==="qty"||field==="rate"){value=parseFloat(value)||0;}
-loadedQuoteItems[i][field]=value;
-renderLoadedQuotation();
-}
-
-function removeQuoteLine(i){
-if(confirm("Omit this item?")){
-loadedQuoteItems.splice(i,1);
-renderLoadedQuotation();
-}
-}
-
-function addItemToSavedQuote(){
-if(loadedQuoteIndex===null){alert("Load quotation first");return;}
-let item=prices[editAddItem.value];
-if(!item){alert("No price item selected");return;}
-let qty=parseFloat(editAddQty.value)||0;
-loadedQuoteItems.push({
-desc:item.desc,
-unit:item.unit,
-qty:qty,
-rate:item.rate,
-amount:qty*item.rate
+printQuotation({
+quoteNo:q.quoteNo||("Q-"+(i+1)),
+project:{name:getQuoteClient(q),address:getQuoteAddress(q),ref:getQuoteRef(q)},
+items:getQuoteItems(q),
+total:getQuoteTotal(q),
+date:q.date||new Date().toLocaleDateString()
 });
-editAddQty.value="";
-renderLoadedQuotation();
+});
 }
 
-function updateSavedQuotation(){
-if(loadedQuoteIndex===null){alert("Load quotation first");return;}
-let total=loadedQuoteItems.reduce((s,i)=>s+(Number(i.qty)||0)*(Number(i.rate)||0),0);
-quotations[loadedQuoteIndex].items=JSON.parse(JSON.stringify(loadedQuoteItems));
-quotations[loadedQuoteIndex].total=total;
-quotations[loadedQuoteIndex].revision=(Number(quotations[loadedQuoteIndex].revision)||0)+1;
-quotations[loadedQuoteIndex].updatedDate=new Date().toLocaleDateString();
-localStorage.setItem("quotations",JSON.stringify(quotations));
-refreshAll();
-renderLoadedQuotation();
-alert("Quotation Updated");
+
+
+
+function buildQuoteOptions(){
+var html="";
+for(var i=0;i<quotations.length;i++){
+var q=quotations[i]||{};
+html += "<option value='"+i+"'>"+(q.quoteNo||("Q-"+(i+1)))+" - "+getQuoteClient(q)+" - RM "+money(getQuoteTotal(q))+"</option>";
+}
+return html;
 }
 
-function deleteLoadedQuotation(){
-if(loadedQuoteIndex===null){alert("Load quotation first");return;}
-if(confirm("Delete this quotation?")){
-quotations.splice(loadedQuoteIndex,1);
-localStorage.setItem("quotations",JSON.stringify(quotations));
-loadedQuoteIndex=null;
-loadedQuoteItems=[];
-editQuoteInfo.innerHTML="Select and load quotation.";
-editQuoteTable.innerHTML="";
-editQuoteTotal.innerText="0.00";
-refreshAll();
+
+function viewSavedQuotation(){
+var sel=document.getElementById("viewQuoteSelect");
+if(!sel){alert("Viewer selector missing");return;}
+var idx=parseInt(sel.value,10);
+if(isNaN(idx)){alert("No quotation selected");return;}
+viewedQuoteIndex=idx;
+var q=quotations[idx];
+if(!q){alert("No quotation found");return;}
+
+var items=getQuoteItems(q);
+var rows="";
+for(var i=0;i<items.length;i++){
+var it=items[i]||{};
+var qty=Number(it.qty||0);
+var rate=Number(it.rate||0);
+var amount=Number(it.amount||qty*rate);
+rows += "<tr>"+
+"<td>"+(i+1)+"</td>"+
+"<td>"+(it.desc||"")+"</td>"+
+"<td>"+(it.unit||"")+"</td>"+
+"<td>"+qty+"</td>"+
+"<td>RM "+money(rate)+"</td>"+
+"<td>RM "+money(amount)+"</td>"+
+"</tr>";
 }
+
+document.getElementById("viewQuoteBox").innerHTML =
+"<div class='item'>"+
+"<b>"+(q.quoteNo||("Q-"+(idx+1)))+"</b><br>"+
+"Client: "+getQuoteClient(q)+"<br>"+
+"Address: "+getQuoteAddress(q)+"<br>"+
+"Job Title: "+getQuoteRef(q)+"<br>"+
+"Date: "+(q.date||"")+"<br>"+
+"Total: <b>RM "+money(getQuoteTotal(q))+"</b>"+
+"</div>"+
+"<table style='width:100%;border-collapse:collapse;margin-top:10px'>"+
+"<thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead>"+
+"<tbody>"+rows+"</tbody></table>";
+}
+
+function printViewedQuotation(){
+if(viewedQuoteIndex===null){alert("View quotation first");return;}
+var q=quotations[viewedQuoteIndex];
+if(!q){alert("No quotation selected");return;}
+printQuotation({
+quoteNo:q.quoteNo||("Q-"+(viewedQuoteIndex+1)),
+project:{name:getQuoteClient(q),address:getQuoteAddress(q),ref:getQuoteRef(q)},
+items:getQuoteItems(q),
+total:getQuoteTotal(q),
+date:q.date||new Date().toLocaleDateString()
+});
 }
 
 function generateInvoices(){
 let q=quotations[invoiceQuotation.value];
-if(!q){alert("No quotation selected");return;}
-if(invoices.some(inv=>inv.quoteNo===q.quoteNo)){
-alert("Invoices already generated for this quotation.");
-return;
-}
+if(!q){alert("Select quotation first");return;}
+if(invoices.some(inv=>inv.quoteNo===q.quoteNo)){alert("Invoices already generated for this quotation");return;}
 let stages=[
 {stage:"INV-1",percent:30},
 {stage:"INV-2",percent:40},
@@ -960,8 +494,8 @@ let amount=q.total*s.percent/100;
 invoices.push({
 invoiceNo:s.stage+"-"+String(invoices.length+1).padStart(3,"0"),
 quoteNo:q.quoteNo,
-client:q.project?.client||"",
-projectRef:q.project?.ref||"",
+client:q.project.name,
+projectRef:q.project.ref||"",
 stage:s.stage,
 percent:s.percent,
 amount:amount,
@@ -972,45 +506,42 @@ date:new Date().toLocaleDateString()
 });
 });
 localStorage.setItem("invoices",JSON.stringify(invoices));
-refreshAll();
-alert("Invoices Generated");
+refresh();
+alert("Invoices generated");
 }
 
 function editInvoice(i){
 let inv=invoices[i];
-let newAmount=prompt("Edit Invoice Amount",inv.amount);
-if(newAmount===null)return;
-newAmount=parseFloat(newAmount)||0;
-inv.amount=newAmount;
-if(inv.paid>newAmount){inv.paid=newAmount;}
-inv.balance=Math.max(0,newAmount-inv.paid);
-if(inv.balance<=0){inv.status="Paid";}
-else if(inv.paid>0){inv.status="Partial";}
-else{inv.status="Pending";}
+let amt=prompt("Edit invoice amount",inv.amount);
+if(amt===null)return;
+amt=parseFloat(amt)||0;
+inv.amount=amt;
+if(inv.paid>amt)inv.paid=amt;
+inv.balance=Math.max(0,amt-inv.paid);
+inv.status=inv.balance<=0?"Paid":(inv.paid>0?"Partial":"Pending");
 localStorage.setItem("invoices",JSON.stringify(invoices));
-refreshAll();
+refresh();
 }
 
 function deleteInvoice(i){
-if(!confirm("Delete invoice?"))return;
+if(!confirm("Delete invoice and related receipts?"))return;
 let invNo=invoices[i].invoiceNo;
 receipts=receipts.filter(r=>r.invoiceNo!==invNo);
 invoices.splice(i,1);
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
-refreshAll();
+refresh();
 }
 
 function saveReceipt(){
 let inv=invoices[receiptInvoice.value];
-if(!inv){alert("No invoice selected");return;}
+if(!inv){alert("Select invoice first");return;}
 let paid=parseFloat(receiptAmount.value)||0;
 if(paid<=0){alert("Enter paid amount");return;}
 let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");
 inv.paid=(Number(inv.paid)||0)+paid;
 inv.balance=Math.max(0,(Number(inv.amount)||0)-inv.paid);
-if(inv.balance<=0){inv.status="Paid";}
-else{inv.status="Partial";}
+inv.status=inv.balance<=0?"Paid":"Partial";
 receipts.push({
 receiptNo:receiptNo,
 invoiceNo:inv.invoiceNo,
@@ -1023,29 +554,27 @@ balance:inv.balance
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
 receiptAmount.value="";
-refreshAll();
+refresh();
+alert("Receipt saved");
 }
 
 function editReceipt(i){
 let r=receipts[i];
-let newAmount=prompt("Edit Receipt Amount",r.amount);
-if(newAmount===null)return;
-newAmount=parseFloat(newAmount)||0;
+let amt=prompt("Edit receipt amount",r.amount);
+if(amt===null)return;
+amt=parseFloat(amt)||0;
 let inv=invoices.find(x=>x.invoiceNo===r.invoiceNo);
 if(inv){
-inv.paid-=Number(r.amount)||0;
-inv.paid+=newAmount;
+inv.paid=(Number(inv.paid)||0)-(Number(r.amount)||0)+amt;
 if(inv.paid<0)inv.paid=0;
-inv.balance=Math.max(0,inv.amount-inv.paid);
-if(inv.balance<=0){inv.status="Paid";}
-else if(inv.paid>0){inv.status="Partial";}
-else{inv.status="Pending";}
+inv.balance=Math.max(0,(Number(inv.amount)||0)-inv.paid);
+inv.status=inv.balance<=0?"Paid":(inv.paid>0?"Partial":"Pending");
 r.balance=inv.balance;
 }
-r.amount=newAmount;
+r.amount=amt;
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
-refreshAll();
+refresh();
 }
 
 function deleteReceipt(i){
@@ -1053,150 +582,136 @@ if(!confirm("Delete receipt?"))return;
 let r=receipts[i];
 let inv=invoices.find(x=>x.invoiceNo===r.invoiceNo);
 if(inv){
-inv.paid-=Number(r.amount)||0;
+inv.paid=(Number(inv.paid)||0)-(Number(r.amount)||0);
 if(inv.paid<0)inv.paid=0;
-inv.balance=Math.max(0,inv.amount-inv.paid);
-if(inv.balance<=0){inv.status="Paid";}
-else if(inv.paid>0){inv.status="Partial";}
-else{inv.status="Pending";}
+inv.balance=Math.max(0,(Number(inv.amount)||0)-inv.paid);
+inv.status=inv.balance<=0?"Paid":(inv.paid>0?"Partial":"Pending");
 }
 receipts.splice(i,1);
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
-refreshAll();
+refresh();
 }
 
-function refitDocHeader(title,meta){
-preparePrintBase();
-printDocTitle.innerHTML=`<div style="letter-spacing:8px;text-transform:lowercase;font-size:26px;text-align:center;font-weight:bold;">${title}</div>`;
-printCompany.innerHTML=`${companyHeader()}<div style="text-align:right;font-size:12px;margin-top:8px;">${meta}</div>`;
-}
-
-function printQuotationDoc(q){
-let total=Number(q.total)||0;
-refitDocHeader("q u o t a t i o n",`quotation no : ${q.quoteNo||""}<br>date : ${q.updatedDate||q.date||new Date().toLocaleDateString()}`);
-printInfo.innerHTML=`<b>attention to</b><br>${q.project?.client||""}<br>${q.project?.address||""}<br><br><b>Job Title</b><br>${q.project?.ref||""}`;
-printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>unit</th><th>qty</th><th>rate</th><th>amount(RM)</th></tr></thead><tbody>${(q.items||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.desc||""}</td><td>${it.unit||""}</td><td>${it.qty||0}</td><td>${money(it.rate)}</td><td>${money((Number(it.qty)||0)*(Number(it.rate)||0))}</td></tr>`).join("")}</tbody></table>`;
-printTotal.innerHTML=`<div style="text-align:right;font-size:20px;font-weight:bold;">TOTAL RENOVATION WORKS : RM${money(total)}</div>`;
-printTerms.innerHTML=`<b>terms and condition:</b><br>~ payment 30% upon confirmation. Progress claim 65% and balance 5% after completion.<br>~ prices valid for 30 working days from date of quotation<br>~ warranty / defects liability period 12 mths upon site handover<br>~ goods sold are not returnable or exchangeable<br><br>All cheques / or bank transfer should be payable to :-<br><b>${company.bank?company.bank.replace(/\n/g,"<br>"):""}</b><br><br>I/we hereby confirm & accept the above quotation in full<br><br>customer name : ___________________________<br>customer i/c or company chop n sign : ___________________________<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
+function printInvoice(inv){
+printTitle.innerHTML="i n v o i c e";
+printCompany.innerHTML=companyHeader();
+printMeta.innerHTML=`invoice no : ${inv.invoiceNo}<br>quotation no : ${inv.quoteNo}<br>date : ${inv.date}`;
+printInfo.innerHTML=`<b>attention to</b><br>${inv.client}<br><br><b>Job Title</b><br>${inv.projectRef||""}`;
+printTable.innerHTML=`<table>
+<thead><tr><th>no</th><th>description</th><th>amount</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>TOTAL RENOVATION</td><td>RM ${money(inv.amount)}</td></tr>
+<tr><td></td><td>${inv.stage} PROGRESS CLAIM : ${inv.percent}%</td><td>RM ${money(inv.amount)}</td></tr>
+<tr><td></td><td>PAID</td><td>RM ${money(inv.paid)}</td></tr>
+<tr><td></td><td><b>BALANCE :</b></td><td><b>RM ${money(inv.balance)}</b></td></tr>
+</tbody>
+</table>`;
+printTotal.innerHTML=`${inv.stage} PROGRESS CLAIM : RM ${money(inv.amount)}<br>BALANCE : RM ${money(inv.balance)}`;
+printTerms.innerHTML=`All cheques / or bank transfers should be payable to <b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>${company.bank||""}<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
 window.print();
-}
-
-function printCurrentQuotation(){
-let p=projects[quoteProject.value];
-if(!p||currentQuoteItems.length===0){alert("Select project and add item");return;}
-let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
-printQuotationDoc({quoteNo:"DRAFT",project:p,items:currentQuoteItems,total:total,date:new Date().toLocaleDateString()});
-}
-
-function printLoadedQuotation(){
-if(loadedQuoteIndex===null){alert("Load quotation first");return;}
-let q=JSON.parse(JSON.stringify(quotations[loadedQuoteIndex]));
-q.items=loadedQuoteItems;
-q.total=loadedQuoteItems.reduce((s,i)=>s+(Number(i.qty)||0)*(Number(i.rate)||0),0);
-printQuotationDoc(q);
 }
 
 function printSelectedInvoice(){
 let inv=invoices[printInvoiceSelect.value];
-if(!inv){alert("No invoice selected");return;}
-refitDocHeader("i n v o i c e",`invoice no : ${inv.invoiceNo}<br>quotation no : ${inv.quoteNo}<br>date : ${inv.date}`);
-printInfo.innerHTML=`<b>attention to</b><br>${inv.client}<br><br><b>Job Title</b><br>project renovation work ${inv.projectRef||""}`;
-printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>amount</th></tr></thead><tbody><tr><td>1</td><td>TOTAL RENOVATION</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>${inv.stage} PROGRESS CLAIM : ${inv.percent}%</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>PAID</td><td>RM ${money(inv.paid)}</td></tr><tr><td></td><td><b>BALANCE :</b></td><td><b>RM ${money(inv.balance)}</b></td></tr></tbody></table>`;
-printTotal.innerHTML=`<div style="text-align:right;font-weight:bold;">${inv.stage} PROGRESS CLAIM : RM ${money(inv.amount)}<br>BALANCE : RM ${money(inv.balance)}</div>`;
-printTerms.innerHTML=`All cheques / or bank transfers should be payable to <b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>${company.bank?company.bank.replace(/\n/g,"<br>"):""}<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
+if(!inv){alert("Select invoice");return;}
+printInvoice(inv);
+}
+
+function printReceipt(r){
+printTitle.innerHTML="o f f i c i a l  r e c e i p t";
+printCompany.innerHTML=companyHeader();
+printMeta.innerHTML=`receipt no : ${r.receiptNo}<br>inv no : ${r.invoiceNo}<br>date : ${r.date}`;
+printInfo.innerHTML=`<b>attention to</b><br>${r.client}<br><br><b>PAID FOR PROGRESS CLAIM</b><br>${r.invoiceNo}<br><br><b>PAYMENT BY CHEQUE NO / TRANSFER FROM / SLIP NO:</b><br>${r.method}`;
+printTable.innerHTML=`<table>
+<thead><tr><th>DATE</th><th>PYMT AMOUNT</th></tr></thead>
+<tbody>
+<tr><td>${r.date}</td><td>RM ${money(r.amount)}</td></tr>
+<tr><td><b>TOTAL</b></td><td><b>RM ${money(r.amount)}</b></td></tr>
+</tbody>
+</table>`;
+printTotal.innerHTML=`RECEIVED THE SUM OF : RINGGIT MALAYSIA RM ${money(r.amount)}`;
+printTerms.innerHTML=`N.B. VALIDITY OF THIS RECEIPT SUBJECT TO CLEARING OF TRANSFER<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
 window.print();
 }
 
 function printSelectedReceipt(){
 let r=receipts[printReceiptSelect.value];
-if(!r){alert("No receipt selected");return;}
-refitDocHeader("o f f i c i a l  r e c e i p t",`receipt no : ${r.receiptNo}<br>inv no : ${r.invoiceNo}<br>date : ${r.date}`);
-printInfo.innerHTML=`<b>attention to</b><br>${r.client}<br><br><b>PAID FOR PROGRESS CLAIM</b><br>${r.invoiceNo}<br><br><b>PAYMENT BY CHEQUE NO / TRANSFER FROM / SLIP NO:</b><br>${r.method}`;
-printTableArea.innerHTML=`<table><thead><tr><th>DATE</th><th>PYMT AMOUNT</th></tr></thead><tbody><tr><td>${r.date}</td><td>RM ${money(r.amount)}</td></tr><tr><td><b>TOTAL</b></td><td><b>RM ${money(r.amount)}</b></td></tr></tbody></table>`;
-printTotal.innerHTML=`<div style="font-weight:bold;">RECEIVED THE SUM OF : RINGGIT MALAYSIA RM ${money(r.amount)}</div>`;
-printTerms.innerHTML=`N.B. VALIDITY OF THIS RECEIPT SUBJECT TO CLEARING OF TRANSFER<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
-window.print();
+if(!r){alert("Select receipt");return;}
+printReceipt(r);
 }
 
-function exportBackup(){
-let data={company,projects,prices,quotations,invoices,receipts};
-let blob=new Blob([JSON.stringify(data)],{type:"application/json"});
-let a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="refitmaster_backup.json";
-a.click();
-}
 
-function importBackup(){
-let file=importFile.files[0];
-if(!file){alert("Select backup file");return;}
-let reader=new FileReader();
-reader.onload=function(e){
-let d=JSON.parse(e.target.result);
-company=d.company||{};
-projects=d.projects||[];
-prices=d.prices||[];
-quotations=d.quotations||[];
-invoices=d.invoices||[];
-receipts=d.receipts||[];
-localStorage.setItem("company",JSON.stringify(company));
-localStorage.setItem("projects",JSON.stringify(projects));
-localStorage.setItem("prices",JSON.stringify(prices));
-localStorage.setItem("quotations",JSON.stringify(quotations));
-localStorage.setItem("invoices",JSON.stringify(invoices));
-localStorage.setItem("receipts",JSON.stringify(receipts));
-refreshAll();
-};
-reader.readAsText(file);
-}
+function refresh(){
+stats.innerHTML=`Projects: ${projects.length}<br>Price Items: ${prices.length}<br>Quotations: ${quotations.length}<br>Invoices: ${invoices.length}<br>Receipts: ${receipts.length}`;
 
-function clearAllData(){
-if(confirm("DELETE ALL DATA?")){
-localStorage.clear();
-location.reload();
-}
-}
+loadCompany();
 
-function refreshAll(){
-projectCount.innerText=projects.length;
-priceCount.innerText=prices.length;
-quoteCount.innerText=quotations.length;
-invoiceCount.innerText=invoices.length;
-receiptCount.innerText=receipts.length;
+companyPreview.innerHTML=`<div class="item">${companyHeader()}<br><br><b>Bank:</b><br>${company.bank||""}<br><br><b>Authorized:</b> ${company.sign||""}</div>`;
 
-loadCompanyForm();
+projectList.innerHTML=projects.map((p,i)=>`<div class="item">
+<b>${p.name}</b><br>
+${p.address}<br>
+Ref: ${p.ref||""}<br>
+<button class="danger" onclick="deleteProject(${i})">Delete</button>
+</div>`).join("");
 
-companyPreview.innerHTML=`<div class="itemBox">${companyHeader()}<br><br><b>Bank:</b><br>${(company.bank||"").replace(/\n/g,"<br>")}<br><br><b>Authorized:</b> ${company.sign||""}</div>`;
+priceList.innerHTML=prices.map((p,i)=>`<div class="item">
+${p.desc}<br>
+Unit: ${p.unit}<br>
+RM ${money(p.rate)}<br>
+<button class="danger" onclick="deletePrice(${i})">Delete</button>
+</div>`).join("");
 
-projectList.innerHTML=projects.map((p,i)=>`<div class="itemBox"><b>${p.client}</b><br>${p.address}<br>Ref: ${p.ref}<br>Status: ${p.status}<br><button class="blueBtn" onclick="editProject(${i})">Edit</button><button class="redBtn" onclick="deleteProject(${i})">Delete</button></div>`).join("");
+quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.name}</option>`).join("");
 
-priceList.innerHTML=prices.map((p,i)=>`<div class="itemBox"><b>${p.category}</b><br>${p.desc}<br>Unit: ${p.unit}<br>Rate: RM ${money(p.rate)}<br><button class="blueBtn" onclick="editPriceItem(${i})">Edit</button><button class="redBtn" onclick="deletePriceItem(${i})">Delete</button></div>`).join("");
+quotePrice.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.desc} - RM ${money(p.rate)}</option>`).join("");
 
-quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.client||"Client"} - ${p.ref||"No Ref"}</option>`).join("");
+quotationList.innerHTML=quotations.map((q,i)=>`<div class="item">
+<b>${q.quoteNo}</b><br>
+Client: ${getQuoteClient(q)}<br>
+Total: RM ${money(getQuoteTotal(q))}<br>
+<button onclick="printSavedQuotation(${i})">Print</button>
+<button class="danger" onclick="deleteQuotation(${i})">Delete</button>
+</div>`).join("");
 
-quoteItem.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>`).join("");
+if(document.getElementById("viewQuoteSelect")){viewQuoteSelect.innerHTML=buildQuoteOptions();}
 
-editAddItem.innerHTML=quoteItem.innerHTML;
+if(document.getElementById("invoiceQuotation")){invoiceQuotation.innerHTML=buildQuoteOptions();}
 
-savedQuoteSelect.innerHTML=quotations.map((q,i)=>`<option value="${i}">${q.quoteNo} - ${q.project?.client||""} - RM ${money(q.total)} - Rev ${q.revision||0}</option>`).join("");
+invoiceList.innerHTML=invoices.map((inv,i)=>`<div class="item">
+<b>${inv.invoiceNo}</b><br>
+Client: ${inv.client}<br>
+Quotation: ${inv.quoteNo}<br>
+Stage: ${inv.stage} (${inv.percent}%)<br>
+Amount: RM ${money(inv.amount)}<br>
+Paid: RM ${money(inv.paid)}<br>
+Balance: RM ${money(inv.balance)}<br>
+Status: <b>${inv.status}</b><br>
+<button onclick="editInvoice(${i})">Edit</button>
+<button class="danger" onclick="deleteInvoice(${i})">Delete</button>
+</div>`).join("");
 
-invoiceQuotation.innerHTML=quotations.map((q,i)=>`<option value="${i}">${q.quoteNo} - ${q.project?.client||""} - RM ${money(q.total)}</option>`).join("");
+receiptInvoice.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)}</option>`).join("");
 
-receiptInvoice.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>`).join("");
+printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client}</option>`).join("");
 
-printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)}</option>`).join("");
+receiptList.innerHTML=receipts.map((r,i)=>`<div class="item">
+<b>${r.receiptNo}</b><br>
+Invoice: ${r.invoiceNo}<br>
+Client: ${r.client}<br>
+Paid: RM ${money(r.amount)}<br>
+Method: ${r.method}<br>
+Date: ${r.date}<br>
+Balance After Payment: RM ${money(r.balance)}<br>
+<button onclick="editReceipt(${i})">Edit</button>
+<button class="danger" onclick="deleteReceipt(${i})">Delete</button>
+</div>`).join("");
 
 printReceiptSelect.innerHTML=receipts.map((r,i)=>`<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>`).join("");
-
-invoiceList.innerHTML=invoices.map((inv,i)=>`<div class="itemBox"><b>${inv.invoiceNo}</b><br>Client: ${inv.client}<br>Quotation: ${inv.quoteNo}<br>Stage: ${inv.stage} (${inv.percent}%)<br>Amount: RM ${money(inv.amount)}<br>Paid: RM ${money(inv.paid)}<br>Balance: RM ${money(inv.balance)}<br>Status: <b>${inv.status}</b><br><br><button class="blueBtn" onclick="editInvoice(${i})">Edit Invoice</button><button class="redBtn" onclick="deleteInvoice(${i})">Delete Invoice</button></div>`).join("");
-
-receiptList.innerHTML=receipts.map((r,i)=>`<div class="itemBox"><b>${r.receiptNo}</b><br>Invoice: ${r.invoiceNo}<br>Client: ${r.client}<br>Paid: RM ${money(r.amount)}<br>Method: ${r.method}<br>Date: ${r.date}<br>Balance After Payment: RM ${money(r.balance)}<br><br><button class="blueBtn" onclick="editReceipt(${i})">Edit Receipt</button><button class="redBtn" onclick="deleteReceipt(${i})">Delete Receipt</button></div>`).join("");
 }
 
-loadSavedTheme();
-refreshAll();
-
+refresh();
 </script>
 
 </body>
