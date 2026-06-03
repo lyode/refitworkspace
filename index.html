@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER DOCS v10.1 Pastel</title>
+<title>REFIT MASTER DOCS v10.2</title>
 
 <style>
 :root{
@@ -20,7 +21,7 @@
 
 body{
 margin:0;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 background:var(--bg);
 color:var(--text);
 }
@@ -94,7 +95,6 @@ padding:14px;
 width:100%;
 font-size:20px;
 border-radius:14px;
-box-shadow:0 2px 5px rgba(0,0,0,.12);
 }
 
 .redBtn{
@@ -167,7 +167,6 @@ border-radius:14px;
 font-size:15px;
 font-weight:bold;
 color:white;
-box-shadow:0 2px 5px rgba(0,0,0,.12);
 }
 
 table{
@@ -201,41 +200,6 @@ display:none;
 background:white;
 color:#222;
 padding:30px;
-font-family:Arial, sans-serif;
-}
-
-.printTitle{
-text-align:center;
-font-size:28px;
-font-weight:bold;
-margin-bottom:12px;
-letter-spacing:6px;
-text-transform:lowercase;
-}
-
-.printCompany{
-text-align:center;
-margin-bottom:25px;
-line-height:1.5;
-}
-
-.printBox{
-margin-bottom:18px;
-line-height:1.6;
-}
-
-.printTotal{
-text-align:right;
-font-size:20px;
-font-weight:bold;
-margin-top:20px;
-}
-
-.printFooter{
-margin-top:35px;
-font-size:13px;
-border-top:1px solid #ccc;
-padding-top:10px;
 }
 
 @media print{
@@ -281,35 +245,34 @@ box-sizing:border-box;
 
 <div id="themePage" class="hidden">
 <div class="card">
-<div class="title">Pastel Appearance Theme</div>
+<div class="title">Pastel Themes</div>
+
 <div class="themeGrid">
-<button class="themeBtn" style="background:#ff6f6f" onclick="setTheme('coral')">Pastel Coral</button>
-<button class="themeBtn" style="background:#e89a9a" onclick="setTheme('rose')">Dusty Rose</button>
+<button class="themeBtn" style="background:#ffb3a7" onclick="setTheme('coral')">Pastel Coral</button>
+<button class="themeBtn" style="background:#d6a5b8" onclick="setTheme('mauve')">Soft Mauve</button>
 <button class="themeBtn" style="background:#8fb7b6" onclick="setTheme('aqua')">Soft Aqua</button>
 <button class="themeBtn" style="background:#94a391" onclick="setTheme('sage')">Sage Green</button>
 <button class="themeBtn" style="background:#e6cf98" onclick="setTheme('sand')">Warm Sand</button>
 <button class="themeBtn" style="background:#a6c1e1" onclick="setTheme('powder')">Powder Blue</button>
-<button class="themeBtn" style="background:#d6a5b8" onclick="setTheme('mauve')">Soft Mauve</button>
 <button class="themeBtn" style="background:#efc6a3" onclick="setTheme('peach')">Peach Cream</button>
-<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint Blue</button>
-<button class="themeBtn" style="background:#c9b6b6" onclick="setTheme('clay')">Clay Blush</button>
-<button class="themeBtn" style="background:#b7c9a8" onclick="setTheme('olive')">Pastel Olive</button>
+<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint</button>
 <button class="themeBtn" style="background:#d7c6e6" onclick="setTheme('lavender')">Lavender</button>
-<button class="themeBtn" style="background:#f0b7a4" onclick="setTheme('salmon')">Soft Salmon</button>
-<button class="themeBtn" style="background:#b7d8c8" onclick="setTheme('seafoam')">Seafoam</button>
-<button class="themeBtn" style="background:#d9c4a9" onclick="setTheme('latte')">Latte</button>
-<button class="themeBtn" style="background:#b6c5d8" onclick="setTheme('mist')">Blue Mist</button>
-<button class="themeBtn" style="background:#d8b6c9" onclick="setTheme('pink')">Pastel Pink</button>
-<button class="themeBtn" style="background:#a7c4bc" onclick="setTheme('eucalyptus')">Eucalyptus</button>
+<button class="themeBtn" style="background:#c9b6b6" onclick="setTheme('clay')">Clay</button>
 </div>
+
 </div>
 </div>
 
 <div id="companyPage" class="hidden">
 <div class="card">
 <div class="title">Company Profile</div>
+
 <input type="file" id="companyLogo" accept="image/*">
-<div class="logoBox"><img id="logoPreview"></div>
+
+<div class="logoBox">
+<img id="logoPreview">
+</div>
+
 <input id="companyName" placeholder="Company Name">
 <textarea id="companyAddress" placeholder="Company Address"></textarea>
 <input id="companySSM" placeholder="SSM / Registration No">
@@ -317,58 +280,92 @@ box-sizing:border-box;
 <input id="companyEmail" placeholder="Company Email">
 <textarea id="companyBank" placeholder="Bank Details"></textarea>
 <input id="companySign" placeholder="Authorized Person / Signature Name">
-<button class="saveBtn" onclick="saveCompany()">Save / Update Company Profile</button>
+
+<button class="saveBtn" onclick="saveCompany()">Save Company</button>
 </div>
-<div class="card"><div class="title">Current Company</div><div id="companyPreview"></div></div>
+
+<div class="card">
+<div class="title">Company Preview</div>
+<div id="companyPreview"></div>
+</div>
 </div>
 
 <div id="projectPage" class="hidden">
+
 <div class="card">
-<div class="title">Create / Edit Project</div>
+<div class="title">Project</div>
+
 <input type="hidden" id="editProjectIndex">
+
 <input id="clientName" placeholder="Client Name">
 <textarea id="projectAddress" placeholder="Project Address"></textarea>
 <input id="phone" placeholder="Phone">
 <input id="email" placeholder="Email">
-<input id="quoteRef" placeholder="Quote Ref No / Job Title">
+<input id="quoteRef" placeholder="Job Title / Ref">
 <input type="date" id="projectDate">
+
 <select id="projectStatus">
 <option>Pending</option>
 <option>Quotation Sent</option>
 <option>Confirmed</option>
 <option>Completed</option>
 </select>
-<button class="saveBtn" onclick="saveProject()">Save / Update Project</button>
-<button class="orangeBtn" onclick="clearProjectForm()">New Project / Clear Form</button>
-</div>
-<div class="card"><div class="title">Project List</div><div id="projectList"></div></div>
+
+<button class="saveBtn" onclick="saveProject()">Save Project</button>
+<button class="orangeBtn" onclick="clearProjectForm()">Clear Form</button>
+
 </div>
 
-<div id="pricePage" class="hidden">
 <div class="card">
-<div class="title">Create / Edit Price Item</div>
+<div class="title">Project List</div>
+<div id="projectList"></div>
+</div>
+
+</div>
+```
+```html
+<div id="pricePage" class="hidden">
+
+<div class="card">
+<div class="title">Price Master</div>
+
 <input type="hidden" id="editPriceIndex">
+
 <input id="priceCategory" placeholder="Category">
 <textarea id="priceDesc" placeholder="Item Description"></textarea>
 <input id="priceUnit" placeholder="Unit">
 <input type="number" id="priceRate" placeholder="Rate RM">
-<button class="saveBtn" onclick="savePriceItem()">Save / Update Price Item</button>
-<button class="orangeBtn" onclick="clearPriceForm()">New Price Item / Clear Form</button>
+
+<button class="saveBtn" onclick="savePriceItem()">Save Price Item</button>
+<button class="orangeBtn" onclick="clearPriceForm()">Clear Form</button>
+
 </div>
-<div class="card"><div class="title">Price Item List</div><div id="priceList"></div></div>
+
+<div class="card">
+<div class="title">Price Item List</div>
+<div id="priceList"></div>
+</div>
+
 </div>
 
 <div id="quotationPage" class="hidden">
+
 <div class="card">
-<div class="title">Create New Quotation</div>
+<div class="title">Create Quotation</div>
+
 <select id="quoteProject"></select>
 <select id="quoteItem"></select>
+
 <input type="number" id="quoteQty" placeholder="Quantity">
+
 <button class="blueBtn" onclick="addQuoteItem()">Add Item</button>
+
 </div>
 
 <div class="card">
-<div class="title">New Quotation Items</div>
+
+<div class="title">Quotation Items</div>
+
 <table>
 <thead>
 <tr>
@@ -380,31 +377,56 @@ box-sizing:border-box;
 <th>Amount</th>
 </tr>
 </thead>
+
 <tbody id="quoteTable"></tbody>
 </table>
-<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
+
+<div class="total">
+Grand Total : RM <span id="grandTotalText">0.00</span>
+</div>
+
 <br>
-<button class="saveBtn" onclick="saveQuotation()">Save New Quotation</button>
+
+<button class="saveBtn" onclick="saveQuotation()">Save Quotation</button>
+
 <br><br>
+
 <button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
+
 <br><br>
+
 <button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
+
 </div>
 
 <div class="card">
-<div class="title">Saved Quotation Preview / Edit</div>
+
+<div class="title">Saved Quotations</div>
+
 <select id="savedQuoteSelect"></select>
+
 <button class="blueBtn" onclick="loadSavedQuotation()">Load Selected Quotation</button>
+
 </div>
 
 <div class="card">
-<div class="title">Quotation Preview / Edit</div>
-<div id="editQuoteInfo" class="itemBox">Select and load a quotation.</div>
+
+<div class="title">Quotation Edit Preview</div>
+
+<div id="editQuoteInfo" class="itemBox">
+Select and load quotation.
+</div>
+
 <select id="editAddItem"></select>
+
 <input type="number" id="editAddQty" placeholder="Quantity to add">
-<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into This Quote</button>
+
+<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into Quotation</button>
+
 <br><br>
+
 <table>
+
 <thead>
 <tr>
 <th>No</th>
@@ -416,42 +438,73 @@ box-sizing:border-box;
 <th>Action</th>
 </tr>
 </thead>
+
 <tbody id="editQuoteTable"></tbody>
+
 </table>
-<div class="total">Updated Total: RM <span id="editQuoteTotal">0.00</span></div>
-<br>
-<button class="saveBtn" onclick="updateSavedQuotation()">Update Saved Quotation</button>
-<br><br>
-<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button>
-<br><br>
-<button class="redBtn" onclick="deleteLoadedQuotation()">Delete This Quotation</button>
+
+<div class="total">
+Updated Total : RM <span id="editQuoteTotal">0.00</span>
 </div>
+
+<br>
+
+<button class="saveBtn" onclick="updateSavedQuotation()">Update Quotation</button>
+
+<br><br>
+
+<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button>
+
+<br><br>
+
+<button class="redBtn" onclick="deleteLoadedQuotation()">Delete Quotation</button>
+
+</div>
+
 </div>
 
 <div id="invoicePage" class="hidden">
+
 <div class="card">
-<div class="title">Generate Progress Invoices</div>
+
+<div class="title">Generate Invoices</div>
+
 <select id="invoiceQuotation"></select>
-<button class="saveBtn" onclick="generateInvoices()">Generate INV 30/40/25/5</button>
+
+<button class="saveBtn" onclick="generateInvoices()">Generate INV-1 / INV-2 / INV-3 / INV-4</button>
+
 </div>
 
 <div class="card">
+
 <div class="title">Invoice List</div>
+
 <div id="invoiceList"></div>
+
 </div>
 
 <div class="card">
+
 <div class="title">Print Invoice</div>
+
 <select id="printInvoiceSelect"></select>
+
 <button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button>
+
 </div>
+
 </div>
 
 <div id="receiptPage" class="hidden">
+
 <div class="card">
+
 <div class="title">Record Receipt</div>
+
 <select id="receiptInvoice"></select>
+
 <input type="number" id="receiptAmount" placeholder="Paid Amount RM">
+
 <input type="date" id="receiptDate">
 
 <select id="paymentMethod">
@@ -462,49 +515,77 @@ box-sizing:border-box;
 </select>
 
 <button class="saveBtn" onclick="saveReceipt()">Save Receipt</button>
+
 </div>
 
 <div class="card">
+
 <div class="title">Receipt List</div>
+
 <div id="receiptList"></div>
+
 </div>
 
 <div class="card">
+
 <div class="title">Print Receipt</div>
+
 <select id="printReceiptSelect"></select>
+
 <button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button>
+
 </div>
+
 </div>
 
 <div id="backupPage" class="hidden">
+
 <div class="card">
+
 <div class="title">Backup & Restore</div>
 
 <button class="saveBtn" onclick="exportBackup()">Export Backup</button>
+
 <br><br>
 
 <input type="file" id="importFile">
+
 <button class="blueBtn" onclick="importBackup()">Import Backup</button>
+
 <br><br>
 
 <button class="redBtn" onclick="clearAllData()">Clear ALL Data</button>
+
 </div>
+
 </div>
 
 </div>
 
 <div id="printArea">
-<div class="printTitle" id="printDocTitle"></div>
-<div class="printCompany" id="printCompany"></div>
-<div class="printBox" id="printInfo"></div>
+
+<div id="printDocTitle"></div>
+
+<div id="printCompany"></div>
+
+<div id="printInfo"></div>
+
 <div id="printTableArea"></div>
-<div class="printTotal" id="printTotal"></div>
+
+<div id="printTotal"></div>
+
 <br><br>
+
 <div id="printTerms"></div>
+
 <br><br>
-<p>Authorized Signature: ___________________________</p>
+
+<p>Authorized Signature : _________________________</p>
+
 <p id="printSign"></p>
-<div class="printFooter" id="printFooter"></div>
+
+<div id="printFooter"></div>
+
 </div>
 
 <script>
@@ -512,27 +593,28 @@ box-sizing:border-box;
 const themes={
 
 coral:{bg:"#fff7f5",text:"#31424a",header:"#c98b8b",accent:"#ffb3a7",primary:"#e0a39d",secondary:"#f0c2bb",danger:"#d98c8c",card:"#ffffff",line:"#ead7d3",soft:"#fff1ed"},
-rose:{bg:"#fff8f8",text:"#4c3f45",header:"#c89aa6",accent:"#e8b7c2",primary:"#d9aab5",secondary:"#efcbd2",danger:"#d98c8c",card:"#ffffff",line:"#ead7d3",soft:"#fff2f5"},
-aqua:{bg:"#f6fbfb",text:"#324b4d",header:"#8fb7b6",accent:"#a7d8d8",primary:"#8fb7b6",secondary:"#c2e4e3",danger:"#d98c8c",card:"#ffffff",line:"#d8eceb",soft:"#eefafa"},
-sage:{bg:"#f8faf7",text:"#465046",header:"#94a391",accent:"#bfd1b9",primary:"#a7b7a2",secondary:"#d4dfd0",danger:"#d98c8c",card:"#ffffff",line:"#dfe7dc",soft:"#f1f5ef"},
-sand:{bg:"#fffdf7",text:"#5a5142",header:"#d1bb8c",accent:"#e6cf98",primary:"#d8c4a1",secondary:"#efe4c6",danger:"#d98c8c",card:"#ffffff",line:"#efe7d3",soft:"#fff8ea"},
-powder:{bg:"#f8fbff",text:"#3d4b5f",header:"#a6c1e1",accent:"#c9ddf2",primary:"#b7cde8",secondary:"#dde9f7",danger:"#d98c8c",card:"#ffffff",line:"#dce7f5",soft:"#f2f7fd"},
+
 mauve:{bg:"#fcf8fb",text:"#564958",header:"#c6a0b6",accent:"#d6a5b8",primary:"#c9afbc",secondary:"#ead5df",danger:"#d98c8c",card:"#ffffff",line:"#ebdde3",soft:"#faf3f7"},
+
+aqua:{bg:"#f6fbfb",text:"#324b4d",header:"#8fb7b6",accent:"#a7d8d8",primary:"#8fb7b6",secondary:"#c2e4e3",danger:"#d98c8c",card:"#ffffff",line:"#d8eceb",soft:"#eefafa"},
+
+sage:{bg:"#f8faf7",text:"#465046",header:"#94a391",accent:"#bfd1b9",primary:"#a7b7a2",secondary:"#d4dfd0",danger:"#d98c8c",card:"#ffffff",line:"#dfe7dc",soft:"#f1f5ef"},
+
+sand:{bg:"#fffdf7",text:"#5a5142",header:"#d1bb8c",accent:"#e6cf98",primary:"#d8c4a1",secondary:"#efe4c6",danger:"#d98c8c",card:"#ffffff",line:"#efe7d3",soft:"#fff8ea"},
+
+powder:{bg:"#f8fbff",text:"#3d4b5f",header:"#a6c1e1",accent:"#c9ddf2",primary:"#b7cde8",secondary:"#dde9f7",danger:"#d98c8c",card:"#ffffff",line:"#dce7f5",soft:"#f2f7fd"},
+
 peach:{bg:"#fff9f6",text:"#5a4840",header:"#efc6a3",accent:"#ffd8be",primary:"#f0c8a9",secondary:"#fae2d2",danger:"#d98c8c",card:"#ffffff",line:"#f0e1d7",soft:"#fff3ec"},
+
 mint:{bg:"#f6fcfc",text:"#3f5555",header:"#91d8d8",accent:"#b9eded",primary:"#9fdede",secondary:"#d9f5f5",danger:"#d98c8c",card:"#ffffff",line:"#d8eeee",soft:"#eefbfb"},
-clay:{bg:"#fbf8f7",text:"#554a48",header:"#c9b6b6",accent:"#dfcccc",primary:"#d0c0c0",secondary:"#eee3e3",danger:"#d98c8c",card:"#ffffff",line:"#e8dede",soft:"#f7f2f2"},
-olive:{bg:"#fafcf8",text:"#4d5344",header:"#b7c9a8",accent:"#d4e2c8",primary:"#c2d2b4",secondary:"#e8f0e1",danger:"#d98c8c",card:"#ffffff",line:"#e0e7d9",soft:"#f5f8f1"},
+
 lavender:{bg:"#fbf9ff",text:"#514a61",header:"#c4b0dd",accent:"#d7c6e6",primary:"#cdbde2",secondary:"#ede4f7",danger:"#d98c8c",card:"#ffffff",line:"#e5ddf0",soft:"#f7f3fb"},
-salmon:{bg:"#fff8f6",text:"#5c4742",header:"#f0b7a4",accent:"#ffd3c7",primary:"#f2c0b1",secondary:"#fae1d8",danger:"#d98c8c",card:"#ffffff",line:"#f0dfd8",soft:"#fff1ec"},
-seafoam:{bg:"#f7fcfb",text:"#42544d",header:"#9fcab9",accent:"#b7d8c8",primary:"#abd1c2",secondary:"#d9ece4",danger:"#d98c8c",card:"#ffffff",line:"#ddebe5",soft:"#f1f8f5"},
-latte:{bg:"#fdfaf7",text:"#56493f",header:"#d9c4a9",accent:"#ecdcc7",primary:"#dccab4",secondary:"#f3e8da",danger:"#d98c8c",card:"#ffffff",line:"#eadfd3",soft:"#faf4ed"},
-mist:{bg:"#f8fbfc",text:"#49545f",header:"#b6c5d8",accent:"#d2dce8",primary:"#c1cfdf",secondary:"#e7eef5",danger:"#d98c8c",card:"#ffffff",line:"#e0e7ee",soft:"#f3f7fa"},
-pink:{bg:"#fff8fb",text:"#56444f",header:"#d8b6c9",accent:"#edcfde",primary:"#dec0d0",secondary:"#f5e4ec",danger:"#d98c8c",card:"#ffffff",line:"#ebdde4",soft:"#faf2f6"},
-eucalyptus:{bg:"#f7fbfa",text:"#44544f",header:"#a7c4bc",accent:"#c7ddd7",primary:"#b6d0c8",secondary:"#e1eee9",danger:"#d98c8c",card:"#ffffff",line:"#dce8e4",soft:"#f2f8f6"}
+
+clay:{bg:"#fbf8f7",text:"#554a48",header:"#c9b6b6",accent:"#dfcccc",primary:"#d0c0c0",secondary:"#eee3e3",danger:"#d98c8c",card:"#ffffff",line:"#e8dede",soft:"#f7f2f2"}
 
 };
 
-let company=JSON.parse(localStorage.getItem("company"))||{name:"REFIT MASTER DOCS",address:"",ssm:"",phone:"",email:"",bank:"",sign:"",logo:""};
+let company=JSON.parse(localStorage.getItem("company"))||{};
 let projects=JSON.parse(localStorage.getItem("projects"))||[];
 let prices=JSON.parse(localStorage.getItem("prices"))||[];
 let quotations=JSON.parse(localStorage.getItem("quotations"))||[];
@@ -545,9 +627,8 @@ let loadedQuoteItems=[];
 
 function setTheme(name){
 let t=themes[name];
-if(!t)return;
-Object.keys(t).forEach(key=>{
-document.documentElement.style.setProperty("--"+key,t[key]);
+Object.keys(t).forEach(k=>{
+document.documentElement.style.setProperty("--"+k,t[k]);
 });
 localStorage.setItem("refit_theme",name);
 }
@@ -557,27 +638,31 @@ setTheme(localStorage.getItem("refit_theme")||"coral");
 }
 
 function showPage(page){
-["dashboardPage","themePage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage","backupPage"].forEach(id=>{
+
+[
+"dashboardPage",
+"themePage",
+"companyPage",
+"projectPage",
+"pricePage",
+"quotationPage",
+"invoicePage",
+"receiptPage",
+"backupPage"
+
+].forEach(id=>{
 document.getElementById(id).classList.add("hidden");
 });
+
 document.getElementById(page).classList.remove("hidden");
+
 refreshAll();
 }
 
 function money(n){
 return (Number(n)||0).toFixed(2);
 }
-
-document.getElementById("companyLogo").addEventListener("change",function(e){
-const file=e.target.files[0];
-if(!file)return;
-const reader=new FileReader();
-reader.onload=function(event){
-logoPreview.src=event.target.result;
-};
-reader.readAsDataURL(file);
-});
-
+```
 function saveCompany(){
 company={
 name:companyName.value,
@@ -590,9 +675,19 @@ sign:companySign.value,
 logo:logoPreview.src||""
 };
 localStorage.setItem("company",JSON.stringify(company));
-alert("Company Profile Saved");
+alert("Company Saved");
 refreshAll();
 }
+
+document.getElementById("companyLogo").addEventListener("change",function(e){
+let file=e.target.files[0];
+if(!file)return;
+let reader=new FileReader();
+reader.onload=function(event){
+logoPreview.src=event.target.result;
+};
+reader.readAsDataURL(file);
+});
 
 function loadCompanyForm(){
 companyName.value=company.name||"";
@@ -606,7 +701,7 @@ if(company.logo){logoPreview.src=company.logo;}
 }
 
 function companyHeader(){
-let logo=company.logo?`<div style="text-align:center;margin-bottom:10px;"><img src="${company.logo}" style="max-width:120px;max-height:120px;"></div>`:"";
+let logo=company.logo?`<div style="text-align:center;margin-bottom:10px;"><img src="${company.logo}" style="max-width:120px;max-height:100px;"></div>`:"";
 return `${logo}<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>${company.address||""}<br>${company.ssm?"SSM: "+company.ssm+"<br>":""}${company.phone?"Tel: "+company.phone+" | ":""}${company.email?"Email: "+company.email:""}`;
 }
 
@@ -616,55 +711,106 @@ printSign.innerHTML=company.sign||"";
 printFooter.innerHTML=company.bank?"<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>"):"";
 }
 
-  function saveProject(){
+function saveProject(){
 let i=editProjectIndex.value;
-let obj={client:clientName.value,address:projectAddress.value,phone:phone.value,email:email.value,ref:quoteRef.value,date:projectDate.value,status:projectStatus.value};
-i===""?projects.push(obj):projects[i]=obj;
+let obj={
+client:clientName.value,
+address:projectAddress.value,
+phone:phone.value,
+email:email.value,
+ref:quoteRef.value,
+date:projectDate.value,
+status:projectStatus.value
+};
+if(i===""){projects.push(obj);}else{projects[i]=obj;}
 localStorage.setItem("projects",JSON.stringify(projects));
-clearProjectForm();refreshAll();
+clearProjectForm();
+refreshAll();
 }
 
 function editProject(i){
 let p=projects[i];
-editProjectIndex.value=i;clientName.value=p.client||"";projectAddress.value=p.address||"";phone.value=p.phone||"";email.value=p.email||"";quoteRef.value=p.ref||"";projectDate.value=p.date||"";projectStatus.value=p.status||"Pending";
+editProjectIndex.value=i;
+clientName.value=p.client||"";
+projectAddress.value=p.address||"";
+phone.value=p.phone||"";
+email.value=p.email||"";
+quoteRef.value=p.ref||"";
+projectDate.value=p.date||"";
+projectStatus.value=p.status||"Pending";
 showPage("projectPage");
 }
 
 function clearProjectForm(){
-editProjectIndex.value="";clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";projectStatus.value="Pending";
+editProjectIndex.value="";
+clientName.value="";
+projectAddress.value="";
+phone.value="";
+email.value="";
+quoteRef.value="";
+projectDate.value="";
+projectStatus.value="Pending";
 }
 
 function deleteProject(i){
-if(confirm("Delete project?")){projects.splice(i,1);localStorage.setItem("projects",JSON.stringify(projects));refreshAll();}
+if(confirm("Delete this project?")){
+projects.splice(i,1);
+localStorage.setItem("projects",JSON.stringify(projects));
+refreshAll();
+}
 }
 
 function savePriceItem(){
 let i=editPriceIndex.value;
-let obj={category:priceCategory.value,desc:priceDesc.value,unit:priceUnit.value,rate:parseFloat(priceRate.value)||0};
-i===""?prices.push(obj):prices[i]=obj;
+let obj={
+category:priceCategory.value,
+desc:priceDesc.value,
+unit:priceUnit.value,
+rate:parseFloat(priceRate.value)||0
+};
+if(i===""){prices.push(obj);}else{prices[i]=obj;}
 localStorage.setItem("prices",JSON.stringify(prices));
-clearPriceForm();refreshAll();
+clearPriceForm();
+refreshAll();
 }
 
 function editPriceItem(i){
 let p=prices[i];
-editPriceIndex.value=i;priceCategory.value=p.category||"";priceDesc.value=p.desc||"";priceUnit.value=p.unit||"";priceRate.value=p.rate||0;
+editPriceIndex.value=i;
+priceCategory.value=p.category||"";
+priceDesc.value=p.desc||"";
+priceUnit.value=p.unit||"";
+priceRate.value=p.rate||0;
 showPage("pricePage");
 }
 
 function clearPriceForm(){
-editPriceIndex.value="";priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";
+editPriceIndex.value="";
+priceCategory.value="";
+priceDesc.value="";
+priceUnit.value="";
+priceRate.value="";
 }
 
 function deletePriceItem(i){
-if(confirm("Delete price item?")){prices.splice(i,1);localStorage.setItem("prices",JSON.stringify(prices));refreshAll();}
+if(confirm("Delete this price item?")){
+prices.splice(i,1);
+localStorage.setItem("prices",JSON.stringify(prices));
+refreshAll();
+}
 }
 
 function addQuoteItem(){
 let item=prices[quoteItem.value];
-if(!item){alert("Add price item first");return;}
+if(!item){alert("Please add price item first");return;}
 let qty=parseFloat(quoteQty.value)||0;
-currentQuoteItems.push({desc:item.desc,unit:item.unit,qty:qty,rate:item.rate,amount:qty*item.rate});
+currentQuoteItems.push({
+desc:item.desc,
+unit:item.unit,
+qty:qty,
+rate:item.rate,
+amount:qty*item.rate
+});
 quoteQty.value="";
 loadQuoteTable();
 }
@@ -673,7 +819,14 @@ function loadQuoteTable(){
 let total=0;
 quoteTable.innerHTML=currentQuoteItems.map((it,i)=>{
 total+=it.amount;
-return `<tr><td>${i+1}</td><td>${it.desc}</td><td>${it.unit}</td><td>${it.qty}</td><td>${money(it.rate)}</td><td>${money(it.amount)}</td></tr>`;
+return `<tr>
+<td>${i+1}</td>
+<td>${it.desc}</td>
+<td>${it.unit}</td>
+<td>${it.qty}</td>
+<td>${money(it.rate)}</td>
+<td>${money(it.amount)}</td>
+</tr>`;
 }).join("");
 grandTotalText.innerText=money(total);
 }
@@ -681,14 +834,22 @@ grandTotalText.innerText=money(total);
 function saveQuotation(){
 if(currentQuoteItems.length===0){alert("No quotation item");return;}
 let p=projects[quoteProject.value];
-if(!p){alert("Select project");return;}
+if(!p){alert("Please select project");return;}
 let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);
 let qNo="Q-"+String(quotations.length+1).padStart(3,"0");
-quotations.push({quoteNo:qNo,project:p,items:[...currentQuoteItems],total:total,date:new Date().toLocaleDateString(),revision:0});
+quotations.push({
+quoteNo:qNo,
+project:p,
+items:[...currentQuoteItems],
+total:total,
+date:new Date().toLocaleDateString(),
+revision:0
+});
 localStorage.setItem("quotations",JSON.stringify(quotations));
 currentQuoteItems=[];
 loadQuoteTable();
 refreshAll();
+alert("Quotation Saved");
 }
 
 function clearCurrentQuote(){
@@ -699,14 +860,14 @@ loadQuoteTable();
 function loadSavedQuotation(){
 loadedQuoteIndex=parseInt(savedQuoteSelect.value);
 let q=quotations[loadedQuoteIndex];
-if(!q){return;}
+if(!q){alert("No quotation selected");return;}
 loadedQuoteItems=JSON.parse(JSON.stringify(q.items||[]));
 renderLoadedQuotation();
 }
 
 function renderLoadedQuotation(){
 let q=quotations[loadedQuoteIndex];
-if(!q){return;}
+if(!q)return;
 let total=0;
 editQuoteInfo.innerHTML=`<b>${q.quoteNo}</b><br>Client: ${q.project?.client||""}<br>Ref: ${q.project?.ref||""}<br>Revision: ${q.revision||0}`;
 editQuoteTable.innerHTML=loadedQuoteItems.map((it,i)=>{
@@ -732,21 +893,30 @@ renderLoadedQuotation();
 }
 
 function removeQuoteLine(i){
-if(confirm("Omit item?")){loadedQuoteItems.splice(i,1);renderLoadedQuotation();}
+if(confirm("Omit this item?")){
+loadedQuoteItems.splice(i,1);
+renderLoadedQuotation();
+}
 }
 
 function addItemToSavedQuote(){
 if(loadedQuoteIndex===null){alert("Load quotation first");return;}
 let item=prices[editAddItem.value];
-if(!item){return;}
+if(!item){alert("No price item selected");return;}
 let qty=parseFloat(editAddQty.value)||0;
-loadedQuoteItems.push({desc:item.desc,unit:item.unit,qty:qty,rate:item.rate,amount:qty*item.rate});
+loadedQuoteItems.push({
+desc:item.desc,
+unit:item.unit,
+qty:qty,
+rate:item.rate,
+amount:qty*item.rate
+});
 editAddQty.value="";
 renderLoadedQuotation();
 }
 
 function updateSavedQuotation(){
-if(loadedQuoteIndex===null){return;}
+if(loadedQuoteIndex===null){alert("Load quotation first");return;}
 let total=loadedQuoteItems.reduce((s,i)=>s+(Number(i.qty)||0)*(Number(i.rate)||0),0);
 quotations[loadedQuoteIndex].items=JSON.parse(JSON.stringify(loadedQuoteItems));
 quotations[loadedQuoteIndex].total=total;
@@ -755,15 +925,17 @@ quotations[loadedQuoteIndex].updatedDate=new Date().toLocaleDateString();
 localStorage.setItem("quotations",JSON.stringify(quotations));
 refreshAll();
 renderLoadedQuotation();
+alert("Quotation Updated");
 }
 
 function deleteLoadedQuotation(){
-if(loadedQuoteIndex===null){return;}
-if(confirm("Delete quotation?")){
+if(loadedQuoteIndex===null){alert("Load quotation first");return;}
+if(confirm("Delete this quotation?")){
 quotations.splice(loadedQuoteIndex,1);
 localStorage.setItem("quotations",JSON.stringify(quotations));
-loadedQuoteIndex=null;loadedQuoteItems=[];
-editQuoteInfo.innerHTML="Select and load a quotation.";
+loadedQuoteIndex=null;
+loadedQuoteItems=[];
+editQuoteInfo.innerHTML="Select and load quotation.";
 editQuoteTable.innerHTML="";
 editQuoteTotal.innerText="0.00";
 refreshAll();
@@ -773,34 +945,130 @@ refreshAll();
 function generateInvoices(){
 let q=quotations[invoiceQuotation.value];
 if(!q){alert("No quotation selected");return;}
-if(invoices.some(inv=>inv.quoteNo===q.quoteNo)){alert("Invoices already generated");return;}
-[{stage:"INV-1",percent:30},{stage:"INV-2",percent:40},{stage:"INV-3",percent:25},{stage:"INV-4",percent:5}].forEach(s=>{
+if(invoices.some(inv=>inv.quoteNo===q.quoteNo)){
+alert("Invoices already generated for this quotation.");
+return;
+}
+let stages=[
+{stage:"INV-1",percent:30},
+{stage:"INV-2",percent:40},
+{stage:"INV-3",percent:25},
+{stage:"INV-4",percent:5}
+];
+stages.forEach(s=>{
 let amount=q.total*s.percent/100;
-invoices.push({invoiceNo:s.stage+"-"+String(invoices.length+1).padStart(3,"0"),quoteNo:q.quoteNo,client:q.project?.client||"",projectRef:q.project?.ref||"",stage:s.stage,percent:s.percent,amount:amount,paid:0,balance:amount,status:"Pending",date:new Date().toLocaleDateString()});
+invoices.push({
+invoiceNo:s.stage+"-"+String(invoices.length+1).padStart(3,"0"),
+quoteNo:q.quoteNo,
+client:q.project?.client||"",
+projectRef:q.project?.ref||"",
+stage:s.stage,
+percent:s.percent,
+amount:amount,
+paid:0,
+balance:amount,
+status:"Pending",
+date:new Date().toLocaleDateString()
+});
 });
 localStorage.setItem("invoices",JSON.stringify(invoices));
+refreshAll();
+alert("Invoices Generated");
+}
+
+function editInvoice(i){
+let inv=invoices[i];
+let newAmount=prompt("Edit Invoice Amount",inv.amount);
+if(newAmount===null)return;
+newAmount=parseFloat(newAmount)||0;
+inv.amount=newAmount;
+if(inv.paid>newAmount){inv.paid=newAmount;}
+inv.balance=Math.max(0,newAmount-inv.paid);
+if(inv.balance<=0){inv.status="Paid";}
+else if(inv.paid>0){inv.status="Partial";}
+else{inv.status="Pending";}
+localStorage.setItem("invoices",JSON.stringify(invoices));
+refreshAll();
+}
+
+function deleteInvoice(i){
+if(!confirm("Delete invoice?"))return;
+let invNo=invoices[i].invoiceNo;
+receipts=receipts.filter(r=>r.invoiceNo!==invNo);
+invoices.splice(i,1);
+localStorage.setItem("invoices",JSON.stringify(invoices));
+localStorage.setItem("receipts",JSON.stringify(receipts));
 refreshAll();
 }
 
 function saveReceipt(){
 let inv=invoices[receiptInvoice.value];
-if(!inv){return;}
+if(!inv){alert("No invoice selected");return;}
 let paid=parseFloat(receiptAmount.value)||0;
 if(paid<=0){alert("Enter paid amount");return;}
 let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");
 inv.paid=(Number(inv.paid)||0)+paid;
 inv.balance=Math.max(0,(Number(inv.amount)||0)-inv.paid);
-inv.status=inv.balance<=0?"Paid":"Partial";
-receipts.push({receiptNo:receiptNo,invoiceNo:inv.invoiceNo,client:inv.client,amount:paid,date:receiptDate.value||new Date().toLocaleDateString(),method:paymentMethod.value,balance:inv.balance});
+if(inv.balance<=0){inv.status="Paid";}
+else{inv.status="Partial";}
+receipts.push({
+receiptNo:receiptNo,
+invoiceNo:inv.invoiceNo,
+client:inv.client,
+amount:paid,
+date:receiptDate.value||new Date().toLocaleDateString(),
+method:paymentMethod.value,
+balance:inv.balance
+});
 localStorage.setItem("invoices",JSON.stringify(invoices));
 localStorage.setItem("receipts",JSON.stringify(receipts));
 receiptAmount.value="";
 refreshAll();
 }
 
+function editReceipt(i){
+let r=receipts[i];
+let newAmount=prompt("Edit Receipt Amount",r.amount);
+if(newAmount===null)return;
+newAmount=parseFloat(newAmount)||0;
+let inv=invoices.find(x=>x.invoiceNo===r.invoiceNo);
+if(inv){
+inv.paid-=Number(r.amount)||0;
+inv.paid+=newAmount;
+if(inv.paid<0)inv.paid=0;
+inv.balance=Math.max(0,inv.amount-inv.paid);
+if(inv.balance<=0){inv.status="Paid";}
+else if(inv.paid>0){inv.status="Partial";}
+else{inv.status="Pending";}
+r.balance=inv.balance;
+}
+r.amount=newAmount;
+localStorage.setItem("invoices",JSON.stringify(invoices));
+localStorage.setItem("receipts",JSON.stringify(receipts));
+refreshAll();
+}
+
+function deleteReceipt(i){
+if(!confirm("Delete receipt?"))return;
+let r=receipts[i];
+let inv=invoices.find(x=>x.invoiceNo===r.invoiceNo);
+if(inv){
+inv.paid-=Number(r.amount)||0;
+if(inv.paid<0)inv.paid=0;
+inv.balance=Math.max(0,inv.amount-inv.paid);
+if(inv.balance<=0){inv.status="Paid";}
+else if(inv.paid>0){inv.status="Partial";}
+else{inv.status="Pending";}
+}
+receipts.splice(i,1);
+localStorage.setItem("invoices",JSON.stringify(invoices));
+localStorage.setItem("receipts",JSON.stringify(receipts));
+refreshAll();
+}
+
 function refitDocHeader(title,meta){
 preparePrintBase();
-printDocTitle.innerHTML=`<div style="letter-spacing:8px;text-transform:lowercase;font-size:26px;">${title}</div>`;
+printDocTitle.innerHTML=`<div style="letter-spacing:8px;text-transform:lowercase;font-size:26px;text-align:center;font-weight:bold;">${title}</div>`;
 printCompany.innerHTML=`${companyHeader()}<div style="text-align:right;font-size:12px;margin-top:8px;">${meta}</div>`;
 }
 
@@ -809,7 +1077,7 @@ let total=Number(q.total)||0;
 refitDocHeader("q u o t a t i o n",`quotation no : ${q.quoteNo||""}<br>date : ${q.updatedDate||q.date||new Date().toLocaleDateString()}`);
 printInfo.innerHTML=`<b>attention to</b><br>${q.project?.client||""}<br>${q.project?.address||""}<br><br><b>Job Title</b><br>${q.project?.ref||""}`;
 printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>unit</th><th>qty</th><th>rate</th><th>amount(RM)</th></tr></thead><tbody>${(q.items||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.desc||""}</td><td>${it.unit||""}</td><td>${it.qty||0}</td><td>${money(it.rate)}</td><td>${money((Number(it.qty)||0)*(Number(it.rate)||0))}</td></tr>`).join("")}</tbody></table>`;
-printTotal.innerHTML=`TOTAL RENOVATION WORKS : RM${money(total)}`;
+printTotal.innerHTML=`<div style="text-align:right;font-size:20px;font-weight:bold;">TOTAL RENOVATION WORKS : RM${money(total)}</div>`;
 printTerms.innerHTML=`<b>terms and condition:</b><br>~ payment 30% upon confirmation. Progress claim 65% and balance 5% after completion.<br>~ prices valid for 30 working days from date of quotation<br>~ warranty / defects liability period 12 mths upon site handover<br>~ goods sold are not returnable or exchangeable<br><br>All cheques / or bank transfer should be payable to :-<br><b>${company.bank?company.bank.replace(/\n/g,"<br>"):""}</b><br><br>I/we hereby confirm & accept the above quotation in full<br><br>customer name : ___________________________<br>customer i/c or company chop n sign : ___________________________<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
 window.print();
 }
@@ -822,7 +1090,7 @@ printQuotationDoc({quoteNo:"DRAFT",project:p,items:currentQuoteItems,total:total
 }
 
 function printLoadedQuotation(){
-if(loadedQuoteIndex===null){return;}
+if(loadedQuoteIndex===null){alert("Load quotation first");return;}
 let q=JSON.parse(JSON.stringify(quotations[loadedQuoteIndex]));
 q.items=loadedQuoteItems;
 q.total=loadedQuoteItems.reduce((s,i)=>s+(Number(i.qty)||0)*(Number(i.rate)||0),0);
@@ -831,22 +1099,22 @@ printQuotationDoc(q);
 
 function printSelectedInvoice(){
 let inv=invoices[printInvoiceSelect.value];
-if(!inv){return;}
+if(!inv){alert("No invoice selected");return;}
 refitDocHeader("i n v o i c e",`invoice no : ${inv.invoiceNo}<br>quotation no : ${inv.quoteNo}<br>date : ${inv.date}`);
 printInfo.innerHTML=`<b>attention to</b><br>${inv.client}<br><br><b>Job Title</b><br>project renovation work ${inv.projectRef||""}`;
 printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>amount</th></tr></thead><tbody><tr><td>1</td><td>TOTAL RENOVATION</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>${inv.stage} PROGRESS CLAIM : ${inv.percent}%</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>PAID</td><td>RM ${money(inv.paid)}</td></tr><tr><td></td><td><b>BALANCE :</b></td><td><b>RM ${money(inv.balance)}</b></td></tr></tbody></table>`;
-printTotal.innerHTML=`${inv.stage} PROGRESS CLAIM : RM ${money(inv.amount)}<br>BALANCE : RM ${money(inv.balance)}`;
+printTotal.innerHTML=`<div style="text-align:right;font-weight:bold;">${inv.stage} PROGRESS CLAIM : RM ${money(inv.amount)}<br>BALANCE : RM ${money(inv.balance)}</div>`;
 printTerms.innerHTML=`All cheques / or bank transfers should be payable to <b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>${company.bank?company.bank.replace(/\n/g,"<br>"):""}<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
 window.print();
 }
 
 function printSelectedReceipt(){
 let r=receipts[printReceiptSelect.value];
-if(!r){return;}
+if(!r){alert("No receipt selected");return;}
 refitDocHeader("o f f i c i a l  r e c e i p t",`receipt no : ${r.receiptNo}<br>inv no : ${r.invoiceNo}<br>date : ${r.date}`);
 printInfo.innerHTML=`<b>attention to</b><br>${r.client}<br><br><b>PAID FOR PROGRESS CLAIM</b><br>${r.invoiceNo}<br><br><b>PAYMENT BY CHEQUE NO / TRANSFER FROM / SLIP NO:</b><br>${r.method}`;
 printTableArea.innerHTML=`<table><thead><tr><th>DATE</th><th>PYMT AMOUNT</th></tr></thead><tbody><tr><td>${r.date}</td><td>RM ${money(r.amount)}</td></tr><tr><td><b>TOTAL</b></td><td><b>RM ${money(r.amount)}</b></td></tr></tbody></table>`;
-printTotal.innerHTML=`RECEIVED THE SUM OF : RINGGIT MALAYSIA RM ${money(r.amount)}`;
+printTotal.innerHTML=`<div style="font-weight:bold;">RECEIVED THE SUM OF : RINGGIT MALAYSIA RM ${money(r.amount)}</div>`;
 printTerms.innerHTML=`N.B. VALIDITY OF THIS RECEIPT SUBJECT TO CLEARING OF TRANSFER<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;
 window.print();
 }
@@ -862,11 +1130,16 @@ a.click();
 
 function importBackup(){
 let file=importFile.files[0];
-if(!file){return;}
+if(!file){alert("Select backup file");return;}
 let reader=new FileReader();
 reader.onload=function(e){
 let d=JSON.parse(e.target.result);
-company=d.company||company;projects=d.projects||[];prices=d.prices||[];quotations=d.quotations||[];invoices=d.invoices||[];receipts=d.receipts||[];
+company=d.company||{};
+projects=d.projects||[];
+prices=d.prices||[];
+quotations=d.quotations||[];
+invoices=d.invoices||[];
+receipts=d.receipts||[];
 localStorage.setItem("company",JSON.stringify(company));
 localStorage.setItem("projects",JSON.stringify(projects));
 localStorage.setItem("prices",JSON.stringify(prices));
@@ -879,7 +1152,10 @@ reader.readAsText(file);
 }
 
 function clearAllData(){
-if(confirm("DELETE ALL DATA?")){localStorage.clear();location.reload();}
+if(confirm("DELETE ALL DATA?")){
+localStorage.clear();
+location.reload();
+}
 }
 
 function refreshAll(){
@@ -913,9 +1189,9 @@ printInvoiceSelect.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.i
 
 printReceiptSelect.innerHTML=receipts.map((r,i)=>`<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>`).join("");
 
-invoiceList.innerHTML=invoices.map(inv=>`<div class="itemBox"><b>${inv.invoiceNo}</b><br>Client: ${inv.client}<br>Quotation: ${inv.quoteNo}<br>Stage: ${inv.stage} (${inv.percent}%)<br>Amount: RM ${money(inv.amount)}<br>Paid: RM ${money(inv.paid)}<br>Balance: RM ${money(inv.balance)}<br>Status: <b>${inv.status}</b></div>`).join("");
+invoiceList.innerHTML=invoices.map((inv,i)=>`<div class="itemBox"><b>${inv.invoiceNo}</b><br>Client: ${inv.client}<br>Quotation: ${inv.quoteNo}<br>Stage: ${inv.stage} (${inv.percent}%)<br>Amount: RM ${money(inv.amount)}<br>Paid: RM ${money(inv.paid)}<br>Balance: RM ${money(inv.balance)}<br>Status: <b>${inv.status}</b><br><br><button class="blueBtn" onclick="editInvoice(${i})">Edit Invoice</button><button class="redBtn" onclick="deleteInvoice(${i})">Delete Invoice</button></div>`).join("");
 
-receiptList.innerHTML=receipts.map(r=>`<div class="itemBox"><b>${r.receiptNo}</b><br>Invoice: ${r.invoiceNo}<br>Client: ${r.client}<br>Paid: RM ${money(r.amount)}<br>Method: ${r.method}<br>Date: ${r.date}<br>Balance After Payment: RM ${money(r.balance)}</div>`).join("");
+receiptList.innerHTML=receipts.map((r,i)=>`<div class="itemBox"><b>${r.receiptNo}</b><br>Invoice: ${r.invoiceNo}<br>Client: ${r.client}<br>Paid: RM ${money(r.amount)}<br>Method: ${r.method}<br>Date: ${r.date}<br>Balance After Payment: RM ${money(r.balance)}<br><br><button class="blueBtn" onclick="editReceipt(${i})">Edit Receipt</button><button class="redBtn" onclick="deleteReceipt(${i})">Delete Receipt</button></div>`).join("");
 }
 
 loadSavedTheme();
