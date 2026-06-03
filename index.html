@@ -68,6 +68,7 @@ body *{visibility:hidden}
 <button onclick="showPage('quotes')">Quotations</button>
 <button onclick="showPage('invoices')">Invoices</button>
 <button onclick="showPage('receipts')">Receipts</button>
+<button onclick="showPage('backup')">Backup</button>
 </div>
 
 <div id="dashboard" class="card">
@@ -210,6 +211,31 @@ body *{visibility:hidden}
 <button onclick="printSelectedReceipt()">Print Selected Receipt</button>
 </div>
 
+
+<div id="backup" class="card hidden">
+<h2>Backup & Data Recovery</h2>
+
+<button onclick="exportBackup()">Export Full Backup JSON</button>
+
+<br><br>
+
+<input type="file" id="importFile" accept=".json,application/json">
+<button onclick="importBackup()">Import Backup JSON</button>
+
+<br><br>
+
+<button onclick="exportCSV()">Export Simple CSV Summary</button>
+
+<br><br>
+
+<button class="danger" onclick="clearAllData()">Clear All Data</button>
+
+<div class="item">
+<b>Backup advice:</b><br>
+Export backup before major changes or before clearing browser history.
+</div>
+</div>
+
 </div>
 
 <div id="printArea">
@@ -280,7 +306,7 @@ return Number(q.total || q.grandTotal || 0);
 
 
 function showPage(id){
-["dashboard","theme","company","projects","prices","quotes","invoices","receipts"].forEach(p=>document.getElementById(p).classList.add("hidden"));
+["dashboard","theme","company","projects","prices","quotes","invoices","receipts","backup"].forEach(p=>document.getElementById(p).classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
 refresh();
 }
@@ -694,6 +720,89 @@ if(!r){alert("Select receipt");return;}
 printReceipt(r);
 }
 
+
+
+
+function exportBackup(){
+var data={
+company:company,
+projects:projects,
+prices:prices,
+quotations:quotations,
+invoices:invoices,
+receipts:receipts,
+exportedAt:new Date().toISOString(),
+app:"REFIT MASTER DOCS"
+};
+var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+var a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="refit_master_docs_backup_"+new Date().toISOString().slice(0,10)+".json";
+a.click();
+}
+
+function importBackup(){
+var file=document.getElementById("importFile").files[0];
+if(!file){alert("Please select backup file");return;}
+if(!confirm("Import backup will replace current data. Continue?"))return;
+var reader=new FileReader();
+reader.onload=function(e){
+try{
+var d=JSON.parse(e.target.result);
+company=d.company||company;
+projects=d.projects||[];
+prices=d.prices||[];
+quotations=d.quotations||[];
+invoices=d.invoices||[];
+receipts=d.receipts||[];
+localStorage.setItem("company",JSON.stringify(company));
+localStorage.setItem("projects",JSON.stringify(projects));
+localStorage.setItem("prices",JSON.stringify(prices));
+localStorage.setItem("quotations",JSON.stringify(quotations));
+localStorage.setItem("invoices",JSON.stringify(invoices));
+localStorage.setItem("receipts",JSON.stringify(receipts));
+refresh();
+alert("Backup imported successfully");
+}catch(err){
+alert("Invalid backup file");
+}
+};
+reader.readAsText(file);
+}
+
+function exportCSV(){
+var lines=[];
+lines.push("TYPE,NO,CLIENT,AMOUNT,PAID,BALANCE,DATE,STATUS");
+for(var i=0;i<quotations.length;i++){
+var q=quotations[i];
+lines.push(["QUOTATION",q.quoteNo||("Q-"+(i+1)),getQuoteClient(q),money(getQuoteTotal(q)),"","",q.date||"",""].join(","));
+}
+for(var j=0;j<invoices.length;j++){
+var inv=invoices[j];
+lines.push(["INVOICE",inv.invoiceNo||"",inv.client||"",money(inv.amount),money(inv.paid),money(inv.balance),inv.date||"",inv.status||""].join(","));
+}
+for(var r=0;r<receipts.length;r++){
+var rc=receipts[r];
+lines.push(["RECEIPT",rc.receiptNo||"",rc.client||"",money(rc.amount),"","",rc.date||"",rc.method||""].join(","));
+}
+var blob=new Blob([lines.join("\\n")],{type:"text/csv"});
+var a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="refit_master_docs_summary_"+new Date().toISOString().slice(0,10)+".csv";
+a.click();
+}
+
+function clearAllData(){
+if(!confirm("This will delete ALL saved app data on this browser. Continue?"))return;
+if(!confirm("Final confirmation: delete all data?"))return;
+localStorage.removeItem("company");
+localStorage.removeItem("projects");
+localStorage.removeItem("prices");
+localStorage.removeItem("quotations");
+localStorage.removeItem("invoices");
+localStorage.removeItem("receipts");
+location.reload();
+}
 
 
 function updateDashboard(){
