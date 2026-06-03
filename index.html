@@ -2,41 +2,253 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REFIT MASTER DOCS v10</title>
+<title>REFIT MASTER DOCS v10.1 Pastel</title>
+
 <style>
-:root{--bg:#f8fdff;--text:#021a24;--header:#021a24;--accent:#ffb703;--primary:#0a3949;--secondary:#219ebc;--danger:#e63946;--card:#fff;--line:#97daf0}
-body{margin:0;font-family:Arial;background:var(--bg);color:var(--text)}
-.header{background:var(--header);color:var(--accent);text-align:center;padding:20px;font-size:32px;font-weight:bold}
-.container{padding:12px}
-.menu{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.menu button,.blueBtn{background:var(--primary);color:white;border:none;padding:14px;font-size:17px;border-radius:10px;width:100%}
-.card{background:var(--card);padding:16px;border-radius:14px;margin-bottom:18px;border-left:6px solid var(--secondary);box-shadow:0 3px 8px rgba(0,0,0,.12)}
-.hidden{display:none}
-input,textarea,select{width:100%;padding:12px;margin:8px 0 14px;font-size:17px;border-radius:8px;border:1px solid var(--line);box-sizing:border-box}
-.saveBtn{background:var(--secondary);color:white;border:none;padding:14px;width:100%;font-size:20px;border-radius:10px}
-.redBtn{background:var(--danger);color:white;border:none;padding:10px;border-radius:8px;margin-top:8px;width:100%}
-.orangeBtn{background:var(--accent);color:#111;border:none;padding:10px;border-radius:8px;margin-top:8px;width:100%;font-weight:bold}
-.title{font-size:25px;font-weight:bold;margin-bottom:12px}
-.count{font-size:42px;font-weight:bold;color:var(--accent)}
-.itemBox{background:var(--bg);padding:12px;margin-top:10px;border-radius:8px;border-left:4px solid var(--accent)}
-.logoBox{text-align:center;margin-bottom:15px}
-#logoPreview{max-width:150px;max-height:150px;border-radius:10px;border:1px solid #ccc;padding:8px;background:white}
-.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.themeBtn{border:none;padding:16px;border-radius:12px;font-size:15px;font-weight:bold;color:white}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{border:1px solid var(--line);padding:7px;vertical-align:top}
-th{background:var(--primary);color:white}
-.total{text-align:right;font-size:19px;font-weight:bold;margin-top:12px;color:var(--accent)}
-#printArea{display:none;background:white;color:#021a24;padding:30px}
-.printTitle{text-align:center;font-size:30px;font-weight:bold;margin-bottom:10px}
-.printCompany{text-align:center;margin-bottom:25px;line-height:1.5}
-.printBox{margin-bottom:18px;line-height:1.6}
-.printTotal{text-align:right;font-size:22px;font-weight:bold;margin-top:20px}
-.printFooter{margin-top:35px;font-size:13px;border-top:1px solid #ccc;padding-top:10px}
+:root{
+--bg:#fff7f5;
+--text:#31424a;
+--header:#8f6f6f;
+--accent:#ffb3a7;
+--primary:#8fb7b6;
+--secondary:#a7c9c7;
+--danger:#d98c8c;
+--card:#ffffff;
+--line:#ead7d3;
+--soft:#fff1ed;
+}
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+.header{
+background:var(--header);
+color:white;
+text-align:center;
+padding:20px;
+font-size:30px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.container{
+padding:12px;
+}
+
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:18px;
+}
+
+.menu button,.blueBtn{
+background:var(--primary);
+color:white;
+border:none;
+padding:14px;
+font-size:17px;
+border-radius:14px;
+width:100%;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.card{
+background:var(--card);
+padding:16px;
+border-radius:18px;
+margin-bottom:18px;
+border-left:6px solid var(--secondary);
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.hidden{
+display:none;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin:8px 0 14px;
+font-size:17px;
+border-radius:12px;
+border:1px solid var(--line);
+box-sizing:border-box;
+background:white;
+color:var(--text);
+}
+
+textarea{
+min-height:70px;
+}
+
+.saveBtn{
+background:var(--secondary);
+color:white;
+border:none;
+padding:14px;
+width:100%;
+font-size:20px;
+border-radius:14px;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.redBtn{
+background:var(--danger);
+color:white;
+border:none;
+padding:10px;
+border-radius:12px;
+margin-top:8px;
+width:100%;
+}
+
+.orangeBtn{
+background:var(--accent);
+color:white;
+border:none;
+padding:10px;
+border-radius:12px;
+margin-top:8px;
+width:100%;
+font-weight:bold;
+}
+
+.title{
+font-size:24px;
+font-weight:bold;
+margin-bottom:12px;
+color:var(--header);
+}
+
+.count{
+font-size:42px;
+font-weight:bold;
+color:var(--primary);
+}
+
+.itemBox{
+background:var(--soft);
+padding:12px;
+margin-top:10px;
+border-radius:14px;
+border-left:4px solid var(--accent);
+line-height:1.5;
+}
+
+.logoBox{
+text-align:center;
+margin-bottom:15px;
+}
+
+#logoPreview{
+max-width:150px;
+max-height:150px;
+border-radius:14px;
+border:1px solid var(--line);
+padding:8px;
+background:white;
+}
+
+.themeGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.themeBtn{
+border:none;
+padding:16px;
+border-radius:14px;
+font-size:15px;
+font-weight:bold;
+color:white;
+box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+background:white;
+}
+
+th,td{
+border:1px solid var(--line);
+padding:7px;
+vertical-align:top;
+}
+
+th{
+background:var(--primary);
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:19px;
+font-weight:bold;
+margin-top:12px;
+color:var(--header);
+}
+
+#printArea{
+display:none;
+background:white;
+color:#222;
+padding:30px;
+font-family:Arial, sans-serif;
+}
+
+.printTitle{
+text-align:center;
+font-size:28px;
+font-weight:bold;
+margin-bottom:12px;
+letter-spacing:6px;
+text-transform:lowercase;
+}
+
+.printCompany{
+text-align:center;
+margin-bottom:25px;
+line-height:1.5;
+}
+
+.printBox{
+margin-bottom:18px;
+line-height:1.6;
+}
+
+.printTotal{
+text-align:right;
+font-size:20px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.printFooter{
+margin-top:35px;
+font-size:13px;
+border-top:1px solid #ccc;
+padding-top:10px;
+}
+
 @media print{
 body *{visibility:hidden}
 #printArea,#printArea *{visibility:visible}
-#printArea{display:block;position:absolute;left:0;top:0;width:100%;box-sizing:border-box}
+#printArea{
+display:block;
+position:absolute;
+left:0;
+top:0;
+width:100%;
+box-sizing:border-box;
+}
 }
 </style>
 </head>
@@ -69,26 +281,26 @@ body *{visibility:hidden}
 
 <div id="themePage" class="hidden">
 <div class="card">
-<div class="title">App Appearance Theme</div>
+<div class="title">Pastel Appearance Theme</div>
 <div class="themeGrid">
-<button class="themeBtn" style="background:#0a3949" onclick="setTheme('classic')">Classic Blue</button>
-<button class="themeBtn" style="background:#111827" onclick="setTheme('midnight')">Midnight</button>
-<button class="themeBtn" style="background:#064e3b" onclick="setTheme('emerald')">Emerald</button>
-<button class="themeBtn" style="background:#7c2d12" onclick="setTheme('amber')">Amber</button>
-<button class="themeBtn" style="background:#581c87" onclick="setTheme('purple')">Purple</button>
-<button class="themeBtn" style="background:#9f1239" onclick="setTheme('rose')">Rose</button>
-<button class="themeBtn" style="background:#1e3a8a" onclick="setTheme('royal')">Royal Blue</button>
-<button class="themeBtn" style="background:#0f766e" onclick="setTheme('teal')">Teal</button>
-<button class="themeBtn" style="background:#374151" onclick="setTheme('slate')">Slate</button>
-<button class="themeBtn" style="background:#78350f" onclick="setTheme('coffee')">Coffee</button>
-<button class="themeBtn" style="background:#14532d" onclick="setTheme('forest')">Forest</button>
-<button class="themeBtn" style="background:#831843" onclick="setTheme('magenta')">Magenta</button>
-<button class="themeBtn" style="background:#312e81" onclick="setTheme('indigo')">Indigo</button>
-<button class="themeBtn" style="background:#164e63" onclick="setTheme('cyan')">Cyan</button>
-<button class="themeBtn" style="background:#713f12" onclick="setTheme('gold')">Gold</button>
-<button class="themeBtn" style="background:#991b1b" onclick="setTheme('red')">Red</button>
-<button class="themeBtn" style="background:#365314" onclick="setTheme('lime')">Lime</button>
-<button class="themeBtn" style="background:#172554" onclick="setTheme('navy')">Navy</button>
+<button class="themeBtn" style="background:#ff6f6f" onclick="setTheme('coral')">Pastel Coral</button>
+<button class="themeBtn" style="background:#e89a9a" onclick="setTheme('rose')">Dusty Rose</button>
+<button class="themeBtn" style="background:#8fb7b6" onclick="setTheme('aqua')">Soft Aqua</button>
+<button class="themeBtn" style="background:#94a391" onclick="setTheme('sage')">Sage Green</button>
+<button class="themeBtn" style="background:#e6cf98" onclick="setTheme('sand')">Warm Sand</button>
+<button class="themeBtn" style="background:#a6c1e1" onclick="setTheme('powder')">Powder Blue</button>
+<button class="themeBtn" style="background:#d6a5b8" onclick="setTheme('mauve')">Soft Mauve</button>
+<button class="themeBtn" style="background:#efc6a3" onclick="setTheme('peach')">Peach Cream</button>
+<button class="themeBtn" style="background:#91d8d8" onclick="setTheme('mint')">Mint Blue</button>
+<button class="themeBtn" style="background:#c9b6b6" onclick="setTheme('clay')">Clay Blush</button>
+<button class="themeBtn" style="background:#b7c9a8" onclick="setTheme('olive')">Pastel Olive</button>
+<button class="themeBtn" style="background:#d7c6e6" onclick="setTheme('lavender')">Lavender</button>
+<button class="themeBtn" style="background:#f0b7a4" onclick="setTheme('salmon')">Soft Salmon</button>
+<button class="themeBtn" style="background:#b7d8c8" onclick="setTheme('seafoam')">Seafoam</button>
+<button class="themeBtn" style="background:#d9c4a9" onclick="setTheme('latte')">Latte</button>
+<button class="themeBtn" style="background:#b6c5d8" onclick="setTheme('mist')">Blue Mist</button>
+<button class="themeBtn" style="background:#d8b6c9" onclick="setTheme('pink')">Pastel Pink</button>
+<button class="themeBtn" style="background:#a7c4bc" onclick="setTheme('eucalyptus')">Eucalyptus</button>
 </div>
 </div>
 </div>
@@ -120,7 +332,12 @@ body *{visibility:hidden}
 <input id="email" placeholder="Email">
 <input id="quoteRef" placeholder="Quote Ref No / Job Title">
 <input type="date" id="projectDate">
-<select id="projectStatus"><option>Pending</option><option>Quotation Sent</option><option>Confirmed</option><option>Completed</option></select>
+<select id="projectStatus">
+<option>Pending</option>
+<option>Quotation Sent</option>
+<option>Confirmed</option>
+<option>Completed</option>
+</select>
 <button class="saveBtn" onclick="saveProject()">Save / Update Project</button>
 <button class="orangeBtn" onclick="clearProjectForm()">New Project / Clear Form</button>
 </div>
@@ -152,10 +369,25 @@ body *{visibility:hidden}
 
 <div class="card">
 <div class="title">New Quotation Items</div>
-<table><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th></tr></thead><tbody id="quoteTable"></tbody></table>
-<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div><br>
-<button class="saveBtn" onclick="saveQuotation()">Save New Quotation</button><br><br>
-<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button><br><br>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Description</th>
+<th>Unit</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody id="quoteTable"></tbody>
+</table>
+<div class="total">Grand Total: RM <span id="grandTotalText">0.00</span></div>
+<br>
+<button class="saveBtn" onclick="saveQuotation()">Save New Quotation</button>
+<br><br>
+<button class="blueBtn" onclick="printCurrentQuotation()">Print Current Quotation</button>
+<br><br>
 <button class="redBtn" onclick="clearCurrentQuote()">Clear Current Quotation</button>
 </div>
 
@@ -170,23 +402,48 @@ body *{visibility:hidden}
 <div id="editQuoteInfo" class="itemBox">Select and load a quotation.</div>
 <select id="editAddItem"></select>
 <input type="number" id="editAddQty" placeholder="Quantity to add">
-<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into This Quote</button><br><br>
-<table><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th><th>Action</th></tr></thead><tbody id="editQuoteTable"></tbody></table>
-<div class="total">Updated Total: RM <span id="editQuoteTotal">0.00</span></div><br>
-<button class="saveBtn" onclick="updateSavedQuotation()">Update Saved Quotation</button><br><br>
-<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button><br><br>
+<button class="blueBtn" onclick="addItemToSavedQuote()">Add Item Into This Quote</button>
+<br><br>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Description</th>
+<th>Unit</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="editQuoteTable"></tbody>
+</table>
+<div class="total">Updated Total: RM <span id="editQuoteTotal">0.00</span></div>
+<br>
+<button class="saveBtn" onclick="updateSavedQuotation()">Update Saved Quotation</button>
+<br><br>
+<button class="blueBtn" onclick="printLoadedQuotation()">Print Updated Quotation</button>
+<br><br>
 <button class="redBtn" onclick="deleteLoadedQuotation()">Delete This Quotation</button>
 </div>
 </div>
-
 <div id="invoicePage" class="hidden">
 <div class="card">
 <div class="title">Generate Progress Invoices</div>
 <select id="invoiceQuotation"></select>
 <button class="saveBtn" onclick="generateInvoices()">Generate INV 30/40/25/5</button>
 </div>
-<div class="card"><div class="title">Print Invoice</div><select id="printInvoiceSelect"></select><button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button></div>
-<div class="card"><div class="title">Invoice List</div><div id="invoiceList"></div></div>
+
+<div class="card">
+<div class="title">Invoice List</div>
+<div id="invoiceList"></div>
+</div>
+
+<div class="card">
+<div class="title">Print Invoice</div>
+<select id="printInvoiceSelect"></select>
+<button class="blueBtn" onclick="printSelectedInvoice()">Print Selected Invoice</button>
+</div>
 </div>
 
 <div id="receiptPage" class="hidden">
@@ -195,19 +452,40 @@ body *{visibility:hidden}
 <select id="receiptInvoice"></select>
 <input type="number" id="receiptAmount" placeholder="Paid Amount RM">
 <input type="date" id="receiptDate">
-<select id="paymentMethod"><option>Cash</option><option>Bank Transfer</option><option>Cheque</option><option>Online Payment</option></select>
+
+<select id="paymentMethod">
+<option>Cash</option>
+<option>Bank Transfer</option>
+<option>Cheque</option>
+<option>Online Payment</option>
+</select>
+
 <button class="saveBtn" onclick="saveReceipt()">Save Receipt</button>
 </div>
-<div class="card"><div class="title">Print Receipt</div><select id="printReceiptSelect"></select><button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button></div>
-<div class="card"><div class="title">Receipt List</div><div id="receiptList"></div></div>
+
+<div class="card">
+<div class="title">Receipt List</div>
+<div id="receiptList"></div>
+</div>
+
+<div class="card">
+<div class="title">Print Receipt</div>
+<select id="printReceiptSelect"></select>
+<button class="blueBtn" onclick="printSelectedReceipt()">Print Selected Receipt</button>
+</div>
 </div>
 
 <div id="backupPage" class="hidden">
 <div class="card">
 <div class="title">Backup & Restore</div>
-<button class="saveBtn" onclick="exportBackup()">Export Backup</button><br><br>
+
+<button class="saveBtn" onclick="exportBackup()">Export Backup</button>
+<br><br>
+
 <input type="file" id="importFile">
-<button class="blueBtn" onclick="importBackup()">Import Backup</button><br><br>
+<button class="blueBtn" onclick="importBackup()">Import Backup</button>
+<br><br>
+
 <button class="redBtn" onclick="clearAllData()">Clear ALL Data</button>
 </div>
 </div>
@@ -229,25 +507,28 @@ body *{visibility:hidden}
 </div>
 
 <script>
+
 const themes={
-classic:{bg:"#f8fdff",text:"#021a24",header:"#021a24",accent:"#ffb703",primary:"#0a3949",secondary:"#219ebc",danger:"#e63946",card:"#fff",line:"#97daf0"},
-midnight:{bg:"#0f172a",text:"#f8fafc",header:"#020617",accent:"#38bdf8",primary:"#1e293b",secondary:"#334155",danger:"#ef4444",card:"#111827",line:"#475569"},
-emerald:{bg:"#ecfdf5",text:"#064e3b",header:"#064e3b",accent:"#10b981",primary:"#065f46",secondary:"#34d399",danger:"#dc2626",card:"#fff",line:"#6ee7b7"},
-amber:{bg:"#fffbeb",text:"#78350f",header:"#92400e",accent:"#f59e0b",primary:"#b45309",secondary:"#fbbf24",danger:"#dc2626",card:"#fff",line:"#fde68a"},
-purple:{bg:"#faf5ff",text:"#581c87",header:"#581c87",accent:"#a855f7",primary:"#6b21a8",secondary:"#c084fc",danger:"#dc2626",card:"#fff",line:"#d8b4fe"},
-rose:{bg:"#fff1f2",text:"#881337",header:"#9f1239",accent:"#fb7185",primary:"#be123c",secondary:"#fda4af",danger:"#dc2626",card:"#fff",line:"#fecdd3"},
-royal:{bg:"#eff6ff",text:"#1e3a8a",header:"#1e3a8a",accent:"#60a5fa",primary:"#1d4ed8",secondary:"#93c5fd",danger:"#dc2626",card:"#fff",line:"#bfdbfe"},
-teal:{bg:"#f0fdfa",text:"#134e4a",header:"#115e59",accent:"#14b8a6",primary:"#0f766e",secondary:"#5eead4",danger:"#dc2626",card:"#fff",line:"#99f6e4"},
-slate:{bg:"#f8fafc",text:"#334155",header:"#1e293b",accent:"#64748b",primary:"#475569",secondary:"#94a3b8",danger:"#dc2626",card:"#fff",line:"#cbd5e1"},
-coffee:{bg:"#faf7f2",text:"#78350f",header:"#451a03",accent:"#d97706",primary:"#78350f",secondary:"#fbbf24",danger:"#dc2626",card:"#fff",line:"#fcd34d"},
-forest:{bg:"#f0fdf4",text:"#14532d",header:"#14532d",accent:"#22c55e",primary:"#166534",secondary:"#4ade80",danger:"#dc2626",card:"#fff",line:"#86efac"},
-magenta:{bg:"#fdf2f8",text:"#831843",header:"#9d174d",accent:"#ec4899",primary:"#be185d",secondary:"#f9a8d4",danger:"#dc2626",card:"#fff",line:"#fbcfe8"},
-indigo:{bg:"#eef2ff",text:"#312e81",header:"#312e81",accent:"#6366f1",primary:"#4338ca",secondary:"#a5b4fc",danger:"#dc2626",card:"#fff",line:"#c7d2fe"},
-cyan:{bg:"#ecfeff",text:"#164e63",header:"#164e63",accent:"#06b6d4",primary:"#0e7490",secondary:"#67e8f9",danger:"#dc2626",card:"#fff",line:"#a5f3fc"},
-gold:{bg:"#fffdf5",text:"#713f12",header:"#854d0e",accent:"#eab308",primary:"#a16207",secondary:"#fde047",danger:"#dc2626",card:"#fff",line:"#fef08a"},
-red:{bg:"#fef2f2",text:"#7f1d1d",header:"#991b1b",accent:"#ef4444",primary:"#b91c1c",secondary:"#f87171",danger:"#dc2626",card:"#fff",line:"#fecaca"},
-lime:{bg:"#f7fee7",text:"#365314",header:"#3f6212",accent:"#84cc16",primary:"#4d7c0f",secondary:"#bef264",danger:"#dc2626",card:"#fff",line:"#d9f99d"},
-navy:{bg:"#eff6ff",text:"#172554",header:"#172554",accent:"#2563eb",primary:"#1e3a8a",secondary:"#60a5fa",danger:"#dc2626",card:"#fff",line:"#bfdbfe"}
+
+coral:{bg:"#fff7f5",text:"#31424a",header:"#c98b8b",accent:"#ffb3a7",primary:"#e0a39d",secondary:"#f0c2bb",danger:"#d98c8c",card:"#ffffff",line:"#ead7d3",soft:"#fff1ed"},
+rose:{bg:"#fff8f8",text:"#4c3f45",header:"#c89aa6",accent:"#e8b7c2",primary:"#d9aab5",secondary:"#efcbd2",danger:"#d98c8c",card:"#ffffff",line:"#ead7d3",soft:"#fff2f5"},
+aqua:{bg:"#f6fbfb",text:"#324b4d",header:"#8fb7b6",accent:"#a7d8d8",primary:"#8fb7b6",secondary:"#c2e4e3",danger:"#d98c8c",card:"#ffffff",line:"#d8eceb",soft:"#eefafa"},
+sage:{bg:"#f8faf7",text:"#465046",header:"#94a391",accent:"#bfd1b9",primary:"#a7b7a2",secondary:"#d4dfd0",danger:"#d98c8c",card:"#ffffff",line:"#dfe7dc",soft:"#f1f5ef"},
+sand:{bg:"#fffdf7",text:"#5a5142",header:"#d1bb8c",accent:"#e6cf98",primary:"#d8c4a1",secondary:"#efe4c6",danger:"#d98c8c",card:"#ffffff",line:"#efe7d3",soft:"#fff8ea"},
+powder:{bg:"#f8fbff",text:"#3d4b5f",header:"#a6c1e1",accent:"#c9ddf2",primary:"#b7cde8",secondary:"#dde9f7",danger:"#d98c8c",card:"#ffffff",line:"#dce7f5",soft:"#f2f7fd"},
+mauve:{bg:"#fcf8fb",text:"#564958",header:"#c6a0b6",accent:"#d6a5b8",primary:"#c9afbc",secondary:"#ead5df",danger:"#d98c8c",card:"#ffffff",line:"#ebdde3",soft:"#faf3f7"},
+peach:{bg:"#fff9f6",text:"#5a4840",header:"#efc6a3",accent:"#ffd8be",primary:"#f0c8a9",secondary:"#fae2d2",danger:"#d98c8c",card:"#ffffff",line:"#f0e1d7",soft:"#fff3ec"},
+mint:{bg:"#f6fcfc",text:"#3f5555",header:"#91d8d8",accent:"#b9eded",primary:"#9fdede",secondary:"#d9f5f5",danger:"#d98c8c",card:"#ffffff",line:"#d8eeee",soft:"#eefbfb"},
+clay:{bg:"#fbf8f7",text:"#554a48",header:"#c9b6b6",accent:"#dfcccc",primary:"#d0c0c0",secondary:"#eee3e3",danger:"#d98c8c",card:"#ffffff",line:"#e8dede",soft:"#f7f2f2"},
+olive:{bg:"#fafcf8",text:"#4d5344",header:"#b7c9a8",accent:"#d4e2c8",primary:"#c2d2b4",secondary:"#e8f0e1",danger:"#d98c8c",card:"#ffffff",line:"#e0e7d9",soft:"#f5f8f1"},
+lavender:{bg:"#fbf9ff",text:"#514a61",header:"#c4b0dd",accent:"#d7c6e6",primary:"#cdbde2",secondary:"#ede4f7",danger:"#d98c8c",card:"#ffffff",line:"#e5ddf0",soft:"#f7f3fb"},
+salmon:{bg:"#fff8f6",text:"#5c4742",header:"#f0b7a4",accent:"#ffd3c7",primary:"#f2c0b1",secondary:"#fae1d8",danger:"#d98c8c",card:"#ffffff",line:"#f0dfd8",soft:"#fff1ec"},
+seafoam:{bg:"#f7fcfb",text:"#42544d",header:"#9fcab9",accent:"#b7d8c8",primary:"#abd1c2",secondary:"#d9ece4",danger:"#d98c8c",card:"#ffffff",line:"#ddebe5",soft:"#f1f8f5"},
+latte:{bg:"#fdfaf7",text:"#56493f",header:"#d9c4a9",accent:"#ecdcc7",primary:"#dccab4",secondary:"#f3e8da",danger:"#d98c8c",card:"#ffffff",line:"#eadfd3",soft:"#faf4ed"},
+mist:{bg:"#f8fbfc",text:"#49545f",header:"#b6c5d8",accent:"#d2dce8",primary:"#c1cfdf",secondary:"#e7eef5",danger:"#d98c8c",card:"#ffffff",line:"#e0e7ee",soft:"#f3f7fa"},
+pink:{bg:"#fff8fb",text:"#56444f",header:"#d8b6c9",accent:"#edcfde",primary:"#dec0d0",secondary:"#f5e4ec",danger:"#d98c8c",card:"#ffffff",line:"#ebdde4",soft:"#faf2f6"},
+eucalyptus:{bg:"#f7fbfa",text:"#44544f",header:"#a7c4bc",accent:"#c7ddd7",primary:"#b6d0c8",secondary:"#e1eee9",danger:"#d98c8c",card:"#ffffff",line:"#dce8e4",soft:"#f2f8f6"}
+
 };
 
 let company=JSON.parse(localStorage.getItem("company"))||{name:"REFIT MASTER DOCS",address:"",ssm:"",phone:"",email:"",bank:"",sign:"",logo:""};
@@ -256,79 +537,80 @@ let prices=JSON.parse(localStorage.getItem("prices"))||[];
 let quotations=JSON.parse(localStorage.getItem("quotations"))||[];
 let invoices=JSON.parse(localStorage.getItem("invoices"))||[];
 let receipts=JSON.parse(localStorage.getItem("receipts"))||[];
-let currentQuoteItems=[], loadedQuoteIndex=null, loadedQuoteItems=[];
 
-function setTheme(name){let t=themes[name];if(!t)return;Object.keys(t).forEach(k=>document.documentElement.style.setProperty("--"+k,t[k]));localStorage.setItem("refit_theme",name);}
-function loadSavedTheme(){setTheme(localStorage.getItem("refit_theme")||"classic");}
-function showPage(page){["dashboardPage","themePage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage","backupPage"].forEach(id=>document.getElementById(id).classList.add("hidden"));document.getElementById(page).classList.remove("hidden");refreshAll();}
-function money(n){return (Number(n)||0).toFixed(2);}
+let currentQuoteItems=[];
+let loadedQuoteIndex=null;
+let loadedQuoteItems=[];
 
-companyLogo.addEventListener("change",e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=ev=>logoPreview.src=ev.target.result;r.readAsDataURL(f);});
-
-function saveCompany(){company={name:companyName.value,address:companyAddress.value,ssm:companySSM.value,phone:companyPhone.value,email:companyEmail.value,bank:companyBank.value,sign:companySign.value,logo:logoPreview.src||""};localStorage.setItem("company",JSON.stringify(company));alert("Company Saved");refreshAll();}
-function loadCompanyForm(){companyName.value=company.name||"";companyAddress.value=company.address||"";companySSM.value=company.ssm||"";companyPhone.value=company.phone||"";companyEmail.value=company.email||"";companyBank.value=company.bank||"";companySign.value=company.sign||"";if(company.logo)logoPreview.src=company.logo;}
-function companyHeader(){let logo=company.logo?`<div><img src="${company.logo}" style="max-width:110px;max-height:90px"></div>`:"";return `${logo}<b style="font-size:18px">${company.name||"REFIT MASTER DOCS"}</b><br>${company.address||""}<br>${company.ssm?"SSM: "+company.ssm+"<br>":""}${company.phone?"Tel: "+company.phone+" | ":""}${company.email?"Email: "+company.email:""}`;}
-function preparePrintBase(){printCompany.innerHTML=companyHeader();printSign.innerHTML=company.sign||"";printFooter.innerHTML=company.bank?"<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>"):"";}
-
-function saveProject(){let i=editProjectIndex.value;let o={client:clientName.value,address:projectAddress.value,phone:phone.value,email:email.value,ref:quoteRef.value,date:projectDate.value,status:projectStatus.value};i===""?projects.push(o):projects[i]=o;localStorage.setItem("projects",JSON.stringify(projects));clearProjectForm();refreshAll();}
-function editProject(i){let p=projects[i];editProjectIndex.value=i;clientName.value=p.client||"";projectAddress.value=p.address||"";phone.value=p.phone||"";email.value=p.email||"";quoteRef.value=p.ref||"";projectDate.value=p.date||"";projectStatus.value=p.status||"Pending";showPage("projectPage");}
-function clearProjectForm(){editProjectIndex.value="";clientName.value="";projectAddress.value="";phone.value="";email.value="";quoteRef.value="";projectDate.value="";projectStatus.value="Pending";}
-function deleteProject(i){if(confirm("Delete project?")){projects.splice(i,1);localStorage.setItem("projects",JSON.stringify(projects));refreshAll();}}
-
-function savePriceItem(){let i=editPriceIndex.value;let o={category:priceCategory.value,desc:priceDesc.value,unit:priceUnit.value,rate:parseFloat(priceRate.value)||0};i===""?prices.push(o):prices[i]=o;localStorage.setItem("prices",JSON.stringify(prices));clearPriceForm();refreshAll();}
-function editPriceItem(i){let p=prices[i];editPriceIndex.value=i;priceCategory.value=p.category||"";priceDesc.value=p.desc||"";priceUnit.value=p.unit||"";priceRate.value=p.rate||0;showPage("pricePage");}
-function clearPriceForm(){editPriceIndex.value="";priceCategory.value="";priceDesc.value="";priceUnit.value="";priceRate.value="";}
-function deletePriceItem(i){if(confirm("Delete price item?")){prices.splice(i,1);localStorage.setItem("prices",JSON.stringify(prices));refreshAll();}}
-
-function addQuoteItem(){let item=prices[quoteItem.value];if(!item){alert("Add price item first");return;}let qty=parseFloat(quoteQty.value)||0;currentQuoteItems.push({desc:item.desc,unit:item.unit,qty,rate:item.rate,amount:qty*item.rate});quoteQty.value="";loadQuoteTable();}
-function loadQuoteTable(){let total=0;quoteTable.innerHTML=currentQuoteItems.map((it,i)=>{total+=it.amount;return `<tr><td>${i+1}</td><td>${it.desc}</td><td>${it.unit}</td><td>${it.qty}</td><td>${money(it.rate)}</td><td>${money(it.amount)}</td></tr>`}).join("");grandTotalText.innerText=money(total);}
-function saveQuotation(){if(currentQuoteItems.length===0){alert("No quotation item");return;}let p=projects[quoteProject.value];if(!p){alert("Select project");return;}let total=currentQuoteItems.reduce((s,i)=>s+i.amount,0);let qNo="Q-"+String(quotations.length+1).padStart(3,"0");quotations.push({quoteNo:qNo,project:p,items:[...currentQuoteItems],total,date:new Date().toLocaleDateString(),revision:0});localStorage.setItem("quotations",JSON.stringify(quotations));currentQuoteItems=[];loadQuoteTable();refreshAll();}
-function clearCurrentQuote(){currentQuoteItems=[];loadQuoteTable();}
-
-function loadSavedQuotation(){loadedQuoteIndex=parseInt(savedQuoteSelect.value);let q=quotations[loadedQuoteIndex];if(!q)return;loadedQuoteItems=JSON.parse(JSON.stringify(q.items||[]));renderLoadedQuotation();}
-function renderLoadedQuotation(){let q=quotations[loadedQuoteIndex];if(!q)return;let total=0;editQuoteInfo.innerHTML=`<b>${q.quoteNo}</b><br>Client: ${q.project?.client||""}<br>Ref: ${q.project?.ref||""}<br>Revision: ${q.revision||0}`;editQuoteTable.innerHTML=loadedQuoteItems.map((it,i)=>{let amt=(+it.qty||0)*(+it.rate||0);total+=amt;return `<tr><td>${i+1}</td><td><textarea onchange="editLine(${i},'desc',this.value)">${it.desc||""}</textarea></td><td><input value="${it.unit||""}" onchange="editLine(${i},'unit',this.value)"></td><td><input type="number" value="${it.qty||0}" onchange="editLine(${i},'qty',this.value)"></td><td><input type="number" value="${it.rate||0}" onchange="editLine(${i},'rate',this.value)"></td><td>${money(amt)}</td><td><button class="redBtn" onclick="removeQuoteLine(${i})">Omit</button></td></tr>`}).join("");editQuoteTotal.innerText=money(total);}
-function editLine(i,f,v){if(f==="qty"||f==="rate")v=parseFloat(v)||0;loadedQuoteItems[i][f]=v;renderLoadedQuotation();}
-function removeQuoteLine(i){if(confirm("Omit item?")){loadedQuoteItems.splice(i,1);renderLoadedQuotation();}}
-function addItemToSavedQuote(){if(loadedQuoteIndex===null){alert("Load quote first");return;}let item=prices[editAddItem.value];let qty=parseFloat(editAddQty.value)||0;loadedQuoteItems.push({desc:item.desc,unit:item.unit,qty,rate:item.rate,amount:qty*item.rate});editAddQty.value="";renderLoadedQuotation();}
-function updateSavedQuotation(){if(loadedQuoteIndex===null)return;let total=loadedQuoteItems.reduce((s,i)=>s+(+i.qty||0)*(+i.rate||0),0);quotations[loadedQuoteIndex].items=JSON.parse(JSON.stringify(loadedQuoteItems));quotations[loadedQuoteIndex].total=total;quotations[loadedQuoteIndex].revision=(+quotations[loadedQuoteIndex].revision||0)+1;quotations[loadedQuoteIndex].updatedDate=new Date().toLocaleDateString();localStorage.setItem("quotations",JSON.stringify(quotations));refreshAll();renderLoadedQuotation();}
-function deleteLoadedQuotation(){if(loadedQuoteIndex===null)return;if(confirm("Delete quotation?")){quotations.splice(loadedQuoteIndex,1);localStorage.setItem("quotations",JSON.stringify(quotations));loadedQuoteIndex=null;loadedQuoteItems=[];refreshAll();}}
-
-function generateInvoices(){let q=quotations[invoiceQuotation.value];if(!q)return;if(invoices.some(i=>i.quoteNo===q.quoteNo)){alert("Invoices already generated");return;}[{stage:"INV-1",percent:30},{stage:"INV-2",percent:40},{stage:"INV-3",percent:25},{stage:"INV-4",percent:5}].forEach(s=>{let amount=q.total*s.percent/100;invoices.push({invoiceNo:s.stage+"-"+String(invoices.length+1).padStart(3,"0"),quoteNo:q.quoteNo,client:q.project?.client||"",projectRef:q.project?.ref||"",stage:s.stage,percent:s.percent,amount,paid:0,balance:amount,status:"Pending",date:new Date().toLocaleDateString()});});localStorage.setItem("invoices",JSON.stringify(invoices));refreshAll();}
-function saveReceipt(){let inv=invoices[receiptInvoice.value];if(!inv)return;let paid=parseFloat(receiptAmount.value)||0;if(paid<=0)return;let receiptNo="RCPT-"+String(receipts.length+1).padStart(3,"0");inv.paid=(+inv.paid||0)+paid;inv.balance=Math.max(0,(+inv.amount||0)-inv.paid);inv.status=inv.balance<=0?"Paid":"Partial";receipts.push({receiptNo,invoiceNo:inv.invoiceNo,client:inv.client,amount:paid,date:receiptDate.value||new Date().toLocaleDateString(),method:paymentMethod.value,balance:inv.balance});localStorage.setItem("invoices",JSON.stringify(invoices));localStorage.setItem("receipts",JSON.stringify(receipts));receiptAmount.value="";refreshAll();}
-
-function refitDocHeader(title,meta){preparePrintBase();printDocTitle.innerHTML=`<div style="letter-spacing:8px;text-transform:lowercase;font-size:26px;">${title}</div>`;printCompany.innerHTML=`${companyHeader()}<div style="text-align:right;font-size:12px;margin-top:8px;">${meta}</div>`;}
-function printQuotationDoc(q){let total=+q.total||0;refitDocHeader("q u o t a t i o n",`quotation no : ${q.quoteNo||""}<br>date : ${q.updatedDate||q.date||new Date().toLocaleDateString()}`);printInfo.innerHTML=`<b>attention to</b><br>${q.project?.client||""}<br>${q.project?.address||""}<br><br><b>Job Title</b><br>${q.project?.ref||""}`;printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>unit</th><th>qty</th><th>rate</th><th>amount(RM)</th></tr></thead><tbody>${(q.items||[]).map((it,i)=>`<tr><td>${i+1}</td><td>${it.desc||""}</td><td>${it.unit||""}</td><td>${it.qty||0}</td><td>${money(it.rate)}</td><td>${money((+it.qty||0)*(+it.rate||0))}</td></tr>`).join("")}</tbody></table>`;printTotal.innerHTML=`TOTAL RENOVATION WORKS : RM${money(total)}`;printTerms.innerHTML=`<b>terms and condition:</b><br>~ payment 30% upon confirmation. Progress claim 65% and balance 5% after completion.<br>~ prices valid for 30 working days from date of quotation<br>~ warranty / defects liability period 12 mths upon site handover<br>~ goods sold are not returnable or exchangeable<br><br>All cheques / or bank transfer should be payable to :-<br><b>${company.bank?company.bank.replace(/\n/g,"<br>"):""}</b><br><br>I/we hereby confirm & accept the above quotation in full<br><br>customer name : ___________________________<br>customer i/c or company chop n sign : ___________________________<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;window.print();}
-function printCurrentQuotation(){let p=projects[quoteProject.value];if(!p||currentQuoteItems.length===0)return;printQuotationDoc({quoteNo:"DRAFT",project:p,items:currentQuoteItems,total:currentQuoteItems.reduce((s,i)=>s+i.amount,0),date:new Date().toLocaleDateString()});}
-function printLoadedQuotation(){if(loadedQuoteIndex===null)return;let q=JSON.parse(JSON.stringify(quotations[loadedQuoteIndex]));q.items=loadedQuoteItems;q.total=loadedQuoteItems.reduce((s,i)=>s+(+i.qty||0)*(+i.rate||0),0);printQuotationDoc(q);}
-
-function printSelectedInvoice(){let inv=invoices[printInvoiceSelect.value];if(!inv)return;refitDocHeader("i n v o i c e",`invoice no : ${inv.invoiceNo}<br>quotation no : ${inv.quoteNo}<br>date : ${inv.date}`);printInfo.innerHTML=`<b>attention to</b><br>${inv.client}<br><br><b>Job Title</b><br>project renovation work ${inv.projectRef||""}`;printTableArea.innerHTML=`<table><thead><tr><th>no</th><th>description</th><th>amount</th></tr></thead><tbody><tr><td>1</td><td>TOTAL RENOVATION</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>${inv.stage} PROGRESS CLAIM : ${inv.percent}%</td><td>RM ${money(inv.amount)}</td></tr><tr><td></td><td>PAID</td><td>RM ${money(inv.paid)}</td></tr><tr><td></td><td><b>BALANCE :</b></td><td><b>RM ${money(inv.balance)}</b></td></tr></tbody></table>`;printTotal.innerHTML=`${inv.stage} PROGRESS CLAIM : RM ${money(inv.amount)}<br>BALANCE : RM ${money(inv.balance)}`;printTerms.innerHTML=`All cheques / or bank transfers should be payable to <b>${company.name||"REFIT MAINTENANCE SERVICES"}</b><br>${company.bank?company.bank.replace(/\n/g,"<br>"):""}<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;window.print();}
-function printSelectedReceipt(){let r=receipts[printReceiptSelect.value];if(!r)return;refitDocHeader("o f f i c i a l  r e c e i p t",`receipt no : ${r.receiptNo}<br>inv no : ${r.invoiceNo}<br>date : ${r.date}`);printInfo.innerHTML=`<b>attention to</b><br>${r.client}<br><br><b>PAID FOR PROGRESS CLAIM</b><br>${r.invoiceNo}<br><br><b>PAYMENT BY CHEQUE NO / TRANSFER FROM / SLIP NO:</b><br>${r.method}`;printTableArea.innerHTML=`<table><thead><tr><th>DATE</th><th>PYMT AMOUNT</th></tr></thead><tbody><tr><td>${r.date}</td><td>RM ${money(r.amount)}</td></tr><tr><td><b>TOTAL</b></td><td><b>RM ${money(r.amount)}</b></td></tr></tbody></table>`;printTotal.innerHTML=`RECEIVED THE SUM OF : RINGGIT MALAYSIA RM ${money(r.amount)}`;printTerms.innerHTML=`N.B. VALIDITY OF THIS RECEIPT SUBJECT TO CLEARING OF TRANSFER<br><br>Yours sincerely,<br>FOR . ${company.name||"REFIT MAINTENANCE SERVICES"}`;window.print();}
-
-function exportBackup(){let data={company,projects,prices,quotations,invoices,receipts};let blob=new Blob([JSON.stringify(data)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="refitmaster_backup.json";a.click();}
-function importBackup(){let f=importFile.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let d=JSON.parse(e.target.result);company=d.company||company;projects=d.projects||[];prices=d.prices||[];quotations=d.quotations||[];invoices=d.invoices||[];receipts=d.receipts||[];["company","projects","prices","quotations","invoices","receipts"].forEach(k=>localStorage.setItem(k,JSON.stringify(eval(k))));refreshAll();};r.readAsText(f);}
-function clearAllData(){if(confirm("DELETE ALL DATA?")){localStorage.clear();location.reload();}}
-
-function refreshAll(){
-projectCount.innerText=projects.length;priceCount.innerText=prices.length;quoteCount.innerText=quotations.length;invoiceCount.innerText=invoices.length;receiptCount.innerText=receipts.length;
-loadCompanyForm();
-companyPreview.innerHTML=`<div class="itemBox">${companyHeader()}<br><br><b>Bank:</b><br>${(company.bank||"").replace(/\n/g,"<br>")}<br><br><b>Authorized:</b> ${company.sign||""}</div>`;
-projectList.innerHTML=projects.map((p,i)=>`<div class="itemBox"><b>${p.client}</b><br>${p.address}<br>Ref: ${p.ref}<br>Status: ${p.status}<br><button class="blueBtn" onclick="editProject(${i})">Edit</button><button class="redBtn" onclick="deleteProject(${i})">Delete</button></div>`).join("");
-priceList.innerHTML=prices.map((p,i)=>`<div class="itemBox"><b>${p.category}</b><br>${p.desc}<br>Unit: ${p.unit}<br>Rate: RM ${money(p.rate)}<br><button class="blueBtn" onclick="editPriceItem(${i})">Edit</button><button class="redBtn" onclick="deletePriceItem(${i})">Delete</button></div>`).join("");
-quoteProject.innerHTML=projects.map((p,i)=>`<option value="${i}">${p.client||"Client"} - ${p.ref||"No Ref"}</option>`).join("");
-quoteItem.innerHTML=prices.map((p,i)=>`<option value="${i}">${p.category} - ${p.desc} - RM ${money(p.rate)}</option>`).join("");
-editAddItem.innerHTML=quoteItem.innerHTML;
-savedQuoteSelect.innerHTML=quotations.map((q,i)=>`<option value="${i}">${q.quoteNo} - ${q.project?.client||""} - RM ${money(q.total)} - Rev ${q.revision||0}</option>`).join("");
-invoiceQuotation.innerHTML=quotations.map((q,i)=>`<option value="${i}">${q.quoteNo} - ${q.project?.client||""} - RM ${money(q.total)}</option>`).join("");
-receiptInvoice.innerHTML=invoices.map((inv,i)=>`<option value="${i}">${inv.invoiceNo} - ${inv.client} - Balance RM ${money(inv.balance)} - ${inv.status}</option>`).join("");
-printInvoiceSelect.innerHTML=receiptInvoice.innerHTML;
-printReceiptSelect.innerHTML=receipts.map((r,i)=>`<option value="${i}">${r.receiptNo} - ${r.client} - RM ${money(r.amount)}</option>`).join("");
-invoiceList.innerHTML=invoices.map(inv=>`<div class="itemBox"><b>${inv.invoiceNo}</b><br>Client: ${inv.client}<br>Quotation: ${inv.quoteNo}<br>Stage: ${inv.stage} (${inv.percent}%)<br>Amount: RM ${money(inv.amount)}<br>Paid: RM ${money(inv.paid)}<br>Balance: RM ${money(inv.balance)}<br>Status: <b>${inv.status}</b></div>`).join("");
-receiptList.innerHTML=receipts.map(r=>`<div class="itemBox"><b>${r.receiptNo}</b><br>Invoice: ${r.invoiceNo}<br>Client: ${r.client}<br>Paid: RM ${money(r.amount)}<br>Method: ${r.method}<br>Date: ${r.date}<br>Balance After Payment: RM ${money(r.balance)}</div>`).join("");
+function setTheme(name){
+let t=themes[name];
+if(!t)return;
+Object.keys(t).forEach(key=>{
+document.documentElement.style.setProperty("--"+key,t[key]);
+});
+localStorage.setItem("refit_theme",name);
 }
 
-loadSavedTheme();
-refreshAll();
-</script>
+function loadSavedTheme(){
+setTheme(localStorage.getItem("refit_theme")||"coral");
+}
 
-</body>
-</html>
+function showPage(page){
+["dashboardPage","themePage","companyPage","projectPage","pricePage","quotationPage","invoicePage","receiptPage","backupPage"].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
+document.getElementById(page).classList.remove("hidden");
+refreshAll();
+}
+
+function money(n){
+return (Number(n)||0).toFixed(2);
+}
+
+document.getElementById("companyLogo").addEventListener("change",function(e){
+const file=e.target.files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=function(event){
+logoPreview.src=event.target.result;
+};
+reader.readAsDataURL(file);
+});
+
+function saveCompany(){
+company={
+name:companyName.value,
+address:companyAddress.value,
+ssm:companySSM.value,
+phone:companyPhone.value,
+email:companyEmail.value,
+bank:companyBank.value,
+sign:companySign.value,
+logo:logoPreview.src||""
+};
+localStorage.setItem("company",JSON.stringify(company));
+alert("Company Profile Saved");
+refreshAll();
+}
+
+function loadCompanyForm(){
+companyName.value=company.name||"";
+companyAddress.value=company.address||"";
+companySSM.value=company.ssm||"";
+companyPhone.value=company.phone||"";
+companyEmail.value=company.email||"";
+companyBank.value=company.bank||"";
+companySign.value=company.sign||"";
+if(company.logo){logoPreview.src=company.logo;}
+}
+
+function companyHeader(){
+let logo=company.logo?`<div style="text-align:center;margin-bottom:10px;"><img src="${company.logo}" style="max-width:120px;max-height:120px;"></div>`:"";
+return `${logo}<b style="font-size:20px">${company.name||"REFIT MASTER DOCS"}</b><br>${company.address||""}<br>${company.ssm?"SSM: "+company.ssm+"<br>":""}${company.phone?"Tel: "+company.phone+" | ":""}${company.email?"Email: "+company.email:""}`;
+}
+
+function preparePrintBase(){
+printCompany.innerHTML=companyHeader();
+printSign.innerHTML=company.sign||"";
+printFooter.innerHTML=company.bank?"<b>Bank Details:</b><br>"+company.bank.replace(/\n/g,"<br>"):"";
+}
