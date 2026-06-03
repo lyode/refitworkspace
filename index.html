@@ -508,54 +508,6 @@ items:getQuoteItems(q),
 total:getQuoteTotal(q),
 date:q.date||new Date().toLocaleDateString()
 });
-});
-}
-
-
-
-
-function buildQuoteOptions(){
-var html="";
-for(var i=0;i<quotations.length;i++){
-var q=quotations[i]||{};
-html += "<option value='"+i+"'>"+(q.quoteNo||("Q-"+(i+1)))+" - "+getQuoteClient(q)+" - RM "+money(getQuoteTotal(q))+"</option>";
-}
-return html;
-}
-
-
-function viewSavedQuotation(){
-var sel=document.getElementById("viewQuoteSelect");
-if(!sel){alert("Viewer selector missing");return;}
-var idx=parseInt(sel.value,10);
-if(isNaN(idx)){alert("No quotation selected");return;}
-viewedQuoteIndex=idx;
-var q=quotations[idx];
-if(!q){alert("No quotation found");return;}
-var items=getQuoteItems(q);
-var rows="";
-for(var i=0;i<items.length;i++){
-var it=items[i]||{};
-var qty=Number(it.qty||0);var rate=Number(it.rate||0);var amount=Number(it.amount||qty*rate);
-rows += "<tr><td>"+(i+1)+"</td><td><textarea onchange=\"editSavedQuoteItem("+i+",'desc',this.value)\">"+(it.desc||"")+"</textarea></td><td><input value=\""+(it.unit||"")+"\" onchange=\"editSavedQuoteItem("+i+",'unit',this.value)\"></td><td><input type='number' value='"+qty+"' onchange=\"editSavedQuoteItem("+i+",'qty',this.value)\"></td><td><input type='number' value='"+rate+"' onchange=\"editSavedQuoteItem("+i+",'rate',this.value)\"></td><td>RM "+money(amount)+"</td><td><button class='danger' onclick='removeSavedQuoteItem("+i+")'>Omit</button></td></tr>";
-}
-document.getElementById("viewQuoteBox").innerHTML = "<div class='item'><b>"+(q.quoteNo||("Q-"+(idx+1)))+"</b><br>Client: "+getQuoteClient(q)+"<br>Address: "+getQuoteAddress(q)+"<br>Job Title: "+getQuoteRef(q)+"<br>Date: "+(q.date||"")+"<br>Total: <b>RM "+money(getQuoteTotal(q))+"</b></div><table class='smallTable'><thead><tr><th>No</th><th>Description</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Amount</th><th>Action</th></tr></thead><tbody>"+rows+"</tbody></table><button onclick='updateViewedQuotation()'>Update Saved Quotation</button>";
-}
-function editSavedQuoteItem(i,f,v){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;if(f==='qty'||f==='rate')v=parseFloat(v)||0;q.items[i][f]=v;q.items[i].amount=(Number(q.items[i].qty)||0)*(Number(q.items[i].rate)||0);}
-function removeSavedQuoteItem(i){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;q.items.splice(i,1);updateViewedQuotation();}
-function updateViewedQuotation(){var q=quotations[viewedQuoteIndex];if(!q||!q.items)return;q.total=q.items.reduce(function(s,it){return s+(Number(it.qty)||0)*(Number(it.rate)||0);},0);q.updatedDate=new Date().toLocaleDateString();localStorage.setItem("quotations",JSON.stringify(quotations));refresh();viewSavedQuotation();alert('Quotation updated');}
-
-function printViewedQuotation(){
-if(viewedQuoteIndex===null){alert("View quotation first");return;}
-var q=quotations[viewedQuoteIndex];
-if(!q){alert("No quotation selected");return;}
-printQuotation({
-quoteNo:q.quoteNo||("Q-"+(viewedQuoteIndex+1)),
-project:{name:getQuoteClient(q),address:getQuoteAddress(q),ref:getQuoteRef(q)},
-items:getQuoteItems(q),
-total:getQuoteTotal(q),
-date:q.date||new Date().toLocaleDateString()
-});
 }
 
 function generateInvoices(){
